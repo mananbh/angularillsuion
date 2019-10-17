@@ -12,6 +12,7 @@ import { AppLoaderService } from './services/app-loader/app-loader.service';
 import { SharedComponentsModule } from './components/shared-components.module';
 import { SharedPipesModule } from './pipes/shared-pipes.module';
 import { SharedDirectivesModule } from './directives/shared-directives.module';
+import { GetdatapiService } from './services/getdatapi.service';
 
 @NgModule({
   imports: [
@@ -26,7 +27,8 @@ import { SharedDirectivesModule } from './directives/shared-directives.module';
     RoutePartsService,
     AuthGuard,
     AppConfirmService,
-    AppLoaderService
+    AppLoaderService,
+    GetdatapiService
   ],
   exports: [
     SharedComponentsModule,
