@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { HttpClient, HttpParams,HttpHeaders } from '@angular/common/http'; 
 
 @Component({
   selector: 'app-sidenav',
@@ -8,9 +9,16 @@ export class SidenavComponent {
   @Input('items') public menuItems: any[] = [];
   @Input('hasIconMenu') public hasIconTypeMenuItem: boolean;
   @Input('iconMenuTitle') public iconTypeMenuTitle: string;
+  //menu detail stored in locastorage while login
+  dynamicmenu: [] = JSON.parse(localStorage.getItem('userData'));
+menulist :[];
+  constructor(private http: HttpClient) {}
+  ngOnInit() {
+    console.log(this.dynamicmenu["Data"]["MenuDetailDTO_List"]);
+    //menu is fetching here
+    this.menulist = this.dynamicmenu["Data"]["MenuDetailDTO_List"]
 
-  constructor() {}
-  ngOnInit() {}
+  } 
 
   // Only for demo purpose
   addMenuItem() {
@@ -26,4 +34,6 @@ export class SidenavComponent {
       ]
     });
   }
+
+
 }
