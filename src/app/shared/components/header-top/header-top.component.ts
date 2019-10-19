@@ -75,4 +75,9 @@ export class HeaderTopComponent implements OnInit, OnDestroy {
       sidebarStyle: 'closed'
     })
   }
+
+  signedout(){
+    sessionStorage.setItem('isLoggedIn','false');
+    localStorage.removeItem('userData');    
+  }
 }

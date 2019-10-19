@@ -52,4 +52,9 @@ export class SidebarSideComponent implements OnInit, OnDestroy, AfterViewInit {
           });
     }
   }
+
+  signedout(){
+    sessionStorage.setItem('isLoggedIn','false');
+    localStorage.removeItem('userData');    
+  }
 }

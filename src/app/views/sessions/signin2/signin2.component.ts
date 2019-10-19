@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { CustomValidators } from 'ng2-validation';
 import  {GetdatapiService} from '../../../shared/services/getdatapi.service'
+import { RouterModule, Routes, Router } from '@angular/router';
+
 @Component({
   selector: 'app-signin2',
   templateUrl: './signin2.component.html',

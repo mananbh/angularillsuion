@@ -370,15 +370,16 @@ export class NavigationService {
       icon: "store",
       state: "icons"
     },
+    //multi menu
     {
-      name: "Multi Level",
+      name: "Production",
       type: "dropDown",
       tooltip: "Multi Level",
       icon: "format_align_center",
       state: "",
       sub: [
         {
-          name: "Level Two",
+          name: "Report",
           type: "dropDown",
           state: "fake-1",
           sub: [
