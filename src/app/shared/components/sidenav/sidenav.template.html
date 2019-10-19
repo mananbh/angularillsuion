@@ -73,4 +73,12 @@
       </div>
     </li>
   </ul>
+
 </div>
+<ul class="dropdown-menu" appDropdown  class="submenu lvl3">
+  <li *ngFor="let item of dynamincnavfetch"> 
+   <a [routerLink]="['/others/gallery']" > 
+      <span>{{item.Description_Display}}</span>
+   </a>
+  </li>
+ </ul>

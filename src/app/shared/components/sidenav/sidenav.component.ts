@@ -8,10 +8,14 @@ export class SidenavComponent {
   @Input('items') public menuItems: any[] = [];
   @Input('hasIconMenu') public hasIconTypeMenuItem: boolean;
   @Input('iconMenuTitle') public iconTypeMenuTitle: string;
-
+  dynamincnav:[]=JSON.parse(localStorage.getItem('userData'));
+  dynamincnavfetch = [];
   constructor() {}
-  ngOnInit() {}
-
+  ngOnInit() {
+    this.dynamincnavfetch = this.dynamincnav["Data"]["MenuDetailDTO_List"];
+    console.log(this.dynamincnavfetch);
+  }
+//
   // Only for demo purpose
   addMenuItem() {
     this.menuItems.push({
@@ -25,5 +29,9 @@ export class SidenavComponent {
         {name: 'SUBITEM', state: 'buttons'}
       ]
     });
+
+    
   }
+
+  
 }
