@@ -78,6 +78,6 @@ export class HeaderTopComponent implements OnInit, OnDestroy {
 
   signedout(){
     sessionStorage.setItem('isLoggedIn','false');
-    localStorage.removeItem('userData');    
+    sessionStorage.removeItem('userData');    
   }
 }

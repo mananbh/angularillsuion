@@ -34,7 +34,7 @@ export class Signin3Component implements OnInit {
       if (this.dataSource.Data.LoginDetailsDTO_List[0].LoginUser==this.signupForm.value.username) {
         
           sessionStorage.setItem("Islogin",'true');
-          localStorage.setItem('userData', JSON.stringify(this.dataSource));
+          sessionStorage.setItem('userData', JSON.stringify(this.dataSource));
           this.router.navigate(['/dashboard/analytics']);
         } else {
           this.loader.close();

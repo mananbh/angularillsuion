@@ -8,30 +8,31 @@ export class SidenavComponent {
   @Input('items') public menuItems: any[] = [];
   @Input('hasIconMenu') public hasIconTypeMenuItem: boolean;
   @Input('iconMenuTitle') public iconTypeMenuTitle: string;
-  dynamincnav:[]=JSON.parse(localStorage.getItem('userData'));
+  dynamincnav:[]=JSON.parse(sessionStorage.getItem('userData'));
   dynamincnavfetch = [];
   constructor() {}
   ngOnInit() {
     this.dynamincnavfetch = this.dynamincnav["Data"]["MenuDetailDTO_List"];
     console.log(this.dynamincnavfetch);
+    this.addMenuItem();
+
   }
 //
   // Only for demo purpose
   addMenuItem() {
     this.menuItems.push({
-      name: 'ITEM',
-      type: 'dropDown',
+      name: 'Production',
+      type: 'menu',
       tooltip: 'Item',
-      icon: 'done',
-      state: 'material',
-      sub: [
-        {name: 'SUBITEM', state: 'cards'},
-        {name: 'SUBITEM', state: 'buttons'}
+      icon: 'accessibility',
+      state: 'reports',
+      sub:[
+        {
+          name: "Report",
+          type: "menu",
+          sub: this.dynamincnavfetch//data is fetching in the loop
+        },
       ]
     });
-
-    
   }
-
-  
 }

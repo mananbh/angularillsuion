@@ -7,7 +7,7 @@ import { HttpClient, HttpParams,HttpHeaders } from '@angular/common/http';
 export class GetdatapiService {
   serverurl = 'http://104.211.240.240/API/api/mAudit';
   localurl = 'http://localhost:60531';
-  serverloginurl = 'http://104.211.240.240/API/api/Admin/Login?userCode='
+  serverloginurl = 'http://10.10.0.149/api/Login?usercode='
 
   header : any;  
   dataSource:any;

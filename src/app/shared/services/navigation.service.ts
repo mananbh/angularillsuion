@@ -17,6 +17,7 @@ interface IChildItem {
   state?: string; // Router state
   icon?: string;
   sub?: IChildItem[];
+
 }
 
 interface IBadge {
@@ -26,6 +27,9 @@ interface IBadge {
 
 @Injectable()
 export class NavigationService {
+  dynamincnav:[]=JSON.parse(sessionStorage.getItem('userData'));
+  dynamincnavfetch : [] =this.dynamincnav["Data"]["MenuDetailDTO_List"];
+
   constructor() {}
   iconMenu: IMenuItem[] = [
     {
@@ -67,13 +71,27 @@ export class NavigationService {
       ]
     },
     {
+    name: 'Production',
+    type: 'dropDown',
+    tooltip: 'Item',
+    icon: 'accessibility',
+    state: 'reports',
+    sub:[
+      {
+        name: "Report",
+        type: "dropDown",
+        sub: this.dynamincnavfetch//data is fetching in the loop
+      },
+    ]
+    },
+    {
       name: "CRUD Table",
       type: "link",
       tooltip: "CRUD Table",
       icon: "format_list_bulleted",
       state: "cruds/ngx-table"
     },
-    {
+   /* {
       name: "ECOMMERCE",
       type: "dropDown",
       tooltip: "Shop",
@@ -86,7 +104,7 @@ export class NavigationService {
         { name: "CHECKOUT", state: "checkout" }
       ]
     },
-    {
+     {
       name: "INBOX",
       type: "link",
       tooltip: "Inbox",
@@ -107,7 +125,7 @@ export class NavigationService {
       icon: "chat",
       state: "chat",
       badges: [{ color: "warn", value: "1" }]
-    },
+    }, */
     {
       name: "CALENDAR",
       type: "link",
@@ -122,7 +140,7 @@ export class NavigationService {
       icon: "center_focus_strong",
       state: "todo/list"
     },
-    {
+   /*  {
       name: "DIALOGS",
       type: "dropDown",
       tooltip: "Dialogs",
@@ -132,7 +150,7 @@ export class NavigationService {
         { name: "CONFIRM", state: "confirm" },
         { name: "LOADER", state: "loader" }
       ]
-    },
+    }, */
     {
       name: "Material Kits",
       type: "dropDown",
@@ -254,7 +272,7 @@ export class NavigationService {
         { name: "BLANK", state: "blank" }
       ]
     },
-    {
+    /* {
       name: "TOUR",
       type: "link",
       tooltip: "Tour",
@@ -267,7 +285,7 @@ export class NavigationService {
       tooltip: "Map",
       icon: "add_location",
       state: "map"
-    },
+    }, */
     {
       name: "CHARTS",
       type: "dropDown",
@@ -295,7 +313,7 @@ export class NavigationService {
     //   icon: "show_chart",
     //   state: "charts"
     // },
-    {
+    /* {
       name: "DND",
       type: "link",
       tooltip: "Drag and Drop",
@@ -317,7 +335,7 @@ export class NavigationService {
         { name: "Left sidebar plain", state: "left-sidebar-plain" }
       ]
     },
-    {
+     */{
       name: "SESSIONS",
       type: "dropDown",
       tooltip: "Pages",
@@ -338,7 +356,7 @@ export class NavigationService {
         { name: "ERROR", state: "error" }
       ]
     },
-    {
+    /* {
       name: "Utilities",
       type: "dropDown",
       icon: "format_list_bulleted",
@@ -362,7 +380,7 @@ export class NavigationService {
         { name: "USERS", state: "users" },
         { name: "BLANK", state: "blank" }
       ]
-    },
+    }, */
     {
       name: "MATICONS",
       type: "link",
@@ -371,8 +389,8 @@ export class NavigationService {
       state: "icons"
     },
     //multi menu
-    {
-      name: "Production",
+  /*   {
+      name: "Multi Meni",
       type: "dropDown",
       tooltip: "Multi Level",
       icon: "format_align_center",
@@ -390,14 +408,14 @@ export class NavigationService {
         { name: "Level Two", state: "fake-4" },
         { name: "Level Two", state: "fake-5" }
       ]
-    },
-    {
+    }, */
+    /* {
       name: "DOC",
       type: "extLink",
       tooltip: "Documentation",
       icon: "library_books",
       state: "http://demos.ui-lib.com/egret-doc/"
-    }
+    } */
   ];
 
   separatorMenu: IMenuItem[] = [

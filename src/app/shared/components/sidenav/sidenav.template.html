@@ -61,24 +61,47 @@
             <!-- LEVEL 3 -->
             <ul class="submenu lvl3" appDropdown *ngIf="itemLvL2.type === 'dropDown'">
               <li *ngFor="let itemLvL3 of itemLvL2.sub" appDropdownLink routerLinkActive="open">
-                <a routerLink="{{item.state ? '/'+item.state : ''}}{{itemLvL2.state ? '/'+itemLvL2.state : ''}}/{{itemLvL3.state}}" appDropdownToggle
+                <a  routerLink="{{item.state ? '/'+item.state : ''}}{{itemLvL2.state ? '/'+itemLvL2.state : ''}}/{{itemLvL3.url}}" appDropdownToggle
                   matRipple>
-                  <span class="item-name lvl3">{{itemLvL3.name | translate}}</span>
+                  <!--changes in itemLvL3-->
+                  <span class="item-name lvl3">{{itemLvL3.name }}</span>
                 </a>
               </li>
             </ul>
-
           </li>
         </ul>
+ <!--For reports-->
+<!--         <a *ngIf="item.type === 'menu'" appDropdownToggle matRipple>
+            <mat-icon>{{item.icon}}</mat-icon>
+            <span class="item-name lvl1">{{item.name | translate}}</span>
+            <span fxFlex></span>
+            <span class="menuitem-badge mat-bg-{{ badge.color }}" [ngStyle]="{background: badge.color}" *ngFor="let badge of item.badges">{{ badge.value }}</span>
+            <mat-icon class="menu-caret">keyboard_arrow_right</mat-icon>
+          </a>
+        <ul class="submenu lvl2" appDropdown *ngIf="item.type === 'menu'">
+            <li *ngFor="let itemLvL2 of item.sub" appDropdownLink routerLinkActive="open">
+              <a *ngIf="itemLvL2.type === 'menu'" appDropdownToggle matRipple>
+                <span class="item-name lvl2">{{itemLvL2.name | translate}}</span>
+                <span fxFlex></span>
+                <mat-icon class="menu-caret">keyboard_arrow_right</mat-icon>
+              </a>
+  
+level 3
+              <ul class="submenu lvl3" appDropdown *ngIf="itemLvL2.type === 'menu'">
+                <li *ngFor="let itemLvL3 of itemLvL2.sub" appDropdownLink routerLinkActive="open">
+                  <a routerLink="{{item.state ? '/'+item.state : ''}}{{itemLvL2.state ? '/'+itemLvL2.state : ''}}/{{itemLvL3.state}}" appDropdownToggle
+                    matRipple>
+                    <mat-icon class="menu-caret">web_asset</mat-icon>
+                    <span class="item-name lvl3">{{itemLvL3.Description_Display}}</span>
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ul> -->
+<!--For reports--> 
+
       </div>
     </li>
   </ul>
 
 </div>
-<ul class="dropdown-menu" appDropdown  class="submenu lvl3">
-  <li *ngFor="let item of dynamincnavfetch"> 
-   <a [routerLink]="['/others/gallery']" > 
-      <span>{{item.Description_Display}}</span>
-   </a>
-  </li>
- </ul>
