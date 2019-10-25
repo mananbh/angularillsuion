@@ -61,7 +61,7 @@
             <!-- LEVEL 3 -->
             <ul class="submenu lvl3" appDropdown *ngIf="itemLvL2.type === 'dropDown'">
               <li *ngFor="let itemLvL3 of itemLvL2.sub" appDropdownLink routerLinkActive="open">
-                <a  routerLink="{{item.state ? '/'+item.state : ''}}{{itemLvL2.state ? '/'+itemLvL2.state : ''}}/{{itemLvL3.url}}" appDropdownToggle
+                <a  routerLink="{{item.state ? '/'+item.state : ''}}{{itemLvL2.state ? '/'+itemLvL2.state : ''}}/{{itemLvL3.state}}" appDropdownToggle
                   matRipple>
                   <!--changes in itemLvL3-->
                   <span class="item-name lvl3">{{itemLvL3.name }}</span>

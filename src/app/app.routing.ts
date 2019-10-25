@@ -144,6 +144,11 @@ export const rootRouterConfig: Routes = [
         path: 'icons', 
         loadChildren: () => import('./views/mat-icons/mat-icons.module').then(m => m.MatIconsModule), 
         data: { title: 'Icons', breadcrumb: 'MATICONS'}
+      },
+      {
+        path: 'reports', 
+        loadChildren: () => import('./views/reports/reports.module').then(m => m.ReportsModule), 
+        data: { title: 'Reports', breadcrumb: ' Lab Tech Report'}
       }
     ]
   },

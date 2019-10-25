@@ -34,6 +34,6 @@ import { GetdatapiService } from './services/getdatapi.service';
     SharedComponentsModule,
     SharedPipesModule,
     SharedDirectivesModule
-  ]
+  ],
 })
 export class SharedModule { }
