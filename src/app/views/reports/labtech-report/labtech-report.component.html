@@ -6,50 +6,58 @@
   <div class="col-md-3"></div>
 </div>
 <br>
+<div class="card" >
+    <div class="card-body">
   <div class="form-group row">
-    <div class="col-md-4">
+    <div class="col-md-3">
       <label class="label">Type</label>
-      <input type="text" id="staticUserIdsSecondWay" class="form-control" />
-      <p *ngFor="let s of suggestions">{{s}}</p>
-     </div>
-      <div class="col-md-4">
-      <label class="label">Location</label>
-      <input type="text" id="staticUserIdsSecondWay"  class="form-control" />
+      <ng-select class="custom" [items]="displaytype"
+      bindLabel="Description"
+      bindValue="ID"
+    ></ng-select>
     </div>
-    <div class="col-md-4">
+      <div class="col-md-3">
+      <label class="label">Location</label>
+      <ng-select class="custom"></ng-select>
+    </div>
+    <div class="col-md-3">
         <label class="label">Employee</label>
-        <input type="text" id="staticUserIdsSecondWay"  class="form-control"/>&nbsp;&nbsp;
-        <input type="text" id="staticUserIdsSecondWay" class="form-control"/>
+        <ng-select class="custom"></ng-select>
+    </div>
+    <div class="col-md-3"  style="padding-top: 25px;">
+        <input type="text" id="staticUserIdsSecondWay"  class="form-control" />
     </div>
   </div>
   <div class="form-group row">
-      <div class="col-md-4">
+      <div class="col-md-3">
         <label class="label">Department</label>
-        <input type="text" id="staticUserIdsSecondWay"  class="form-control"/>
-        &nbsp;&nbsp;
-        <input type="text" id="staticUserIdsSecondWay"  class="form-control" />
+        <ng-select class="custom"></ng-select>
        </div>
-      <div class="col-md-4">
+      <div class="col-md-3" style="padding-top: 25px;">
         <input type="text" id="staticUserIdsSecondWay"  class="form-control" />
       </div>
-      <div class="col-md-4">
-          <label class="label">Employee</label>
-          <input type="text" id="staticUserIdsSecondWay"  class="form-control" />&nbsp;&nbsp;
-          <input type="text" id="staticUserIdsSecondWay"  class="form-control"/>
+      <div class="col-md-3">
+          <label class="label">Process</label>
+          <ng-select class="custom"></ng-select>
+      </div>
+      <div class="col-md-3" style="padding-top: 25px;">
+          <input type="text" id="staticUserIdsSecondWay"  class="form-control" />
       </div>
     </div>
     <div class="form-group row">
-        <div class="col-md-4">
-          <label class="label">Show Time</label>
-          <input type="text" id="staticUserIdsSecondWay" />
-          <p *ngFor="let s of suggestions">{{s}}</p>
-         </div>
-          <div class="col-md-4">
-          <label class="label">Location</label>
-          <input type="text" id="staticUserIdsSecondWay" />
+          <div class="col-md-3">
+              <label class="label">From Date</label>
+              <input [owlDateTime]="fromdate" [owlDateTimeTrigger]="fromdate" placeholder="Date Time" class="form-control">
+              <owl-date-time #fromdate></owl-date-time>
         </div>
-        <div class="col-md-4">
-            <label class="label">Process</label>
-            <input type="text" id="staticUserIdsSecondWay" />&nbsp;&nbsp;
+        <div class="col-md-3">
+            <label class="label">To Date</label>
+            <input [owlDateTime]="todate" [owlDateTimeTrigger]="todate" placeholder="Date Time" class="form-control">
+            <owl-date-time #todate></owl-date-time>
+        </div>
+        <div class="col-md-3" style="padding-top: 25px;">
+           <button class="btn btn-primary">Get Details</button>
         </div>
     </div>
+  </div>
+</div>

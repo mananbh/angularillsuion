@@ -13,7 +13,10 @@
 @import "todo/todo-details";
 @import "todo/todo-list";
 @import "todo/todo";
+@import "~@ng-select/ng-select/themes/default.theme.css";
+@import "~ng-pick-datetime/assets/style/picker.min.css";
 
+// ... or  
 /* 
   Only Required if you want to use Angular Landing
   (https://themeforest.net/item/angular-landing-material-design-angular-app-landing-page/21198258)

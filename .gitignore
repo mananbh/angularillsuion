@@ -1,2 +1,6 @@
 node_modules
+<<<<<<< HEAD
 dist
+=======
+/dist
+>>>>>>> c7274f38e70065cf232e91ece8c1e649c5148bac
