@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import{ReportsRouting} from './reports.routing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {GetcommdataService} from '../../shared/services/getcommdata.service'
+import { DatePipe } from '@angular/common';
 
 import { 
   MatInputModule,
@@ -26,16 +27,23 @@ import {
   MatMenuModule,
   MatSidenavModule,
   MatToolbarModule,
-  MatGridListModule,
+  MatGridListModule
   
 } from '@angular/material';
-import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+import { OwlDateTimeModule, OwlNativeDateTimeModule,OWL_DATE_TIME_LOCALE,OWL_DATE_TIME_FORMATS } from 'ng-pick-datetime';
 
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { QuillModule } from 'ngx-quill';
 import { NgSelectModule } from '@ng-select/ng-select';
-
+export const MY_NATIVE_FORMATS = {
+  fullPickerInput: {year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric'},
+  datePickerInput: {year: 'numeric', month: 'numeric', day: 'numeric'},
+  timePickerInput: {hour: 'numeric', minute: 'numeric'},
+  monthYearLabel: {year: 'numeric', month: 'short'},
+  dateA11yLabel: {year: 'numeric', month: 'long', day: 'numeric'},
+  monthYearA11yLabel: {year: 'numeric', month: 'long'},
+};
 @NgModule({
   declarations: [LabtechReportComponent],
   imports: [
@@ -67,10 +75,13 @@ import { NgSelectModule } from '@ng-select/ng-select';
     NgSelectModule,
     OwlDateTimeModule, 
     OwlNativeDateTimeModule,
-    RouterModule.forChild(ReportsRouting)
+    RouterModule.forChild(ReportsRouting),
   ],
   providers: [
     { provide: GetcommdataService, useClass: GetcommdataService },
+    {provide: OWL_DATE_TIME_LOCALE, useValue: 'en-SG'},
+    {provide: OWL_DATE_TIME_FORMATS, useValue: MY_NATIVE_FORMATS},
+    DatePipe
   ],
 })
 export class ReportsModule { }
