@@ -19,7 +19,6 @@ export class ReportType{
 export class GetcommdataService {
   localurl = 'http://10.10.0.149/API';
   header : any;  
-  dataSource:any;
   /* dynamincnav:[]=JSON.parse(sessionStorage.getItem('userData'));
   dynamincnavfetch : string =this.dynamincnav["Data"]["MenuDetailDTO_List"]["1"]["sscid"]; */
   constructor(private http: HttpClient) {

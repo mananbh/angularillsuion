@@ -13,6 +13,8 @@ import { SharedComponentsModule } from './components/shared-components.module';
 import { SharedPipesModule } from './pipes/shared-pipes.module';
 import { SharedDirectivesModule } from './directives/shared-directives.module';
 import { GetdatapiService } from './services/getdatapi.service';
+import { GetcommdataService } from './services/getcommdata.service';
+
 
 @NgModule({
   imports: [
@@ -28,7 +30,8 @@ import { GetdatapiService } from './services/getdatapi.service';
     AuthGuard,
     AppConfirmService,
     AppLoaderService,
-    GetdatapiService
+    GetdatapiService,
+    GetcommdataService
   ],
   exports: [
     SharedComponentsModule,
