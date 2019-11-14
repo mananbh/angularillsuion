@@ -6,7 +6,7 @@ import{ReportsRouting} from './reports.routing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {GetcommdataService} from '../../shared/services/getcommdata.service'
 import { DatePipe } from '@angular/common';
-
+import { AgGridModule } from '@ag-grid-community/angular';
 import { 
   MatInputModule,
   MatDatepickerModule, 
@@ -27,7 +27,9 @@ import {
   MatMenuModule,
   MatSidenavModule,
   MatToolbarModule,
-  MatGridListModule
+  MatGridListModule,
+ MatTableModule 
+
   
 } from '@angular/material';
 import { OwlDateTimeModule, OwlNativeDateTimeModule,OWL_DATE_TIME_LOCALE,OWL_DATE_TIME_FORMATS } from 'ng-pick-datetime';
@@ -75,6 +77,8 @@ export const MY_NATIVE_FORMATS = {
     NgSelectModule,
     OwlDateTimeModule, 
     OwlNativeDateTimeModule,
+    MatTableModule,
+    AgGridModule.withComponents([]),
     RouterModule.forChild(ReportsRouting),
   ],
   providers: [

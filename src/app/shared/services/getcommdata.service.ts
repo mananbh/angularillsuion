@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { HttpClient, HttpParams,HttpHeaders } from '@angular/common/http'; 
+import {LabGuruReportcolnames} from '../../shared/classes/reportcolnames';
 
 @Injectable({
   providedIn: 'root'
@@ -48,9 +49,19 @@ export class GetcommdataService {
     const httpOptions = {headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
     return  this.http.post(this.localurl+'/GetCommonList',data,httpOptions);
   }  
-  getProcess(){
-    let data = {SSCID: "3249",SituationID: "5",UserID:"1",RoleID:"1",Filter1:"16",Filter2:"0",Filter3:"0",Filter4:"0"};
+  getProcess(filter:string){
+    let data = {SSCID: "3249",SituationID: "5",UserID:"1",RoleID:"1",Filter1:filter,Filter2:"0",Filter3:"0",Filter4:"0"};
     const httpOptions = {headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
     return  this.http.post(this.localurl+'/GetCommonList',data,httpOptions);
   } 
+
+  fetchlabgurureport(getlabgurudata) {
+    const httpOptions = {headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+    return  this.http.post(this.localurl+'/GetLabTechnicianPerformanceReport',getlabgurudata,httpOptions);
+  } 
+
+  getallpostdata() {
+    //return  this.http.get(this.localurl+'/EmployeeInfo');
+return  this.http.get('http://104.211.240.240/API/api/mAudit'+"/EmployeeInfo");
+ }
 }

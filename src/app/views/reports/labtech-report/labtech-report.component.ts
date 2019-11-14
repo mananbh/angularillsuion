@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import {Observable} from 'rxjs';
-import {map, startWith} from 'rxjs/operators';
+import {map, startWith, filter} from 'rxjs/operators';
 import {GetcommdataService} from '../../../shared/services/getcommdata.service'
 import { FormBuilder, FormGroup,FormControl,Validators} from '@angular/forms';
 import { AppLoaderService } from '../../../shared/services/app-loader/app-loader.service';
 import { DatePipe } from '@angular/common';
+import {AllCommunityModules} from '@ag-grid-community/all-modules';
+import { MatSort, MatTableDataSource, MatPaginator } from '@angular/material';
+import {LabGuruReportcolnames} from '../../../shared/classes/reportcolnames';
 
 @Component({
   selector: 'app-labtech-report',
@@ -12,97 +15,145 @@ import { DatePipe } from '@angular/common';
   styleUrls: ['./labtech-report.component.scss']
 })
 export class LabtechReportComponent implements OnInit {
-  public selectedMoment2 = new FormControl(new Date());
-
   dataSource :any;
-  flag:number =0;
   labgururepform: FormGroup;
   reporttype:[];
   location:[];
   employee:[];
   department:[];
   process:[];
+  labgurureport:any[];
+  todateagain:any;
+  selected :any;
+  EmployeeLoading = false;
+  getlabdataSource : any;
   constructor(private getcommdata:GetcommdataService,private formbulider: FormBuilder,private loader: AppLoaderService,private datePipe: DatePipe) { 
   }
+
+  tablecolumn = [
+    {headerName: 'EmployeeCode', field: 'EmployeeCode'},
+    {headerName: 'Employee', field: 'Employee'},
+    {headerName: 'Date', field: 'Date', editable: true},
+    {headerName: 'TimeIn', field: 'TimeIn', editable: true},
+
+    {headerName: 'TimeOut', field: 'TimeOut', editable: true},
+
+    {headerName: 'TargetPoints', field: 'TargetPoints', editable: true},
+
+    {headerName: 'Department', field: 'Department', editable: true},
+    {headerName: 'Process', field: 'Process', editable: true},
+
+    {headerName: 'NewPoints', field: 'NewPoints', editable: true},
+    {headerName: 'OJPoints', field: 'OJPoints', editable: true},
+    {headerName: 'TotalPoints', field: 'TotalPoints', editable: true},
+    {headerName: 'Location', field: 'Location', editable: true},
+
+  ];
+  tablecolumn2 = [
+   'EmployeeCode',
+     'Employee', 
+     'Date',
+     'TimeIn', 
+
+   'TimeOut',
+
+   'TargetPoints', 
+
+     'Department', 
+     'Process', 
+
+     'NewPoints', 
+     'OJPoints', 
+   'TotalPoints', 
+  'Location'
+
+  ];
+  modules = AllCommunityModules;
 
   ngOnInit() {
     this.getreporttypedata();
     this.getlocationdata();
     this.getemployeedata();
     this.getdepartmentdata();
-    this.getprocessdata();
+ 
     this.labgururepform = this.formbulider.group({
-      reptype: ['', [Validators.required]],
-      locationget: ['', [Validators.required]],
-      employeeid: ['', [Validators.required]],
-      department: ['', [Validators.required]],
-      process: ['', [Validators.required]],
-      fromdate: ['', [Validators.required]],
-      todate: ['', [Validators.required]],
+      ReporttypeID: ['', [Validators.required]],
+      LocationID: ['', [Validators.required]],
+      EmployeeID: ['', [Validators.required]],
+      DepartmentID: ['', [Validators.required]],
+      ProcessID: ['', [Validators.required]],
+      FromDate: ['', [Validators.required]],
+      ToDate: ['', [Validators.required]],
     });
+
   }
 
   getreporttypedata(){
     this.getcommdata.getReportType().subscribe((data:any) => {
       this.dataSource = JSON.parse(data.objData); 
        this.reporttype =   this.dataSource.Data;
-        this.flag =this.flag + 1;
        }
     );
   }
   getlocationdata(){
     this.getcommdata.getLocation().subscribe((data:any) => {
       this.dataSource = JSON.parse(data.objData); 
-       this.location =   this.dataSource.Data;
-       this.flag= this.flag + 1;
-      
+       this.location =   this.dataSource.Data;      
        }
     );
   }
   getemployeedata(){
+    this.EmployeeLoading = true;
     this.getcommdata.getEmployee().subscribe((data:any) => {
       this.dataSource = JSON.parse(data.objData); 
        this.employee =   this.dataSource.Data;
-       this.flag=this.flag + 1;
-       if( this.flag==5){
-        this.loader.close();
-        }else{
-          this.loader.open();
-        }
+       this.EmployeeLoading = false;
        }
     );
   }
-  
+
   getdepartmentdata(){
 
     this.getcommdata.getDepartment().subscribe((data:any) => {
       this.dataSource = JSON.parse(data.objData); 
        this.department =   this.dataSource.Data;
-       this.flag= this.flag + 1;;
-       this.loader.close();
        }
     );
   }
 
-  getprocessdata(){
-    this.getcommdata.getProcess().subscribe((data:any) => {
-      this.dataSource = JSON.parse(data.objData); 
-       this.process =   this.dataSource.Data;
-       this.flag= this.flag + 1;
-       }       
+  onFormSubmit(event) {
+        event.preventDefault();
+      this.labgururepform.value.FromDate = this.datePipe.transform(this.labgururepform.value.FromDate,"yyyy-MM-dd H:mm:ss");
+      this.labgururepform.value.ToDate = this.datePipe.transform(this.labgururepform.value.ToDate,"yyyy-MM-dd H:mm:ss");
+    
+  /*   this.labgururepform.addControl('FromDate', new FormControl('', Validators.required));
+    this.labgururepform.addControl('ToDate', new FormControl('', Validators.required));
+    this.labgururepform.patchValue({
+      FromDate: this.todatecontrol, 
+      ToDate:this.fromdatecontrol
+    });
+    this.labgururepform.removeControl('fromdate');
+    this.labgururepform.removeControl('todate'); */
+    //this.getlabgururepdata();
+    const getlabgurudata = this.labgururepform.value
+    this.getlabgururepdata(getlabgurudata)
+
+  }
+
+   onChange() {
+   this.getcommdata.getProcess(this.selected).subscribe((data:any) => {
+    this.dataSource = JSON.parse(data.objData); 
+     this.process =   this.dataSource.Data;
+     }       
     );
   }
 
-  onFormSubmit() {
-    var todatecontrol = this.datePipe.transform(this.labgururepform.value.todate,"dd-MM-yyyy H:mm");
-    var fromdatecontrol = this.datePipe.transform(this.labgururepform.value.fromdate,"dd-MM-yyyy H:mm");
-    this.labgururepform.addControl('todatenew', new FormControl('', Validators.required));
-    this.labgururepform.addControl('fromdatenew', new FormControl('', Validators.required));
-    this.labgururepform.patchValue({
-      todatenew: todatecontrol, 
-      fromdatenew: fromdatecontrol
-    });
-    const labgururepdata =  this.labgururepform.value;
-    console.log(labgururepdata)
+  getlabgururepdata(fetchlabgurudata:LabGuruReportcolnames){
+     this.getcommdata.fetchlabgurureport(fetchlabgurudata).subscribe((data:any) => {
+      this.dataSource = JSON.parse(data.objData); 
+        this.labgurureport =  this.dataSource.Data;;
+       }
+    );
   }
+
 }
