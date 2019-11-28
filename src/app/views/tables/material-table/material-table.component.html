@@ -1,41 +1,81 @@
-<div class="ml-05 mr-05 mt-05 pb-1">
-  <div class="mat-elevation-z8">
-      <mat-table [dataSource]="dataSource" matSort >
+<div class="col-sm-12">
+    <div class="col-sm-12">
 
-          <ng-container matColumnDef="id">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
-            <mat-cell *matCellDef="let row" data-label="id"> {{row.id}} </mat-cell>
-          </ng-container>
-      
-          <ng-container matColumnDef="age">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> Progress </mat-header-cell>
-            <mat-cell *matCellDef="let row" data-label="progress"> {{row.age}} </mat-cell>
-          </ng-container>
-      
-          <ng-container matColumnDef="name">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
-            <mat-cell *matCellDef="let row" data-label="name"> {{row.name}} </mat-cell>
-          </ng-container>
-      
-          <ng-container matColumnDef="gender">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> Gender </mat-header-cell>
-            <mat-cell *matCellDef="let row" [style.color]="row.color" data-label="color"> {{row.gender}} </mat-cell>
-          </ng-container>
+ 
+    </div>
+ <div class="col-sm-12">
+ <div class="example-container mat-elevation-z8" >
+      <button (click)="getcustomerdata()" class="btn btn-danger float-right" >Get Data</button> 
 
-          <ng-container matColumnDef="company">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> Company </mat-header-cell>
-            <mat-cell *matCellDef="let row" [style.color]="row.color" data-label="color"> {{row.company}} </mat-cell>
-          </ng-container>
+    <mat-table [dataSource] = "dataSource"  matSort  >   
+       
+       <ng-container matColumnDef = "officeCode">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Office Code</mat-header-cell>
+          <mat-cell *matCellDef = "let element"> {{element.officeCode}} </mat-cell>
+       </ng-container>
+       <ng-container matColumnDef = "office">
+          <mat-header-cell *matHeaderCellDef mat-sort-header >Office</mat-header-cell>
+          <mat-cell *matCellDef = "let element" > {{element.office}} </mat-cell>
+             </ng-container>
+             <ng-container matColumnDef = "area">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Area</mat-header-cell>
+                <mat-cell *matCellDef = "let element"> {{element.area}} </mat-cell>
+             </ng-container>
+             <ng-container matColumnDef = "city_Name">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>City name</mat-header-cell>
+                <mat-cell *matCellDef = "let element"> {{element.city_Name}} </mat-cell>
+             </ng-container>
+             <ng-container matColumnDef = "station_Name">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Station Name</mat-header-cell>
+                <mat-cell *matCellDef = "let element"> {{element.station_Name}} </mat-cell>
+             </ng-container>
+             <ng-container matColumnDef = "salesTerritory">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Sales Territory</mat-header-cell>
+                <mat-cell *matCellDef = "let element"> {{element.salesTerritory}} </mat-cell>
+             </ng-container>
+             <ng-container matColumnDef = "doctors">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Doctor</mat-header-cell>
+                <mat-cell *matCellDef = "let element"> {{element.doctors}} </mat-cell>
+             </ng-container>
+             <ng-container matColumnDef = "addressDetail">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Address Details</mat-header-cell>
+                <mat-cell *matCellDef = "let element"> {{element.addressDetail}} </mat-cell>
+             </ng-container>
+             <ng-container matColumnDef = "contact_Detail">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Contact Details</mat-header-cell>
+                <mat-cell *matCellDef = "let element"> {{element.contact_Detail}} </mat-cell>
+             </ng-container>
+             <ng-container matColumnDef = "mobile_No">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Mobile No</mat-header-cell>
+                <mat-cell *matCellDef = "let element"> {{element.mobile_No}} </mat-cell>
+             </ng-container>
+             <ng-container matColumnDef = "gsT_NO">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>GST No</mat-header-cell>
+                <mat-cell *matCellDef = "let element"> {{element.gsT_NO}} </mat-cell>
+             </ng-container>
+             <ng-container matColumnDef = "paN_NO">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>PAN No</mat-header-cell>
+                <mat-cell *matCellDef = "let element"> {{element.paN_NO}} </mat-cell>
+             </ng-container>
+             <ng-container matColumnDef = "sales_Zone">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Sales Zone</mat-header-cell>
+                <mat-cell *matCellDef = "let element"> {{element.sales_Zone}} </mat-cell>
+             </ng-container>
+             <ng-container matColumnDef = "warranty_Card_Preference">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Warranty Card</mat-header-cell>
+                <mat-cell *matCellDef = "let element"> {{element.warranty_Card_Preference}} </mat-cell>
+             </ng-container>
+             <mat-header-row *matHeaderRowDef = "tablecolumn"></mat-header-row>
+             <mat-row *matRowDef = "let row; columns: tablecolumn;"></mat-row>
+             
+          </mat-table>
 
-          <ng-container matColumnDef="email">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> Company </mat-header-cell>
-            <mat-cell *matCellDef="let row" [style.color]="row.color" data-label="color"> {{row.email}} </mat-cell>
-          </ng-container>
-      
-          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-          <mat-row *matRowDef="let row; columns: displayedColumns;">
-          </mat-row>
-      </mat-table>
-      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
-  </div>
-</div>
+       </div>
+<!--        <mat-card *ngIf="isLoading" 
+       
+       <div>
+       
+          <!-- <button mat-raised-button (click)="downloadPDF()">PDF</button>-->
+       </div>
+       </div>
+       

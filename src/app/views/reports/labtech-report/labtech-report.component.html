@@ -1,4 +1,4 @@
-<form [formGroup]="labgururepform" (ngSubmit)="onFormSubmit($event)">
+<form [formGroup]="labgururepform">
 <div  class="row">
   <div class="col-md-3"></div> 
   <div class="col-md-6" style="font-size: 20px;text-align: center;">
@@ -78,97 +78,23 @@
     </div>
     <div class="form-group row">
         <div class="col-md-3" style="padding-top: 25px;">
-           <button type = "submit" class="btn btn-primary" >Get Details</button>
-        </div>
+            <button (click)="getlabgururepdata()" class="btn btn-success">Get data</button>          </div>
     </div>
   </div>
 </div>
-    
-<ag-grid-angular 
+<div *ngIf="getlabdataSource"><ag-grid-angular 
 style="width: 100%; height: 450px;" 
 
-    class="ag-theme-balham"
-    [rowData]="labgurureport" 
+class="ag-theme-dark"
+[rowData]="getlabdataSource| async "
     [columnDefs]="tablecolumn"
-    [modules]="modules">
-</ag-grid-angular> 
-</form>
-<div class="col-sm-12">
-<!--     <div class="example-container mat-elevation-z8" >
-       <mat-table [dataSource] = "labgurureport"  matSort   >   
-          
-          <ng-container matColumnDef = "EmployeeCode">
-             <mat-header-cell *matHeaderCellDef mat-sort-header>Employee Code</mat-header-cell>
-             <mat-cell *matCellDef = "let element"> {{element.EmployeeCode}} </mat-cell>
-          </ng-container>
-          <ng-container matColumnDef = "Employee">
-              <mat-header-cell *matHeaderCellDef mat-sort-header>Employee Code</mat-header-cell>
-              <mat-cell *matCellDef = "let element"> {{element.Employee}} </mat-cell>
-           </ng-container>
-          <ng-container matColumnDef = "Date">
-             <mat-header-cell *matHeaderCellDef mat-sort-header >DOB</mat-header-cell>
-             <mat-cell *matCellDef = "let element" > {{element.Date}} </mat-cell>
-                </ng-container>
-                <ng-container matColumnDef = "TimeIn">
-                   <mat-header-cell *matHeaderCellDef mat-sort-header>TimeIn</mat-header-cell>
-                   <mat-cell *matCellDef = "let element"> {{element.TimeIn}} </mat-cell>
-                </ng-container>
-                <ng-container matColumnDef = "TimeOut">
-                   <mat-header-cell *matHeaderCellDef mat-sort-header>Middle name</mat-header-cell>
-                   <mat-cell *matCellDef = "let element"> {{element.TimeOut}} </mat-cell>
-                </ng-container>
-                <ng-container matColumnDef = "TargetPoints">
-                   <mat-header-cell *matHeaderCellDef mat-sort-header>Last Name</mat-header-cell>
-                   <mat-cell *matCellDef = "let element"> {{element.TargetPoints}} </mat-cell>
-                </ng-container>
-                <ng-container matColumnDef = "Department">
-                   <mat-header-cell *matHeaderCellDef mat-sort-header>Mobile No</mat-header-cell>
-                   <mat-cell *matCellDef = "let element"> {{element.Department}} </mat-cell>
-                </ng-container>
-                <ng-container matColumnDef = "Process">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>Mobile No</mat-header-cell>
-                    <mat-cell *matCellDef = "let element"> {{element.Process}} </mat-cell>
-                 </ng-container>
-                 <ng-container matColumnDef = "NewPoints">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>Mobile No</mat-header-cell>
-                    <mat-cell *matCellDef = "let element"> {{element.NewPoints}} </mat-cell>
-                 </ng-container>
-                 <ng-container matColumnDef = "OJPoints">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>Mobile No</mat-header-cell>
-                    <mat-cell *matCellDef = "let element"> {{element.OJPoints}} </mat-cell>
-                 </ng-container>
-                 <ng-container matColumnDef = "TotalPoints">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>Mobile No</mat-header-cell>
-                    <mat-cell *matCellDef = "let element"> {{element.TotalPoints}} </mat-cell>
-                 </ng-container>
-                 <ng-container matColumnDef = "Location">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>Mobile No</mat-header-cell>
-                    <mat-cell *matCellDef = "let element"> {{element.Location}} </mat-cell>
-                 </ng-container>
-                <mat-header-row *matHeaderRowDef = "tablecolumn"></mat-header-row>
-                <mat-row *matRowDef = "let row; columns: tablecolumn;"></mat-row>
-                
-             </mat-table>
-            <mat-card *ngIf="isLoading" 
-             style="display: flex; justify-content: center; align-items: center;">
-             <mat-progress-spinner 
-               color="warn" 
-               mode="indeterminate">
-             </mat-progress-spinner>
-          </mat-card> 
-          </div>
-    
-      <mat-paginator
-          [pageSize]="10"
-          [pageSizeOptions]="[5, 10, 20]"
-          showFirstLastButtons
-          ></mat-paginator> 
-          <div>
-           <button mat-raised-button (click)="exporter.exportTable('xlsx', {fileName:'Employee;', sheet: 'sheet_name', Props: {Author: 'Labguru'}})">Excel</button>
-             <button mat-raised-button (click)="exporter.exportTable('csv')">Csv</button>
-          <button mat-raised-button (click)="downloadPDF()">PDF</button>
-          </div>
-          </div> -->
-    
+    [modules]="modules"
+    [enableCellChangeFlash]="true"
+    (gridReady)="onGridReady($event)"
+    [pagination]="true"
 
+    >
+</ag-grid-angular>
 </div>
+
+</form>

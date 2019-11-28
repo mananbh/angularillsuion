@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpParams,HttpHeaders } from '@angular/common/http'; 
 
 @Injectable({
   providedIn: 'root'
 })
 export class TablesService {
-  constructor() { }
+  constructor(private http: HttpClient) { }
+  serverurl = 'http://104.211.240.240/API/api/mAudit';
+
   getDataConf() {
     return [
       {
@@ -636,5 +639,13 @@ export class TablesService {
       }
     ]
   }
+
+  
+  getallcustomerinfopostdata (){
+    return  this.http.get(this.serverurl + '/GetCustomerInfolist');
+  }
+  getallcustomerdatapostdata() {
+    return  this.http.get(this.serverurl+'/CustomerInfo');
+ }
 
 }

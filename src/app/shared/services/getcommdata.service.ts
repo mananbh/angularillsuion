@@ -17,10 +17,8 @@ export class ReportType{
     Filter4: string;
 }
 export class GetcommdataService {
-  localurl = 'http://10.10.0.149/API';
+  localurl = 'http://104.211.240.240/labguru_mobile';
   header : any;  
-  /* dynamincnav:[]=JSON.parse(sessionStorage.getItem('userData'));
-  dynamincnavfetch : string =this.dynamincnav["Data"]["MenuDetailDTO_List"]["1"]["sscid"]; */
   constructor(private http: HttpClient) {
     const headerSettings: {[name: string]: string | string[]; } = {};  
     this.header = new HttpHeaders(headerSettings);  
@@ -61,6 +59,6 @@ export class GetcommdataService {
 
   getallpostdata() {
     //return  this.http.get(this.localurl+'/EmployeeInfo');
-return  this.http.get('http://104.211.240.240/API/api/mAudit'+"/EmployeeInfo");
+  return  this.http.get('http://104.211.240.240/API/api/mAudit'+"/EmployeeInfo");
  }
 }

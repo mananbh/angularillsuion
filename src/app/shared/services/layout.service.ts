@@ -46,18 +46,20 @@ export class LayoutService {
 
   setAppLayout() {
     //******** SET YOUR LAYOUT OPTIONS HERE *********
-    this.layoutConf = {
-      "navigationPos": "side",      // side, top
-      "sidebarStyle": "full",       // full, compact, closed
-      "sidebarColor": "white",      // http://demos.ui-lib.com/egret-doc/#egret-colors
-      "sidebarCompactToggle": false, // applied when "sidebarStyle" is "compact"
-      "dir": "ltr",                 // ltr, rtl
+    this.layoutConf = 
+    {
+      "navigationPos": "side",
+      "sidebarStyle": "full",
+      "sidebarColor": "black",
+      "sidebarCompactToggle": false,
+      "dir": "ltr",
       "useBreadcrumb": true,
       "topbarFixed": false,
-      "topbarColor": "white",       // http://demos.ui-lib.com/egret-doc/#egret-colors
-      "matTheme": "egret-blue",     // egret-blue, egret-navy, egret-dark-purple, egret-dark-pink
-      "breadcrumb": "simple",       // simple, title
-      "perfectScrollbar": true
+      "topbarColor": "indigo",
+      "matTheme": "egret-blue",
+      "breadcrumb": "simple",
+      "perfectScrollbar": true,
+      "isMobile": false
     }
 
     //******* Only for demo purpose ***

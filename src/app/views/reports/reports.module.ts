@@ -78,7 +78,7 @@ export const MY_NATIVE_FORMATS = {
     OwlDateTimeModule, 
     OwlNativeDateTimeModule,
     MatTableModule,
-    AgGridModule.withComponents([]),
+    AgGridModule.withComponents([LabtechReportComponent]),
     RouterModule.forChild(ReportsRouting),
   ],
   providers: [

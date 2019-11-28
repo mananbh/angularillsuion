@@ -8,6 +8,9 @@ import { DatePipe } from '@angular/common';
 import {AllCommunityModules} from '@ag-grid-community/all-modules';
 import { MatSort, MatTableDataSource, MatPaginator } from '@angular/material';
 import {LabGuruReportcolnames} from '../../../shared/classes/reportcolnames';
+import { HttpClient, HttpParams,HttpHeaders } from '@angular/common/http'; 
+import { analyzeAndValidateNgModules } from '@angular/compiler';
+import { AngularFrameworkComponentWrapper } from '@ag-grid-community/angular';
 
 @Component({
   selector: 'app-labtech-report',
@@ -15,6 +18,8 @@ import {LabGuruReportcolnames} from '../../../shared/classes/reportcolnames';
   styleUrls: ['./labtech-report.component.scss']
 })
 export class LabtechReportComponent implements OnInit {
+  movies$;
+
   dataSource :any;
   labgururepform: FormGroup;
   reporttype:[];
@@ -27,47 +32,35 @@ export class LabtechReportComponent implements OnInit {
   selected :any;
   EmployeeLoading = false;
   getlabdataSource : any;
-  constructor(private getcommdata:GetcommdataService,private formbulider: FormBuilder,private loader: AppLoaderService,private datePipe: DatePipe) { 
+  private gridApi;
+  private gridColumnApi;
+
+  constructor(private getcommdata:GetcommdataService,private formbulider: FormBuilder,private loader: AppLoaderService,private datePipe: DatePipe,private http: HttpClient) { 
   }
 
   tablecolumn = [
-    {headerName: 'EmployeeCode', field: 'EmployeeCode'},
-    {headerName: 'Employee', field: 'Employee'},
-    {headerName: 'Date', field: 'Date', editable: true},
-    {headerName: 'TimeIn', field: 'TimeIn', editable: true},
+    {headerName: 'EmployeeCode', field: 'Code',filter: true},
+    {headerName: 'Employee', field: 'Employee',filter: true},
+    {headerName: 'Date', field: 'Date', editable: true,filter: true},
+    {headerName: 'TimeIn', field: 'TimeIn', editable: true,filter: true,
+    cellRenderer: (data) => {
+      return data.value ? (new Date(data.value)).toLocaleDateString() : '';
+ }},
 
-    {headerName: 'TimeOut', field: 'TimeOut', editable: true},
+    {headerName: 'TimeOut', field: 'TimeOut', editable: true,filter: true},
+    {headerName: 'TargetPoints', field: 'TargetPoints',filter: true},
+    {headerName: 'Department', field: 'Department',filter: true},
+    {headerName: 'Process', field: 'Process', editable: true,filter: true},
+    {headerName: 'NewPoints', field: 'NewPoints', editable: true,filter: true},
 
-    {headerName: 'TargetPoints', field: 'TargetPoints', editable: true},
+    {headerName: 'OJPoints', field: 'OJPoints', editable: true,filter: true},
 
-    {headerName: 'Department', field: 'Department', editable: true},
-    {headerName: 'Process', field: 'Process', editable: true},
-
-    {headerName: 'NewPoints', field: 'NewPoints', editable: true},
-    {headerName: 'OJPoints', field: 'OJPoints', editable: true},
     {headerName: 'TotalPoints', field: 'TotalPoints', editable: true},
-    {headerName: 'Location', field: 'Location', editable: true},
+    {headerName: 'Location', field: 'Location', editable: true },
+
 
   ];
-  tablecolumn2 = [
-   'EmployeeCode',
-     'Employee', 
-     'Date',
-     'TimeIn', 
 
-   'TimeOut',
-
-   'TargetPoints', 
-
-     'Department', 
-     'Process', 
-
-     'NewPoints', 
-     'OJPoints', 
-   'TotalPoints', 
-  'Location'
-
-  ];
   modules = AllCommunityModules;
 
   ngOnInit() {
@@ -125,7 +118,6 @@ export class LabtechReportComponent implements OnInit {
         event.preventDefault();
       this.labgururepform.value.FromDate = this.datePipe.transform(this.labgururepform.value.FromDate,"yyyy-MM-dd H:mm:ss");
       this.labgururepform.value.ToDate = this.datePipe.transform(this.labgururepform.value.ToDate,"yyyy-MM-dd H:mm:ss");
-    
   /*   this.labgururepform.addControl('FromDate', new FormControl('', Validators.required));
     this.labgururepform.addControl('ToDate', new FormControl('', Validators.required));
     this.labgururepform.patchValue({
@@ -136,7 +128,7 @@ export class LabtechReportComponent implements OnInit {
     this.labgururepform.removeControl('todate'); */
     //this.getlabgururepdata();
     const getlabgurudata = this.labgururepform.value
-    this.getlabgururepdata(getlabgurudata)
+    //this.getlabgururepdata(getlabgurudata)
 
   }
 
@@ -148,12 +140,54 @@ export class LabtechReportComponent implements OnInit {
     );
   }
 
-  getlabgururepdata(fetchlabgurudata:LabGuruReportcolnames){
-     this.getcommdata.fetchlabgurureport(fetchlabgurudata).subscribe((data:any) => {
-      this.dataSource = JSON.parse(data.objData); 
-        this.labgurureport =  this.dataSource.Data;;
-       }
-    );
-  }
+  getlabgururepdata(){
+    this.labgururepform.value.FromDate = this.datePipe.transform(this.labgururepform.value.FromDate,"yyyy-MM-dd H:mm:ss");
+    this.labgururepform.value.ToDate = this.datePipe.transform(this.labgururepform.value.ToDate,"yyyy-MM-dd H:mm:ss");
+    this.labgururepform.value.ReporttypeID =3250
+
+   /*  return new Promise(resolve => {
+      //setTimeout(() => {
+        this.getcommdata.getallpostdata().subscribe((data:any) => {
+          this.dataSource = data; 
+            this.labgurureport =  this.dataSource.Data;;
+            console.log("called");
+            console.log(this.dataSource);
+
+           }
+        );
+     /// }, 1000);
+    }); */
+
+    const httpOptions = {headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+    //this.getlabdataSource =   this.http.post(this.localurl+'/GetLabTechnicianPerformanceReport',this.labgururepform.value,httpOptions).map(res => res );
+    ;
+
+     /* this.http.post(this.localurl+'/GetLabTechnicianPerformanceReport',this.labgururepform.value,httpOptions).subscribe(
+      (data :any)=> {
+        this.dataSource = JSON.parse(data.objData)
+          this.labgurureport =  this.dataSource.Data;;
+          console.log("called");
+
+         }
+         ); */
+
+
+     //    this.dataSource =  this.http.get('http://104.211.240.240/API/api/mAudit'+"/EmployeeInfo");
+
+     this.getlabdataSource = this.getcommdata.fetchlabgurureport(this.labgururepform.value);
+    console.log(  this.getlabdataSource);
+}
+
+onGridReady(params) {
+  this.gridApi = params.api;
+  this.gridColumnApi = params.columnApi;
+
+  params.api.sizeColumnsToFit();
+}
+   
+  
+
+  
+  
 
 }
