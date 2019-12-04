@@ -18,6 +18,21 @@
 @import "~@ag-grid-community/all-modules/dist/styles/ag-theme-dark.css";
 @import "~@ag-grid-community/all-modules/dist/styles/ag-grid.css";
 
+.ag-theme-dark .sick-days-breach {
+    background-color:rgb(37, 141, 189) !important;
+}
+
+.ag-row-hover {
+  /* putting in !important so it overrides the theme's styling as it hovers the row also */
+  background-color: #8989e6 !important;
+}
+
+
+.ag-theme-dark .sick-days-breach {
+    background-color:rgb(37, 141, 189) !important;
+}
+
+
 
 /* 
   Only Required if you want to use Angular Landing

@@ -7,6 +7,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {GetcommdataService} from '../../shared/services/getcommdata.service'
 import { DatePipe } from '@angular/common';
 import { AgGridModule } from '@ag-grid-community/angular';
+import { GetreportdataapiService } from './getreportdataapi.service';
+
 import { 
   MatInputModule,
   MatDatepickerModule, 
@@ -38,6 +40,7 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule,OWL_DATE_TIME_LOCALE,OWL_DAT
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { QuillModule } from 'ngx-quill';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { AttendenceReportComponent } from './attendence-report/attendence-report.component';
 export const MY_NATIVE_FORMATS = {
   fullPickerInput: {year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric'},
   datePickerInput: {year: 'numeric', month: 'numeric', day: 'numeric'},
@@ -47,7 +50,7 @@ export const MY_NATIVE_FORMATS = {
   monthYearA11yLabel: {year: 'numeric', month: 'long'},
 };
 @NgModule({
-  declarations: [LabtechReportComponent],
+  declarations: [LabtechReportComponent, AttendenceReportComponent],
   imports: [
     CommonModule,
     MatInputModule,
@@ -78,14 +81,15 @@ export const MY_NATIVE_FORMATS = {
     OwlDateTimeModule, 
     OwlNativeDateTimeModule,
     MatTableModule,
-    AgGridModule.withComponents([LabtechReportComponent]),
+    AgGridModule.withComponents([]),
     RouterModule.forChild(ReportsRouting),
   ],
   providers: [
     { provide: GetcommdataService, useClass: GetcommdataService },
     {provide: OWL_DATE_TIME_LOCALE, useValue: 'en-SG'},
     {provide: OWL_DATE_TIME_FORMATS, useValue: MY_NATIVE_FORMATS},
-    DatePipe
+    DatePipe,
+    GetreportdataapiService
   ],
 })
 export class ReportsModule { }

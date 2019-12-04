@@ -1,30 +1,34 @@
 <mat-card class="p-0">
   <mat-card-title class="">
-    <div class="card-title-text">File upload</div>
+    <div class="card-title-text" style="font-size: 20px;">File upload</div>
     <mat-divider></mat-divider>
   </mat-card-title>
   <mat-card-content>
       <div class="mb-1">
-        <p>Multiple</p>
-        <input type="file" ng2FileSelect [uploader]="uploader" multiple  /><br/>
+          <label style="font-size: 20px;">Multiple </label>
+          <div  class="custom-file-upload">
+            <input type="file" ng2FileSelect [uploader]="uploader" multiple class="btn btn-primary" />
+         </div> &nbsp;
+        <label style="font-size: 20px;">Single      </label>
 
-        <p>Single</p>
-        <input type="file" ng2FileSelect [uploader]="uploader" />
+        <div  class="custom-file-upload">
+        <input type="file" ng2FileSelect [uploader]="uploader" class="btn btn-primary"/>
+      </div>
       </div>
 
       <div class="mb-1">
-        <div ng2FileDrop
+        <div ng2FileDrop style="border: 4px solid rgb(65, 53, 53);"
         [ngClass]="{'dz-file-over': hasBaseDropZoneOver}"
         (fileOver)="fileOverBase($event)"
         [uploader]="uploader"
         class="fileupload-drop-zone mb-24">
-        Drop file here
+        <label style="font-size: 20px;">Drop file here</label> 
         </div>
       </div>
 
-      <table class="default-table mat-box-shadow mb-24" style="width: 100%">
+      <table class="default-table mat-box-shadow mb-24" style="width: 100%" border="1">
         <thead>
-        <tr>
+        <tr style="font-size: medium;font-weight: bold;">
             <th width="30%">Name</th>
             <th>Size</th>
             <th>Progress</th>
@@ -33,12 +37,12 @@
         </tr>
         </thead>
         <tbody *ngIf="uploader.queue.length; else tableNoData">
-        <tr *ngFor="let item of uploader.queue">
+        <tr *ngFor="let item of uploader.queue"  style="font-size: medium;font-weight: bold;">
             <td>{{ item?.file?.name }}</td>
             <td nowrap>{{ item?.file?.size/1024/1024 | number:'.2' }} MB</td>
             <td>
                 <div class="progress" style="margin-bottom: 0;">
-                    <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': item.progress + '%' }"></div>
+                    <div class="progress-bar" role="progressbar"></div>
                     <mat-progress-bar
                       class=""
                       color="primary"
@@ -74,13 +78,13 @@
             </td>
         </tr>
         </tbody>
-        <ng-template #tableNoData>
-          <p [ngStyle]="{padding: '0 1.2rem'}">Queue is empty</p>
+        <ng-template #tableNoData >
+          <p [ngStyle]="{padding: '0 8.2rem'}">Queue is empty</p>
         </ng-template>
     </table>
 
 
-      <div>
+      <div style="font-size: 20px;">
         <p>Queue progress:</p>
         <div class="progress mb-1" >
             <mat-progress-bar

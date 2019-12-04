@@ -7,10 +7,8 @@ import { AppLoaderService } from '../../../shared/services/app-loader/app-loader
 import { DatePipe } from '@angular/common';
 import {AllCommunityModules} from '@ag-grid-community/all-modules';
 import { MatSort, MatTableDataSource, MatPaginator } from '@angular/material';
-import {LabGuruReportcolnames} from '../../../shared/classes/reportcolnames';
 import { HttpClient, HttpParams,HttpHeaders } from '@angular/common/http'; 
-import { analyzeAndValidateNgModules } from '@angular/compiler';
-import { AngularFrameworkComponentWrapper } from '@ag-grid-community/angular';
+
 
 @Component({
   selector: 'app-labtech-report',
@@ -34,8 +32,10 @@ export class LabtechReportComponent implements OnInit {
   getlabdataSource : any;
   private gridApi;
   private gridColumnApi;
-
+  private overlayLoadingTemplate;
+  private overlayNoRowsTemplate;
   constructor(private getcommdata:GetcommdataService,private formbulider: FormBuilder,private loader: AppLoaderService,private datePipe: DatePipe,private http: HttpClient) { 
+
   }
 
   tablecolumn = [
@@ -57,8 +57,7 @@ export class LabtechReportComponent implements OnInit {
 
     {headerName: 'TotalPoints', field: 'TotalPoints', editable: true},
     {headerName: 'Location', field: 'Location', editable: true },
-
-
+  
   ];
 
   modules = AllCommunityModules;
@@ -141,6 +140,7 @@ export class LabtechReportComponent implements OnInit {
   }
 
   getlabgururepdata(){
+
     this.labgururepform.value.FromDate = this.datePipe.transform(this.labgururepform.value.FromDate,"yyyy-MM-dd H:mm:ss");
     this.labgururepform.value.ToDate = this.datePipe.transform(this.labgururepform.value.ToDate,"yyyy-MM-dd H:mm:ss");
     this.labgururepform.value.ReporttypeID =3250
@@ -173,7 +173,7 @@ export class LabtechReportComponent implements OnInit {
 
 
      //    this.dataSource =  this.http.get('http://104.211.240.240/API/api/mAudit'+"/EmployeeInfo");
-
+    
      this.getlabdataSource = this.getcommdata.fetchlabgurureport(this.labgururepform.value);
     console.log(  this.getlabdataSource);
 }
@@ -181,8 +181,8 @@ export class LabtechReportComponent implements OnInit {
 onGridReady(params) {
   this.gridApi = params.api;
   this.gridColumnApi = params.columnApi;
-
-  params.api.sizeColumnsToFit();
+  this.getcommdata.fetchlabgurureport(this.labgururepform.value);
+  params.api.resetRowHeights();
 }
    
   

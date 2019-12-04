@@ -1,0 +1,45 @@
+<form [formGroup]="attendencerep" novalidate>
+  <div  class="row">
+    <div class="col-md-3"></div> 
+    <div class="col-md-6" style="font-size: 20px;text-align: center;">
+      <b>Attendence Log</b>
+    </div>
+    <div class="col-md-3"></div>
+  </div>
+  <br>
+  
+  <div class="card" >
+      <div class="card-body">
+        <div class="form-group row">
+          <div class="col-md-3">
+          <label class="label">Select</label>
+          <ng-select appearance="outline" #agreeSelect labelForId="yesno" [searchable]="false"  formControlName="Inout">
+            <ng-option [value]="0">IN</ng-option>
+            <ng-option [value]="1">OUT</ng-option>
+         </ng-select>
+         </div>
+        <div class="col-md-3">
+          <button (click)="getattendencereport()" class="btn btn-success" style="margin-top:20px;">Get data</button>
+        </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="getattendencereportdata">  <ag-grid-angular 
+        class="ag-theme-dark"
+      [rowData]="getattendencereportdata| async "
+      [columnDefs]="columnDefs"
+      [modules]="modules"
+      [pagination]="true"
+      (gridReady)="onGridReady($event)"
+      [icons]="icons"
+      [domLayout]="domLayout"
+      [rowClassRules]="rowClassRules"
+      [floatingFilter]="true"
+      [enableCellChangeFlash]="true"
+      [overlayLoadingTemplate]="overlayLoadingTemplate"
+      >
+  </ag-grid-angular>
+</div>
+
+  </form>
+  

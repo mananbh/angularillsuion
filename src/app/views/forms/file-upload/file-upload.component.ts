@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,EventEmitter } from '@angular/core';
 import { FileUploader } from 'ng2-file-upload';
+
 
 @Component({
   selector: 'app-file-upload',
@@ -7,12 +8,21 @@ import { FileUploader } from 'ng2-file-upload';
   styleUrls: ['./file-upload.component.css']
 })
 export class FileUploadComponent implements OnInit {
-  public uploader: FileUploader = new FileUploader({ url: 'https://evening-anchorage-315.herokuapp.com/api/' });
+  public uploader: FileUploader = new FileUploader({ url: 'http://localhost:60531/api/Aligners/Upload_Files_new?fileid=88' });
   public hasBaseDropZoneOver: boolean = false;
   console = console;
-  constructor() { }
+  constructor() { 
+  }
 
   ngOnInit() {
+    this.uploader.onAfterAddingFile = (file) => { file.withCredentials = false; };
+    /*  this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
+         console.log('FileUpload:uploaded:', item, status, response);
+         alert('File uploaded successfully');
+     };  */
+    this.uploader.onCompleteAll= () =>{
+      alert("Successfull");
+     }
   }
 
   public fileOverBase(e: any): void {

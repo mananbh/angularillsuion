@@ -82,16 +82,16 @@
     </div>
   </div>
 </div>
-<div *ngIf="getlabdataSource"><ag-grid-angular 
-style="width: 100%; height: 450px;" 
-
+<div *ngIf="getlabdataSource">
+  <ag-grid-angular 
+style="width: auto; height: 450px;"
 class="ag-theme-dark"
 [rowData]="getlabdataSource| async "
     [columnDefs]="tablecolumn"
     [modules]="modules"
-    [enableCellChangeFlash]="true"
     (gridReady)="onGridReady($event)"
     [pagination]="true"
+    [floatingFilter]="true"
 
     >
 </ag-grid-angular>
