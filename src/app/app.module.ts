@@ -22,6 +22,7 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ErrorHandlerService } from './shared/services/error-handler.service';
 import { SessionsModule } from './views/sessions/sessions.module';
+import { FileUploadModule } from 'ng2-file-upload';
 
 
 // AoT requires an exported function for factories
@@ -40,6 +41,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     BrowserAnimationsModule,
     SharedModule,
     HttpClientModule,
+    FileUploadModule,
     PerfectScrollbarModule,
     TranslateModule.forRoot({
       loader: {

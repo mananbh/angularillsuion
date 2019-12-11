@@ -1,3 +1,18 @@
+
+<div class="card" >
+    <div class="card-body">
+      <div class="form-group row">
+        <div class="col-md-12">
+           <label>From Date</label>
+            <input [owlDateTime]="fromdate" [owlDateTimeTrigger]="fromdate" placeholder="Date Time">
+            <owl-date-time #fromdate></owl-date-time>
+            <label>To Date</label>
+          <input [owlDateTime]="todate" [owlDateTimeTrigger]="todate" placeholder="Date Time">
+          <owl-date-time #todate></owl-date-time>   
+          </div>
+        </div>
+    </div>
+</div>
 <mat-card class="p-0">
   <mat-card-title class="">
     <div class="card-title-text" style="font-size: 20px;">File upload</div>
@@ -84,7 +99,7 @@
                 color="primary"
                 class="mx-4"
                 (click)="item.upload()"
-                [disabled]="item.isReady || item.isUploading || item.isSuccess">Upload</button>
+                [disabled]="item.isReady  || item.isSuccess">Upload</button>
            <!--      <button 
                 mat-raised-button
                 color="accent"

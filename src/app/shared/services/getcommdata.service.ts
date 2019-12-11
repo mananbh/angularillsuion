@@ -17,7 +17,8 @@ export class ReportType{
     Filter4: string;
 }
 export class GetcommdataService {
-  localurl = 'http://104.211.240.240/labguru_mobile';
+  //localurl = 'http://104.211.240.240/labguru_mobile';
+  localurl = 'http://10.10.0.149/api'
   header : any;  
   constructor(private http: HttpClient) {
     const headerSettings: {[name: string]: string | string[]; } = {};  
@@ -61,4 +62,12 @@ export class GetcommdataService {
     //return  this.http.get(this.localurl+'/EmployeeInfo');
   return  this.http.get('http://104.211.240.240/API/api/mAudit'+"/EmployeeInfo");
  }
+
+
+ getimagenameapi() {
+  let data = {OrganizationUnitID: 7,CustomerID: 2059,FromDate:"2019-11-09 00:00:00",ToDate:"2019-12-10 00:00:00",ImpressionNo:"",Attribute:""};
+
+  const httpOptions = {headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+  return  this.http.post(this.localurl+'/api/PP/UploadRx_Search',data,httpOptions);
+} 
 }
