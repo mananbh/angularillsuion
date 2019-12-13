@@ -1,18 +1,35 @@
-
+<form [formGroup]="rximageupload">
 <div class="card" >
     <div class="card-body">
       <div class="form-group row">
         <div class="col-md-12">
-           <label>From Date</label>
-            <input [owlDateTime]="fromdate" [owlDateTimeTrigger]="fromdate" placeholder="Date Time">
-            <owl-date-time #fromdate></owl-date-time>
-            <label>To Date</label>
-          <input [owlDateTime]="todate" [owlDateTimeTrigger]="todate" placeholder="Date Time">
-          <owl-date-time #todate></owl-date-time>   
+           <label class="label" style="font-size: 15px;">From Date</label>&nbsp;&nbsp;
+            <input [owlDateTime]="fromdate" [owlDateTimeTrigger]="fromdate" placeholder="Date Time" formControlName="FromDate">
+            <owl-date-time [pickerType]="'calendar'" #fromdate></owl-date-time>&nbsp;&nbsp;
+            <label class="label" style="font-size: 15px;">To Date</label>&nbsp;&nbsp;
+          <input [owlDateTime]="todate" [owlDateTimeTrigger]="todate" placeholder="Date Time" formControlName="ToDate">
+          <owl-date-time [pickerType]="'calendar'" #todate></owl-date-time>   &nbsp;&nbsp;
+          <button (click)="getrximagereport()" class="btn btn-success" >Get data</button>
+
           </div>
+        </div>  
+     <div *ngIf="dataSource2">
+          <ag-grid-angular 
+           style="width: 400px; height: 200px;"
+            class="ag-theme-dark"
+            [rowData]="dataSource2| async "
+            [columnDefs]="tablecolumn"
+            [modules]="modules"
+            
+            [pagination]="true"
+            [floatingFilter]="true"
+            >
+          </ag-grid-angular>
         </div>
+
     </div>
 </div>
+</form>
 <mat-card class="p-0">
   <mat-card-title class="">
     <div class="card-title-text" style="font-size: 20px;">File upload</div>
