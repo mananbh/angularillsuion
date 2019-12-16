@@ -84,13 +84,13 @@ export class NavigationService {
       },
     ]
     },
-    {
+   /*  {
       name: "CRUD Table",
       type: "link",
       tooltip: "CRUD Table",
       icon: "format_list_bulleted",
       state: "cruds/ngx-table"
-    },
+    }, */
    /* {
       name: "ECOMMERCE",
       type: "dropDown",
@@ -126,7 +126,7 @@ export class NavigationService {
       state: "chat",
       badges: [{ color: "warn", value: "1" }]
     }, */
-    {
+/*     {
       name: "CALENDAR",
       type: "link",
       tooltip: "Calendar",
@@ -139,7 +139,7 @@ export class NavigationService {
       tooltip: "Todo",
       icon: "center_focus_strong",
       state: "todo/list"
-    },
+    }, */
    /*  {
       name: "DIALOGS",
       type: "dropDown",
@@ -151,7 +151,7 @@ export class NavigationService {
         { name: "LOADER", state: "loader" }
       ]
     }, */
-    {
+   /*  {
       name: "Material Kits",
       type: "dropDown",
       tooltip: "Material",
@@ -232,21 +232,21 @@ export class NavigationService {
         },
         { name: "Buttons Loading", state: "loading-buttons" }
       ]
-    },
+    }, */
     {
-      name: "FORMS",
+      name: "RX",
       type: "dropDown",
       tooltip: "Forms",
       icon: "description",
       state: "forms",
       sub: [
-        { name: "BASIC", state: "basic" },
-        { name: "EDITOR", state: "editor" },
-        { name: "UPLOAD", state: "upload" },
-        { name: "WIZARD", state: "wizard" }
+        //{ name: "BASIC", state: "basic" },
+       //{ name: "EDITOR", state: "editor" },
+        { name: " RX UPLOAD", state: "upload" },
+       // { name: "WIZARD", state: "wizard" }
       ]
     },
-    {
+   /*  {
       name: "TABLES",
       type: "dropDown",
       tooltip: "Tables",
@@ -271,7 +271,7 @@ export class NavigationService {
         { name: "SETTINGS", state: "settings" },
         { name: "BLANK", state: "blank" }
       ]
-    },
+    }, */
     /* {
       name: "TOUR",
       type: "link",
@@ -286,7 +286,7 @@ export class NavigationService {
       icon: "add_location",
       state: "map"
     }, */
-    {
+   /*  {
       name: "CHARTS",
       type: "dropDown",
       tooltip: "Charts",
@@ -305,7 +305,7 @@ export class NavigationService {
         },
         { name: "Chart js", state: "charts" }
       ]
-    },
+    }, */
     // {
     //   name: "CHARTS",
     //   type: "link",
@@ -335,7 +335,7 @@ export class NavigationService {
         { name: "Left sidebar plain", state: "left-sidebar-plain" }
       ]
     },
-     */{
+     *//* {
       name: "SESSIONS",
       type: "dropDown",
       tooltip: "Pages",
@@ -355,7 +355,7 @@ export class NavigationService {
         { name: "NOTFOUND", state: "404" },
         { name: "ERROR", state: "error" }
       ]
-    },
+    }, */
     /* {
       name: "Utilities",
       type: "dropDown",
@@ -381,13 +381,13 @@ export class NavigationService {
         { name: "BLANK", state: "blank" }
       ]
     }, */
-    {
+ /*    {
       name: "MATICONS",
       type: "link",
       tooltip: "Material Icons",
       icon: "store",
       state: "icons"
-    },
+    }, */
     //multi menu
   /*   {
       name: "Multi Meni",

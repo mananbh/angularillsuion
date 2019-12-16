@@ -31,7 +31,9 @@ export class Signin3Component implements OnInit {
       // do what you want to do with your data
       this.getdata.doLogin(this.signupForm.value).pipe(first()).subscribe((data:any) => {
       this.dataSource = JSON.parse(data.objData); 
-      if (this.dataSource.Data.LoginDetailsDTO_List[0].LoginUser==this.signupForm.value.username) {
+      var usernamefromapi :string= this.dataSource.Data.LoginDetailsDTO_List[0].LoginUser;
+      var usernamefromuser :string= this.signupForm.value.username;
+      if (usernamefromapi.toLowerCase()==usernamefromuser.toLowerCase()) {
         
           sessionStorage.setItem("Islogin",'true');
           sessionStorage.setItem('userData', JSON.stringify(this.dataSource));

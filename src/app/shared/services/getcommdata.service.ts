@@ -19,6 +19,8 @@ export class ReportType{
 export class GetcommdataService {
   localurl = 'http://104.211.240.240/labguru_mobile';
   //localurl = 'http://10.10.0.149/api'
+  liveurl = 'https://mobileapi.illusiondentallab.com/';
+
   header : any;  
   constructor(private http: HttpClient) {
     const headerSettings: {[name: string]: string | string[]; } = {};  
@@ -66,6 +68,6 @@ export class GetcommdataService {
 
  getimagenameapi(getrximagereport) {
   const httpOptions = {headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-  return  this.http.post(this.localurl+'/api/PP/UploadRx_Search',getrximagereport,httpOptions);
+  return  this.http.post(this.liveurl+'/api/PP/UploadRx_Search',getrximagereport,httpOptions);
 } 
 }

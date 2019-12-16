@@ -3,7 +3,7 @@ import { FileUploader, } from 'ng2-file-upload';
 import { AppLoaderService } from '../../../shared/services/app-loader/app-loader.service';
 import { async } from '@angular/core/testing';
 import { FileUploadModule ,FileItem } from "ng2-file-upload";
-import { FormBuilder, FormGroup,FormControl,Validators} from '@angular/forms';
+import { FormBuilder, FormGroup,FormControl,Validators,FormArray } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 import {GetcommdataService} from '../../../shared/services/getcommdata.service'
 import { HttpClient, HttpParams,HttpHeaders } from '@angular/common/http'; 
@@ -17,10 +17,13 @@ import {AllCommunityModules} from '@ag-grid-community/all-modules';
 export class FileUploadComponent implements OnInit {
     uaturl = 'http://104.211.240.240/labguru_mobile';
     localurl = 'http://localhost:60531';
-    rximageupload: FormGroup;
+    liveurl = 'https://mobileapi.illusiondentallab.com/';
 
+    rximageupload: FormGroup;
+    submitted = false;
+    messeges :string
     response:string;
-    public uploader: FileUploader = new FileUploader({ url: this.localurl+ '/api/PP/Upload_Rx?FolderID=8',
+    public uploader: FileUploader = new FileUploader({ url: this.liveurl+ '/api/PP/Upload_Rx?FolderID=8',
     formatDataFunction:async ,autoUpload : false,
   })
   ;
@@ -37,14 +40,16 @@ export class FileUploadComponent implements OnInit {
       this.uploader.clearQueue();
       this.uploader.response.subscribe( res => this.response = res );
       this.uploader.onProgressItem = (progress: any) => this.changeDetector.detectChanges();
+
+      
       this.uploader.onAfterAddingFile = (file) => { 
       file.withCredentials = false;
       const hash = this.getFileHash(file._file);
       this.console.log(this.dataSource);
       if(this.dataSource !== undefined){
       for(var i=0;i<this.dataSource.length;i++){
-            var str : string = (this.dataSource[i]["ImageName"]) ;
-            var index = str.localeCompare(file._file.name) 
+            var str : string = (this.dataSource[i]["ImageName"]);
+            var index = str.toUpperCase().localeCompare(file._file.name.toUpperCase()); 
             //var checkindex: number = this.uploader.queue.indexOf(file, 0);
               if(index  == 0){
                 this.uploader.queue.push(file);
@@ -57,12 +62,15 @@ export class FileUploadComponent implements OnInit {
     
         }
       }else{
-          setTimeout(function() { alert("Kindly Select data") }, 50);
+        //setTimeout(function() { alert("Kindly Select data") }, 50);
+        this.messeges ="Select From And to date first before upload"
         this.uploader.clearQueue();
-      }
+      } 
       
     }; 
-    
+
+
+
   }
 
 
@@ -80,7 +88,7 @@ export class FileUploadComponent implements OnInit {
     ToDate: ['', [Validators.required]],
   });
 
-  this.rximageupload.addControl('OrganizationUnitID', new FormControl());
+    this.rximageupload.addControl('OrganizationUnitID', new FormControl());
     this.rximageupload.addControl('CustomerID', new FormControl());
     this.rximageupload.addControl('ImpressionNo', new FormControl());
     this.rximageupload.addControl('Attribute', new FormControl());
@@ -98,6 +106,10 @@ export class FileUploadComponent implements OnInit {
       this.changeDetector.detectChanges();
     }
 
+    this.uploader.onCompleteAll= () =>{
+      alert("All Image Uploading completed")
+    }
+
   }
   public fileOverBase(e:any):void {
     this.hasBaseDropZoneOver = e;
@@ -110,6 +122,10 @@ export class FileUploadComponent implements OnInit {
   }
 
     async  getrximagereport(){
+      this.submitted = true;
+      if (this.rximageupload.invalid) {
+        return;
+      }
       this.rximageupload.value.OrganizationUnitID = 7;
       this.rximageupload.value.CustomerID = 2059;
       this.rximageupload.value.ImpressionNo = "";
