@@ -16,11 +16,12 @@ export const FormsRoutes: Routes = [
       path: 'editor',
       component: RichTextEditorComponent,
       data: { title: 'Editor', breadcrumb: 'EDITOR' }
-    }, {
+    }, 
+   /*  {
       path: 'upload',
       component: FileUploadComponent,
       data: { title: 'Upload', breadcrumb: 'UPLOAD' }
-    }, {
+    }, */ {
       path: 'wizard',
       component: WizardComponent,
       data: { title: 'Wizard', breadcrumb: 'WIZARD' }

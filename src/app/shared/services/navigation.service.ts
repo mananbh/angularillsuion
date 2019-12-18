@@ -64,10 +64,10 @@ export class NavigationService {
       icon: "dashboard",
       state: "dashboard",
       sub: [
-        { name: "Default", state: "default" },
+        //{ name: "Default", state: "default" },
         { name: "Analytics", state: "analytics" },
-        { name: "Cryptocurrency", state: "crypto" },
-        { name: "Dark Cards", state: "dark" }
+        //{ name: "Cryptocurrency", state: "crypto" },
+       // { name: "Dark Cards", state: "dark" }
       ]
     },
     {
@@ -232,7 +232,7 @@ export class NavigationService {
         },
         { name: "Buttons Loading", state: "loading-buttons" }
       ]
-    }, */
+    }, 
     {
       name: "RX",
       type: "dropDown",
@@ -240,10 +240,10 @@ export class NavigationService {
       icon: "description",
       state: "forms",
       sub: [
-        //{ name: "BASIC", state: "basic" },
-       //{ name: "EDITOR", state: "editor" },
+        { name: "BASIC", state: "basic" },
+       { name: "EDITOR", state: "editor" },
         { name: " RX UPLOAD", state: "upload" },
-       // { name: "WIZARD", state: "wizard" }
+        { name: "WIZARD", state: "wizard" }
       ]
     },
    /*  {

@@ -8,6 +8,8 @@ import {GetcommdataService} from '../../shared/services/getcommdata.service'
 import { DatePipe } from '@angular/common';
 import { AgGridModule } from '@ag-grid-community/angular';
 import { GetreportdataapiService } from './getreportdataapi.service';
+import { FileUploadModule } from 'ng2-file-upload';
+import { DataDialogOverviewComponent } from '../../../assets/examples/material/data-dialog/data-dialog-overview/data-dialog-overview.component'
 
 import { 
   MatInputModule,
@@ -36,6 +38,8 @@ import {
 } from '@angular/material';
 import { OwlDateTimeModule, OwlNativeDateTimeModule,OWL_DATE_TIME_LOCALE,OWL_DATE_TIME_FORMATS } from 'ng-pick-datetime';
 
+import { FileUploadComponent } from '../forms/file-upload/file-upload.component';
+import { AlertsModule } from 'angular-alert-module';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { QuillModule } from 'ngx-quill';
@@ -50,7 +54,7 @@ export const MY_NATIVE_FORMATS = {
   monthYearA11yLabel: {year: 'numeric', month: 'long'},
 };
 @NgModule({
-  declarations: [LabtechReportComponent, AttendenceReportComponent],
+  declarations: [LabtechReportComponent,FileUploadComponent,AttendenceReportComponent,DataDialogOverviewComponent],
   imports: [
     CommonModule,
     MatInputModule,
@@ -83,13 +87,19 @@ export const MY_NATIVE_FORMATS = {
     MatTableModule,
     AgGridModule.withComponents([]),
     RouterModule.forChild(ReportsRouting),
-  ],
+    FileUploadModule,
+    AlertsModule.forRoot()
+
+    ],
   providers: [
     { provide: GetcommdataService, useClass: GetcommdataService },
     {provide: OWL_DATE_TIME_LOCALE, useValue: 'en-SG'},
     {provide: OWL_DATE_TIME_FORMATS, useValue: MY_NATIVE_FORMATS},
     DatePipe,
     GetreportdataapiService
+  ],
+  entryComponents: [
+    DataDialogOverviewComponent
   ],
 })
 export class ReportsModule { }

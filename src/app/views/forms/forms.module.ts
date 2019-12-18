@@ -30,6 +30,8 @@ import { WizardComponent } from './wizard/wizard.component';
 import { OwlDateTimeModule, OwlNativeDateTimeModule ,OWL_DATE_TIME_LOCALE,OWL_DATE_TIME_FORMATS } from 'ng-pick-datetime';
 import {GetcommdataService} from '../../shared/services/getcommdata.service'
 import { AgGridModule } from '@ag-grid-community/angular';
+import { MatDialogModule  } from '@angular/material';
+import { DataDialogOverviewComponent } from '../../../assets/examples/material/data-dialog/data-dialog-overview/data-dialog-overview.component'
 
 export const MY_NATIVE_FORMATS = {
   fullPickerInput: {year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric'},
@@ -64,14 +66,20 @@ export const MY_NATIVE_FORMATS = {
     OwlNativeDateTimeModule,
     AgGridModule.withComponents([]),
     RouterModule.forChild(FormsRoutes),
+    MatDialogModule,
 
   ],
-  declarations: [BasicFormComponent, RichTextEditorComponent, FileUploadComponent, WizardComponent],
+  declarations: [BasicFormComponent, RichTextEditorComponent, FileUploadComponent, WizardComponent,DataDialogOverviewComponent],
   providers: [
     { provide: GetcommdataService, useClass: GetcommdataService },
     {provide: OWL_DATE_TIME_LOCALE, useValue: 'en-SG'},
     {provide: OWL_DATE_TIME_FORMATS, useValue: MY_NATIVE_FORMATS},
     DatePipe,
+    
+  ],
+  entryComponents: [
+    DataDialogOverviewComponent
   ],
 })
+
 export class AppFormsModule { }

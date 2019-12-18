@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import{LabtechReportComponent} from './labtech-report/labtech-report.component';
 import{AttendenceReportComponent} from './attendence-report/attendence-report.component';
+import { FileUploadComponent } from '../forms/file-upload/file-upload.component';
 
 
 
@@ -20,6 +21,14 @@ export const ReportsRouting: Routes = [
       path: 'attenrep',
       component: AttendenceReportComponent,
       data: { title: 'Report', breadcrumb: 'Attendence report Log' }
+    }]
+  },
+  {
+    path: '',
+    children: [{
+        path: 'rxupload',
+        component: FileUploadComponent,
+        data: { title: 'Upload', breadcrumb: 'UPLOAD' }
     }]
   }
 ];

@@ -6,6 +6,7 @@ import {  Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { AppLoaderService } from '../../../shared/services/app-loader/app-loader.service';
 import { MatDialog } from '@angular/material';
+import {GetcommdataService} from '../../../shared/services/getcommdata.service'
 
 @Component({
   selector: 'app-signin3',
@@ -17,7 +18,7 @@ export class Signin3Component implements OnInit {
   dataSource:any;
 
   public signupForm: FormGroup;
-  constructor(private fb: FormBuilder,private getdata: GetdatapiService,private router: Router,private loader: AppLoaderService,public dialog: MatDialog) {}
+  constructor(private fb: FormBuilder,private getdata: GetcommdataService,private router: Router,private loader: AppLoaderService,public dialog: MatDialog) {}
 
   ngOnInit() {
     this.signupForm = this.fb.group({
@@ -31,16 +32,16 @@ export class Signin3Component implements OnInit {
       // do what you want to do with your data
       this.getdata.doLogin(this.signupForm.value).pipe(first()).subscribe((data:any) => {
       this.dataSource = JSON.parse(data.objData); 
-      var usernamefromapi :string= this.dataSource.Data.LoginDetailsDTO_List[0].LoginUser;
+      console.log(this.dataSource);
+      var usernamefromapi :string= this.dataSource.Data.LoginDetailsDTO_List[0].ValidationMsg;
       var usernamefromuser :string= this.signupForm.value.username;
-      if (usernamefromapi.toLowerCase()==usernamefromuser.toLowerCase()) {
-        
+      if (usernamefromapi=="") {
           sessionStorage.setItem("Islogin",'true');
           sessionStorage.setItem('userData', JSON.stringify(this.dataSource));
           this.router.navigate(['/dashboard/analytics']);
         } else {
           this.loader.close();
-          alert("Wrong Username and Password");
+          alert(usernamefromapi);
        }
      });
     }

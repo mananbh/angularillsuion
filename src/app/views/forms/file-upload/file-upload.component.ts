@@ -8,12 +8,21 @@ import { DatePipe } from '@angular/common';
 import {GetcommdataService} from '../../../shared/services/getcommdata.service'
 import { HttpClient, HttpParams,HttpHeaders } from '@angular/common/http'; 
 import {AllCommunityModules} from '@ag-grid-community/all-modules';
+import { DataDialogOverviewComponent } from '../../../../assets/examples/material/data-dialog/data-dialog-overview/data-dialog-overview.component'
+import { MatDialog } from '@angular/material';
+import{AttendenceReportComponent} from '../../reports/attendence-report/attendence-report.component';
+import { AlertsService } from 'angular-alert-module';
 
+export interface DialogData {
+  messages: string;
+}
 @Component({
   selector: 'app-file-upload',
   templateUrl: './file-upload.component.html',
   styleUrls: ['./file-upload.component.css']
 })
+
+
 export class FileUploadComponent implements OnInit {
     uaturl = 'http://104.211.240.240/labguru_mobile';
     localurl = 'http://localhost:60531';
@@ -36,7 +45,9 @@ export class FileUploadComponent implements OnInit {
     getFileHash (file: File): string {
       return file.name;
      }
-    constructor(private loader: AppLoaderService,private changeDetector: ChangeDetectorRef,private getcommdata: GetcommdataService,private formbulider: FormBuilder,private datePipe: DatePipe,private http: HttpClient) {  
+    constructor(private loader: AppLoaderService,private changeDetector: ChangeDetectorRef,private getcommdata: GetcommdataService,private formbulider: FormBuilder,private datePipe: DatePipe,private http: HttpClient,public dialog: MatDialog,private alerts: AlertsService) {  
+      this.alerts.setDefaults("timeout",1);
+      
       this.uploader.clearQueue();
       this.uploader.response.subscribe( res => this.response = res );
       this.uploader.onProgressItem = (progress: any) => this.changeDetector.detectChanges();
@@ -86,6 +97,8 @@ export class FileUploadComponent implements OnInit {
     this.rximageupload = this.formbulider.group({
     FromDate: ['', [Validators.required]],
     ToDate: ['', [Validators.required]],
+
+    
   });
 
     this.rximageupload.addControl('OrganizationUnitID', new FormControl());
@@ -116,26 +129,50 @@ export class FileUploadComponent implements OnInit {
   }
 
   getiamgename() {
-    this.getcommdata.getimagenameapi(this.rximageupload.value).subscribe((data:[]) => {
+    this.loader.close();
+
+    this.getcommdata.getimagenameapi(this.rximageupload.value).subscribe(async(data:any) => {
+      
     this.dataSource =data; 
-      });
+   this.messeges =  await this.dataSource.length + " Cases found.Kindly Browse Rx files and click upload all button";
+    this.console.log(this.messeges);
+    });
+    this.changeDetector.detectChanges();
+
   }
 
     async  getrximagereport(){
+      this.messeges ="";
+      this.loader.open();
+
       this.submitted = true;
+     /*  this.dialog.open(DataDialogOverviewComponent, {
+        data: {name: this.messeges}
+      });  */     
       if (this.rximageupload.invalid) {
+        this.loader.close();
         return;
       }
-      this.rximageupload.value.OrganizationUnitID = 7;
-      this.rximageupload.value.CustomerID = 2059;
+
+      if(this.rximageupload.value.FromDate > this.rximageupload.value.ToDate){
+        this.loader.close();
+        alert("From Date Cannot be more than to date")
+        return;
+      }
+       
+      this.rximageupload.value.OrganizationUnitID ='';
+      this.rximageupload.value.CustomerID ='';
       this.rximageupload.value.ImpressionNo = "";
       this.rximageupload.value.Attribute = "";
       this.rximageupload.value.FromDate = this.datePipe.transform(this.rximageupload.value.FromDate,"yyyy-MM-dd");
       this.rximageupload.value.ToDate = this.datePipe.transform(this.rximageupload.value.ToDate,"yyyy-MM-dd");
-      this.dataSource2 =  this.getcommdata.getimagenameapi(this.rximageupload.value).toPromise();
+      this.dataSource2 =(await this.getcommdata.getimagenameapi(this.rximageupload.value).toPromise()).length;
+      this.messeges =  this.dataSource2 + " Cases found.Kindly Browse Rx files and click upload all button";
+      this.alerts.setMessage(this.messeges,'success');
+
       this.getiamgename();
     }
-      
+    
 }
 
 /*   this.uploader.onBuildItemForm = (fileItem: any, form: any) => {
