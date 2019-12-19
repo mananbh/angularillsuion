@@ -1,0 +1,143 @@
+<form >
+  <div class="card" >
+      <div class="card-body">
+        <div class="form-row"></div>    
+            <div class="form-group col-md-3">
+              <label class="label" style="font-size: 15px;">Impression No</label>&nbsp;&nbsp;
+              <input type="text" placeholder="Impression No" [(ngModel)]="myModel" (blur)="onBlurMethod()" class="form-control" name="something">
+              <span *ngIf="submitted &amp;&amp; caseuploadform.controls.impresionno.errors" class="text-danger">
+                <span *ngIf="caseuploadform.controls.impresionno.errors.required">To Date is required</span>
+              </span>
+            </div>    
+        </div>  
+      </div>  
+   </form>
+  <!--      <div *ngIf="dataSource2">
+            <ag-grid-angular 
+             style="width: 400px; height: 200px;"
+              class="ag-theme-dark"
+              [rowData]="dataSource2| async "
+              [columnDefs]="tablecolumn"
+              [modules]="modules"
+              
+              [pagination]="true"
+              [floatingFilter]="true"
+              >
+            </ag-grid-angular>
+          </div> -->
+  
+  <mat-card class="p-0">
+    <mat-card-title class="">
+      <div class="card-title-text" style="font-size: 20px;">File upload</div>
+      <mat-divider></mat-divider>
+    </mat-card-title>
+    <mat-card-content>
+        <div class="mb-1">
+            <label style="font-size: 20px;">Multiple </label>
+            <div  class="custom-file-upload">
+              <input type="file" ng2FileSelect [uploader]="uploader" multiple class="btn btn-primary" />
+            </div> &nbsp;
+         <!--  <label style="font-size: 20px;">Single      </label>
+  
+          <div  class="custom-file-upload">
+          <input type="file" ng2FileSelect [uploader]="uploader" class="btn btn-primary"/>
+        </div> -->
+        </div>
+  
+  <!--       <div class="mb-1">
+          <div ng2FileDrop style="border: 4px solid rgb(65, 53, 53);"
+          [ngClass]="{'dz-file-over': hasBaseDropZoneOver}"
+          (fileOver)="fileOverBase($event)"
+          [uploader]="uploader"
+          class="fileupload-drop-zone mb-24">
+          <label style="font-size: 20px;">Drop file here</label> 
+          </div>
+        </div> -->
+  
+        <div style="font-size: 20px;">
+          <p>Queue progress:</p>
+          <div class="progress mb-1" >
+              <mat-progress-bar
+                class=""
+                color="primary"
+                mode="determinate"
+                [value]="uploader.progress">
+              </mat-progress-bar>
+          </div>
+  
+        <button 
+        mat-raised-button
+        color="primary"
+        class="mx-4"
+        (click)="uploader.uploadAll()"
+        [disabled]="!uploader.getNotUploadedItems().length" >Upload all</button>
+  <!-- 
+        <button 
+        mat-raised-button
+        color="accent"
+        class="mx-4"
+        (click)="uploader.cancelAll()"
+        [disabled]="!uploader.isUploading">Cancel all</button> -->
+  
+        <button 
+        mat-raised-button
+        color="warn"
+        class="mx-4"
+        (click)="uploader.clearQueue()"
+        [disabled]="!uploader.queue.length">Remove all</button>
+      </div>
+      <br>
+        <table class="default-table mat-box-shadow mb-24" style="width: 100%" border="1">
+          <thead>
+          <tr style="font-size: medium;font-weight: bold;">
+              <th width="30%">Name</th>
+              <th>Size</th>
+              <th>Status</th>
+              <th>Actions</th>
+          </tr>
+          </thead>
+          <tbody *ngIf="uploader.queue.length; else tableNoData">
+          <tr *ngFor="let item of uploader.queue"  style="font-size: medium;font-weight: bold;">
+              <td>{{ item?.file?.name }}</td>
+              <td nowrap>{{ item?.file?.size/1024/1024 | number:'.2' }} MB</td>
+  
+              <td class="">
+                  <mat-icon *ngIf="item.isSuccess" color="primary">check</mat-icon>
+                  <mat-icon *ngIf="item.isCancel" color="accent">cancel</mat-icon>
+                  <mat-icon *ngIf="item.isError" color="warn">error</mat-icon>
+              </td>
+              <td nowrap>
+                  <button 
+                  mat-raised-button
+                  color="primary"
+                  class="mx-4"
+                  (click)="item.upload()"
+                  [disabled]="item.isReady  || item.isSuccess">Upload</button>
+             <!--      <button 
+                  mat-raised-button
+                  color="accent"
+                  class="mx-4"
+                  (click)="item.cancel()"
+                  [disabled]="!item.isUploading">Cancel</button> -->
+  
+                  <button 
+                  mat-raised-button
+                  color="warn"
+                  class="mx-4"
+                  (click)="item.remove()">Remove</button>
+              </td>
+          </tr>
+          </tbody>
+          <ng-template #tableNoData >
+            <p [ngStyle]="{padding: '0 8.2rem'}">Queue is empty</p>
+          </ng-template>
+      </table>
+  
+  
+    </mat-card-content>
+  </mat-card>
+  <app-alerts></app-alerts>
+  
+  
+  
+  

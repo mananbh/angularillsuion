@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import{LabtechReportComponent} from './labtech-report/labtech-report.component';
 import{AttendenceReportComponent} from './attendence-report/attendence-report.component';
 import { FileUploadComponent } from '../forms/file-upload/file-upload.component';
-
+import { CaseDocumentComponent } from './case-document/case-document.component';
 
 
 export const ReportsRouting: Routes = [
@@ -29,6 +29,14 @@ export const ReportsRouting: Routes = [
         path: 'rxupload',
         component: FileUploadComponent,
         data: { title: 'Upload', breadcrumb: 'UPLOAD' }
+    }]
+  },
+  {
+    path: '',
+    children: [{
+        path: 'casedoc',
+        component: CaseDocumentComponent,
+        data: { title: 'Case', breadcrumb: 'Doc Upload' }
     }]
   }
 ];

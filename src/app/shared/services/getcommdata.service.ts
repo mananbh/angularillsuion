@@ -26,7 +26,7 @@ export class rxfileupload{
 }
 export class GetcommdataService {
   uaturl = 'http://104.211.240.240/labguru_mobile/';
-  //localurl = 'http://10.10.0.149/api'
+  localurl = 'http://10.10.0.149/api/'
   url = 'https://mobileapi.illusiondentallab.com/';
 
   header : any;  
@@ -39,33 +39,33 @@ export class GetcommdataService {
    getReportType(){
     let data = {SSCID: "3249",SituationID: "1",UserID:"1",RoleID:"1",Filter1:"16",Filter2:"0",Filter3:"0",Filter4:"0"};
     const httpOptions = {headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return  this.http.post(this.uaturl+'/GetCommonList',data,httpOptions);
+    return  this.http.post(this.localurl+'/GetCommonList',data,httpOptions);
   }  
 
   getLocation(){
     let data = {SSCID: "3249",SituationID: "2",UserID:"1",RoleID:"1",Filter1:"16",Filter2:"0",Filter3:"0",Filter4:"0"};
     const httpOptions = {headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return  this.http.post(this.uaturl+'/GetCommonList',data,httpOptions);
+    return  this.http.post(this.localurl+'/GetCommonList',data,httpOptions);
   }  
   getEmployee(){
     let data = {SSCID: "3249",SituationID: "3",UserID:"1",RoleID:"1",Filter1:"16",Filter2:"0",Filter3:"0",Filter4:"0"};
     const httpOptions = {headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return  this.http.post(this.uaturl+'/GetCommonList',data,httpOptions);
+    return  this.http.post(this.localurl+'/GetCommonList',data,httpOptions);
   }  
   getDepartment(){
     let data = {SSCID: "3249",SituationID: "4",UserID:"1",RoleID:"1",Filter1:"16",Filter2:"0",Filter3:"0",Filter4:"0"};
     const httpOptions = {headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return  this.http.post(this.uaturl+'/GetCommonList',data,httpOptions);
+    return  this.http.post(this.localurl+'/GetCommonList',data,httpOptions);
   }  
   getProcess(filter:string){
     let data = {SSCID: "3249",SituationID: "5",UserID:"1",RoleID:"1",Filter1:filter,Filter2:"0",Filter3:"0",Filter4:"0"};
     const httpOptions = {headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return  this.http.post(this.uaturl+'/GetCommonList',data,httpOptions);
+    return  this.http.post(this.localurl+'/GetCommonList',data,httpOptions);
   } 
 
   fetchlabgurureport(getlabgurudata) {
     const httpOptions = {headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return  this.http.post(this.uaturl+'/GetLabTechnicianPerformanceReport',getlabgurudata,httpOptions);
+    return  this.http.post(this.localurl+'/GetLabTechnicianPerformanceReport',getlabgurudata,httpOptions);
   } 
 
   getallpostdata() {
@@ -76,12 +76,12 @@ export class GetcommdataService {
 
  getimagenameapi(getrximagereport:  rxfileupload): Observable<string> {
   const httpOptions = {headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-  return  this.http.post<string>(this.url+'/api/PP/UploadRx_Search',getrximagereport,httpOptions);
+  return  this.http.post<string>(this.localurl+'/api/PP/UploadRx_Search',getrximagereport,httpOptions);
   } 
 
   //for login
   doLogin(data){
-    return this.http.get(this.url+'Login?usercode='+data.username+'&password='+data.password+'&IPAddress=12.27382.4666');
+    return this.http.get(this.localurl+'Login?usercode='+data.username+'&password='+data.password+'&IPAddress=12.27382.4666');
   }
 
 }

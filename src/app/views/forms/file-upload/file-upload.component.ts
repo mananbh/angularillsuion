@@ -10,7 +10,6 @@ import { HttpClient, HttpParams,HttpHeaders } from '@angular/common/http';
 import {AllCommunityModules} from '@ag-grid-community/all-modules';
 import { DataDialogOverviewComponent } from '../../../../assets/examples/material/data-dialog/data-dialog-overview/data-dialog-overview.component'
 import { MatDialog } from '@angular/material';
-import{AttendenceReportComponent} from '../../reports/attendence-report/attendence-report.component';
 import { AlertsService } from 'angular-alert-module';
 
 export interface DialogData {

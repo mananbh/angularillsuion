@@ -45,6 +45,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { QuillModule } from 'ngx-quill';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { AttendenceReportComponent } from './attendence-report/attendence-report.component';
+import { CaseDocumentComponent } from './case-document/case-document.component';
 export const MY_NATIVE_FORMATS = {
   fullPickerInput: {year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric'},
   datePickerInput: {year: 'numeric', month: 'numeric', day: 'numeric'},
@@ -54,7 +55,7 @@ export const MY_NATIVE_FORMATS = {
   monthYearA11yLabel: {year: 'numeric', month: 'long'},
 };
 @NgModule({
-  declarations: [LabtechReportComponent,FileUploadComponent,AttendenceReportComponent,DataDialogOverviewComponent],
+  declarations: [LabtechReportComponent,FileUploadComponent,AttendenceReportComponent,DataDialogOverviewComponent, CaseDocumentComponent],
   imports: [
     CommonModule,
     MatInputModule,
