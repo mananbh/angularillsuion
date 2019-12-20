@@ -16,14 +16,17 @@ export class CaseDocumentComponent implements OnInit {
   uaturl = 'http://104.211.240.240/labguru_mobile';
   localurl = 'http://localhost:60531';
   liveurl = 'https://mobileapi.illusiondentallab.com/';
-  fetchimpresion: '444';
+  demovmware = 'http://10.10.0.149/API'
+  fetchimpresion: any;
   myModel: any;
 
   caseuploadform: FormGroup;
   submitted = false;
   messeges :string
   response:string;
-  public uploader: FileUploader = new FileUploader({ url: this.uaturl+ '/api/PP/Upload_Rx?FolderID=8',
+  datasource:[];
+
+  public uploader: FileUploader = new FileUploader({ url: this.demovmware+ '/api/PP/Upload_Case?FolderID=9',
   formatDataFunction:async ,parametersBeforeFiles  : true,
 })
 ;
@@ -39,12 +42,11 @@ export class CaseDocumentComponent implements OnInit {
       item.withCredentials = false;
       this.uploader.options.additionalParameter = {
         name: item.file.name,
-        parent_id: this.fetchimpresion
+        Impresionno: this.fetchimpresion
       };
     };
 
     this.alerts.setDefaults("timeout",1);
-      
     this.uploader.clearQueue();
     this.uploader.response.subscribe( res => this.response = res );
     this.uploader.onProgressItem = (progress: any) => this.changeDetector.detectChanges();
@@ -59,9 +61,41 @@ export class CaseDocumentComponent implements OnInit {
   ngOnInit() {
     
   }
-  onBlurMethod(){
+  onBlurMethod(event){
+    event.stopPropagation();
+    event.preventDefault();
+
     this.fetchimpresion = this.myModel;
-    alert(this.fetchimpresion);
-   }
-  
+    this.getcommdata.getimpresionno(this.fetchimpresion).subscribe(async(data:any) => {
+      this.datasource = data;
+     if(this.datasource.length==0){
+      this.messeges = await "Impresion No Not Found";
+      this.alerts.setMessage(this.messeges,'error');
+      this.changeDetector.detectChanges();
+
+     }else{
+      this.messeges = await "Impresion No Found";
+      this.alerts.setMessage(this.messeges,'success');
+      this.changeDetector.detectChanges();
+
+     } 
+    this.console.log(this.messeges);
+    },
+   async error  => {
+      this.messeges = await "Something wrong"; 
+      this.alerts.setMessage(this.messeges,'error');
+      this.changeDetector.detectChanges();
+    },
+     );
+    }
+
+    getuploadbutton(){
+      if(this.datasource.length==0){
+        return false
+      }else{
+        return true;
+      }
+    }
+   //
+
 }

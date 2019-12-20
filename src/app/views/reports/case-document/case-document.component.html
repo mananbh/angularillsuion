@@ -4,11 +4,8 @@
         <div class="form-row"></div>    
             <div class="form-group col-md-3">
               <label class="label" style="font-size: 15px;">Impression No</label>&nbsp;&nbsp;
-              <input type="text" placeholder="Impression No" [(ngModel)]="myModel" (blur)="onBlurMethod()" class="form-control" name="something">
-              <span *ngIf="submitted &amp;&amp; caseuploadform.controls.impresionno.errors" class="text-danger">
-                <span *ngIf="caseuploadform.controls.impresionno.errors.required">To Date is required</span>
-              </span>
-            </div>    
+              <input type="text" placeholder="Impression No" [(ngModel)]="myModel" (keyup)="onBlurMethod($event)" class="form-control" name="something">
+            </div>   
         </div>  
       </div>  
    </form>
@@ -32,10 +29,12 @@
       <mat-divider></mat-divider>
     </mat-card-title>
     <mat-card-content>
+     <div  *ngIf="datasource">
+      <div  *ngIf="datasource.length >0 ">
         <div class="mb-1">
             <label style="font-size: 20px;">Multiple </label>
             <div  class="custom-file-upload">
-              <input type="file" ng2FileSelect [uploader]="uploader" multiple class="btn btn-primary" />
+              <input type="file" ng2FileSelect [uploader]="uploader" multiple class="btn btn-primary" >
             </div> &nbsp;
          <!--  <label style="font-size: 20px;">Single      </label>
   
@@ -43,7 +42,9 @@
           <input type="file" ng2FileSelect [uploader]="uploader" class="btn btn-primary"/>
         </div> -->
         </div>
-  
+
+      </div>
+    </div>
   <!--       <div class="mb-1">
           <div ng2FileDrop style="border: 4px solid rgb(65, 53, 53);"
           [ngClass]="{'dz-file-over': hasBaseDropZoneOver}"
@@ -70,7 +71,7 @@
         color="primary"
         class="mx-4"
         (click)="uploader.uploadAll()"
-        [disabled]="!uploader.getNotUploadedItems().length" >Upload all</button>
+        [disabled]="!uploader.getNotUploadedItems().length"  >Upload all</button>
   <!-- 
         <button 
         mat-raised-button

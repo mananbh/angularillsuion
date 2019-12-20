@@ -24,6 +24,11 @@ export class rxfileupload{
   ToDate: string;
   ImpressionNo  : string;
 }
+
+export class ImpressionNo{
+  
+  ImpressionNo  : string;
+}
 export class GetcommdataService {
   uaturl = 'http://104.211.240.240/labguru_mobile/';
   localurl = 'http://10.10.0.149/api/'
@@ -78,6 +83,10 @@ export class GetcommdataService {
   const httpOptions = {headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
   return  this.http.post<string>(this.localurl+'/api/PP/UploadRx_Search',getrximagereport,httpOptions);
   } 
+
+  getimpresionno(ImpressionNo) {
+    return  this.http.get(this.localurl+'/api/PP/UploadCase_Search?ImpressionNo='+ImpressionNo);
+    } 
 
   //for login
   doLogin(data){

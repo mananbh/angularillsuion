@@ -31,7 +31,7 @@ export class FileUploadComponent implements OnInit {
     submitted = false;
     messeges :string
     response:string;
-    public uploader: FileUploader = new FileUploader({ url: this.liveurl+ '/api/PP/Upload_Rx?FolderID=8',
+    public uploader: FileUploader = new FileUploader({ url: this.localurl+ '/api/PP/Upload_Rx?FolderID=8',
     formatDataFunction:async ,autoUpload : false,
   })
   ;
