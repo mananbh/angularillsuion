@@ -3,6 +3,8 @@ import { Observable } from 'rxjs/Rx';
 import { HttpClient, HttpParams,HttpHeaders } from '@angular/common/http'; 
 import {LabGuruReportcolnames} from '../../shared/classes/reportcolnames';
 import {} from '../CommonModal/commonmodal'
+import { environment } from '../../../environments/environment';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -30,9 +32,11 @@ export class ImpressionNo{
   ImpressionNo  : string;
 }
 export class GetcommdataService {
-  uaturl = 'http://104.211.240.240/labguru_mobile/';
+  private API_URL= environment.apiURL;
+
+  uaturl = 'http://104.211.240.240/labguru_mobile/api';
   localurl = 'http://10.10.0.149/api/'
-  url = 'https://mobileapi.illusiondentallab.com/';
+  url = 'https://mobileapi.illusiondentallab.com/api';
 
   header : any;  
   constructor(private http: HttpClient) {
@@ -44,33 +48,33 @@ export class GetcommdataService {
    getReportType(){
     let data = {SSCID: "3249",SituationID: "1",UserID:"1",RoleID:"1",Filter1:"16",Filter2:"0",Filter3:"0",Filter4:"0"};
     const httpOptions = {headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return  this.http.post(this.localurl+'/GetCommonList',data,httpOptions);
+    return  this.http.post(this.uaturl+'/GetCommonList',data,httpOptions);
   }  
 
   getLocation(){
     let data = {SSCID: "3249",SituationID: "2",UserID:"1",RoleID:"1",Filter1:"16",Filter2:"0",Filter3:"0",Filter4:"0"};
     const httpOptions = {headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return  this.http.post(this.localurl+'/GetCommonList',data,httpOptions);
+    return  this.http.post(this.uaturl+'/GetCommonList',data,httpOptions);
   }  
   getEmployee(){
     let data = {SSCID: "3249",SituationID: "3",UserID:"1",RoleID:"1",Filter1:"16",Filter2:"0",Filter3:"0",Filter4:"0"};
     const httpOptions = {headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return  this.http.post(this.localurl+'/GetCommonList',data,httpOptions);
+    return  this.http.post(this.uaturl+'/GetCommonList',data,httpOptions);
   }  
   getDepartment(){
     let data = {SSCID: "3249",SituationID: "4",UserID:"1",RoleID:"1",Filter1:"16",Filter2:"0",Filter3:"0",Filter4:"0"};
     const httpOptions = {headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return  this.http.post(this.localurl+'/GetCommonList',data,httpOptions);
+    return  this.http.post(this.uaturl+'/GetCommonList',data,httpOptions);
   }  
   getProcess(filter:string){
     let data = {SSCID: "3249",SituationID: "5",UserID:"1",RoleID:"1",Filter1:filter,Filter2:"0",Filter3:"0",Filter4:"0"};
     const httpOptions = {headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return  this.http.post(this.localurl+'/GetCommonList',data,httpOptions);
+    return  this.http.post(this.uaturl+'/GetCommonList',data,httpOptions);
   } 
 
   fetchlabgurureport(getlabgurudata) {
     const httpOptions = {headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return  this.http.post(this.localurl+'/GetLabTechnicianPerformanceReport',getlabgurudata,httpOptions);
+    return  this.http.post(this.uaturl+'/GetLabTechnicianPerformanceReport',getlabgurudata,httpOptions);
   } 
 
   getallpostdata() {
@@ -81,16 +85,23 @@ export class GetcommdataService {
 
  getimagenameapi(getrximagereport:  rxfileupload): Observable<string> {
   const httpOptions = {headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-  return  this.http.post<string>(this.localurl+'/api/PP/UploadRx_Search',getrximagereport,httpOptions);
+  return  this.http.post<string>(this.url+'/PP/UploadRx_Search',getrximagereport,httpOptions);
   } 
 
-  getimpresionno(ImpressionNo) {
-    return  this.http.get(this.localurl+'/api/PP/UploadCase_Search?ImpressionNo='+ImpressionNo);
-    } 
+/*   getimpresionno(ImpressionNo) {
+    return  this.http.get(this.url+'/PP/UploadCase_Search?ImpressionNo='+ImpressionNo);
+    }  */
 
   //for login
   doLogin(data){
-    return this.http.get(this.localurl+'Login?usercode='+data.username+'&password='+data.password+'&IPAddress=12.27382.4666');
+    return this.http.get(this.url+'/PP/Login?usercode='+data.username+'&password='+data.password+'&IPAddress=12.27382.4666');
   }
+
+  getimpresionno(ImpressionNo){
+    let data = {SSCID: "0",SituationID: "6",UserID:"0",RoleID:"0",Filter1:"0",Filter2:"0",Filter3:ImpressionNo,Filter4:"0"};
+    const httpOptions = {headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+    return  this.http.post(this.url+'/PP/JobEntryValidation',data,httpOptions);
+  }  
+
 
 }

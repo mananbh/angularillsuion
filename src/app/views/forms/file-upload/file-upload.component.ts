@@ -25,13 +25,13 @@ export interface DialogData {
 export class FileUploadComponent implements OnInit {
     uaturl = 'http://104.211.240.240/labguru_mobile';
     localurl = 'http://localhost:60531';
-    liveurl = 'https://mobileapi.illusiondentallab.com/';
+    liveurl = 'https://mobileapi.illusiondentallab.com/api';
 
     rximageupload: FormGroup;
     submitted = false;
     messeges :string
     response:string;
-    public uploader: FileUploader = new FileUploader({ url: this.localurl+ '/api/PP/Upload_Rx?FolderID=8',
+    public uploader: FileUploader = new FileUploader({ url: this.liveurl+ '/PP/Upload_Rx?FolderID=8',
     formatDataFunction:async ,autoUpload : false,
   })
   ;

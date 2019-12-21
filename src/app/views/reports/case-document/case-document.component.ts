@@ -6,6 +6,7 @@ import { FileUploader, FileItem} from 'ng2-file-upload';
 import { AppLoaderService } from '../../../shared/services/app-loader/app-loader.service';
 import { async } from '@angular/core/testing';
 import {GetcommdataService} from '../../../shared/services/getcommdata.service'
+import { isThisISOWeek } from 'date-fns';
 
 @Component({
   selector: 'app-case-document',
@@ -15,8 +16,8 @@ import {GetcommdataService} from '../../../shared/services/getcommdata.service'
 export class CaseDocumentComponent implements OnInit {
   uaturl = 'http://104.211.240.240/labguru_mobile';
   localurl = 'http://localhost:60531';
-  liveurl = 'https://mobileapi.illusiondentallab.com/';
-  demovmware = 'http://10.10.0.149/API'
+  liveurl = 'https://mobileapi.illusiondentallab.com/api';
+  demovmware = 'http://10.10.0.149/API/api'
   fetchimpresion: any;
   myModel: any;
 
@@ -25,8 +26,7 @@ export class CaseDocumentComponent implements OnInit {
   messeges :string
   response:string;
   datasource:[];
-
-  public uploader: FileUploader = new FileUploader({ url: this.demovmware+ '/api/PP/Upload_Case?FolderID=9',
+  public uploader: FileUploader = new FileUploader({ url: this.demovmware+ '/PP/Upload_Case?FolderID=9',
   formatDataFunction:async ,parametersBeforeFiles  : true,
 })
 ;
@@ -55,6 +55,18 @@ export class CaseDocumentComponent implements OnInit {
       this.console.log(file);
     }; 
 
+
+
+     
+    this.uploader.onSuccessItem = (item: any, response: any, status: any, headers: any)=> {
+      this.alerts.setMessage("File Uploaded Successfully",'success');
+      this.changeDetector.detectChanges();
+    }
+
+    this.uploader.onErrorItem = (item: any, response: any, status: any, headers: any)=> {
+      this.alerts.setMessage("Something Wrong check your internet and later",'error');
+      this.changeDetector.detectChanges();
+    }
     
   }
 
@@ -62,31 +74,36 @@ export class CaseDocumentComponent implements OnInit {
     
   }
   onBlurMethod(event){
-    event.stopPropagation();
     event.preventDefault();
-
+    event.stopPropagation();
     this.fetchimpresion = this.myModel;
+    if(this.fetchimpresion!==undefined){
     this.getcommdata.getimpresionno(this.fetchimpresion).subscribe(async(data:any) => {
-      this.datasource = data;
-     if(this.datasource.length==0){
-      this.messeges = await "Impresion No Not Found";
+    this.datasource = data;
+    if(this.datasource.length==0){
+      this.messeges = await "Impresion Number Not Found";
       this.alerts.setMessage(this.messeges,'error');
       this.changeDetector.detectChanges();
 
      }else{
-      this.messeges = await "Impresion No Found";
+      this.messeges = await "Impresion Number Found";
       this.alerts.setMessage(this.messeges,'success');
       this.changeDetector.detectChanges();
 
      } 
-    this.console.log(this.messeges);
+      this.console.log(this.messeges);
     },
-   async error  => {
+    async error  => {
       this.messeges = await "Something wrong"; 
       this.alerts.setMessage(this.messeges,'error');
       this.changeDetector.detectChanges();
-    },
+        },
      );
+   }else{
+    this.messeges ="Kindly Enter Impression number"; 
+    this.alerts.setMessage(this.messeges,'info');
+    this.changeDetector.detectChanges();
+  }
     }
 
     getuploadbutton(){
