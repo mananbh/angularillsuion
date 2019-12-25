@@ -1,0 +1,42 @@
+
+<form  [formGroup]="viewimpression">
+    <div class="form-row align-items-center">
+      <div class="col-auto">
+        <label class="label" style="font-size: 15px;">From Date</label>
+        <input type="text" class="form-control mb-2" id="inlineFormInput" [owlDateTime]="fromdate" [owlDateTimeTrigger]="fromdate" placeholder="Date Time" formControlName="FromDate" [ngClass]="{ 'is-invalid': submitted &amp;&amp; viewimpression.controls.FromDate.errors }">
+        <owl-date-time [pickerType]="'calendar'" #fromdate></owl-date-time>&nbsp;&nbsp;
+        <span *ngIf="submitted &amp;&amp; viewimpression.controls.FromDate.errors" class="text-danger">
+          <span *ngIf="viewimpression.controls.FromDate.errors.required">From Date is required</span>
+        </span>
+      </div>
+      <div class="col-auto">
+        <label class="label" style="font-size: 15px;">To Date</label>
+        <input [owlDateTime]="todate" [owlDateTimeTrigger]="todate" placeholder="Date Time" formControlName="ToDate" class="form-control mb-2">
+        <owl-date-time [pickerType]="'calendar'" #todate></owl-date-time>   &nbsp;&nbsp;
+        <span *ngIf="submitted &amp;&amp; viewimpression.controls.ToDate.errors" class="text-danger">
+          <span *ngIf="viewimpression.controls.ToDate.errors.required">To Date is required</span>
+        </span>    
+        </div>
+        <div class="col-auto">
+            <button type="button" class="btn btn-primary mb-2" (click)="getviewuploadimpression()">Get Data</button>
+        </div>
+    </div>
+</form>
+<div class="col-md-12">
+    <div *ngIf="dataSource">
+          <ag-grid-angular 
+           style="width: auto; height: 300px;"
+            class="ag-theme-dark"
+            [rowData]="dataSource"
+            [columnDefs]="tablecolumn"
+            [modules]="modules"
+            [pagination]="true"
+            [defaultColDef]="defaultColDef"
+
+            (firstDataRendered)="onFirstDataRendered($event)"
+           >
+          </ag-grid-angular>
+    </div>    
+</div>
+<ngx-alerts></ngx-alerts><!-- 
+(firstDataRendered)="onFirstDataRendered($event)" -->

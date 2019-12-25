@@ -2,3 +2,9 @@
 
 
 
+@-webkit-keyframes autofill {
+    to {
+        color: #666;
+        background: transparent;
+    }
+}

@@ -35,7 +35,7 @@ export class GetcommdataService {
   private API_URL= environment.apiURL;
 
   uaturl = 'http://104.211.240.240/labguru_mobile/api';
-  localurl = 'http://10.10.0.149/api/'
+  localurl = 'http://10.10.0.149/API/api'
   url = 'https://mobileapi.illusiondentallab.com/api';
 
   header : any;  
@@ -48,33 +48,33 @@ export class GetcommdataService {
    getReportType(){
     let data = {SSCID: "3249",SituationID: "1",UserID:"1",RoleID:"1",Filter1:"16",Filter2:"0",Filter3:"0",Filter4:"0"};
     const httpOptions = {headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return  this.http.post(this.uaturl+'/GetCommonList',data,httpOptions);
+    return  this.http.post(this.API_URL+'/GetCommonList',data,httpOptions);
   }  
 
   getLocation(){
     let data = {SSCID: "3249",SituationID: "2",UserID:"1",RoleID:"1",Filter1:"16",Filter2:"0",Filter3:"0",Filter4:"0"};
     const httpOptions = {headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return  this.http.post(this.uaturl+'/GetCommonList',data,httpOptions);
+    return  this.http.post(this.API_URL+'/GetCommonList',data,httpOptions);
   }  
   getEmployee(){
     let data = {SSCID: "3249",SituationID: "3",UserID:"1",RoleID:"1",Filter1:"16",Filter2:"0",Filter3:"0",Filter4:"0"};
     const httpOptions = {headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return  this.http.post(this.uaturl+'/GetCommonList',data,httpOptions);
+    return  this.http.post(this.API_URL+'/GetCommonList',data,httpOptions);
   }  
   getDepartment(){
     let data = {SSCID: "3249",SituationID: "4",UserID:"1",RoleID:"1",Filter1:"16",Filter2:"0",Filter3:"0",Filter4:"0"};
     const httpOptions = {headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return  this.http.post(this.uaturl+'/GetCommonList',data,httpOptions);
+    return  this.http.post(this.API_URL+'/GetCommonList',data,httpOptions);
   }  
   getProcess(filter:string){
     let data = {SSCID: "3249",SituationID: "5",UserID:"1",RoleID:"1",Filter1:filter,Filter2:"0",Filter3:"0",Filter4:"0"};
     const httpOptions = {headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return  this.http.post(this.uaturl+'/GetCommonList',data,httpOptions);
+    return  this.http.post(this.API_URL+'/GetCommonList',data,httpOptions);
   } 
 
   fetchlabgurureport(getlabgurudata) {
     const httpOptions = {headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return  this.http.post(this.uaturl+'/GetLabTechnicianPerformanceReport',getlabgurudata,httpOptions);
+    return  this.http.post(this.API_URL+'/GetLabTechnicianPerformanceReport',getlabgurudata,httpOptions);
   } 
 
   getallpostdata() {
@@ -85,7 +85,7 @@ export class GetcommdataService {
 
  getimagenameapi(getrximagereport:  rxfileupload): Observable<string> {
   const httpOptions = {headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-  return  this.http.post<string>(this.url+'/PP/UploadRx_Search',getrximagereport,httpOptions);
+  return  this.http.post<string>(this.API_URL+'/PP/UploadRx_Search',getrximagereport,httpOptions);
   } 
 
 /*   getimpresionno(ImpressionNo) {
@@ -94,14 +94,18 @@ export class GetcommdataService {
 
   //for login
   doLogin(data){
-    return this.http.get(this.url+'/PP/Login?usercode='+data.username+'&password='+data.password+'&IPAddress=12.27382.4666');
+    return this.http.get(this.API_URL+'/PP/Login?usercode='+data.username+'&password='+data.password+'&IPAddress=12.27382.4666');
   }
 
   getimpresionno(ImpressionNo){
     let data = {SSCID: "0",SituationID: "6",UserID:"0",RoleID:"0",Filter1:"0",Filter2:"0",Filter3:ImpressionNo,Filter4:"0"};
     const httpOptions = {headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return  this.http.post(this.url+'/PP/JobEntryValidation',data,httpOptions);
+    return  this.http.post(this.API_URL+'/PP/JobEntryValidation',data,httpOptions);
   }  
-
+  //for view imppresion
+  getviewimpresiondata(impressiondata){
+    const httpOptions = {headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+    return  this.http.post(this.API_URL+'/PP/View_ImpressionDoc',impressiondata,httpOptions);
+  } 
 
 }

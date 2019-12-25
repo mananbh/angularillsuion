@@ -9,7 +9,7 @@ import { DatePipe } from '@angular/common';
 import { AgGridModule } from '@ag-grid-community/angular';
 import { GetreportdataapiService } from './getreportdataapi.service';
 import { FileUploadModule } from 'ng2-file-upload';
-import { DataDialogOverviewComponent } from '../../../assets/examples/material/data-dialog/data-dialog-overview/data-dialog-overview.component'
+//import { DataDialogOverviewComponent } from '../../../assets/examples/material/data-dialog/data-dialog-overview/data-dialog-overview.component'
 
 import { 
   MatInputModule,
@@ -39,7 +39,7 @@ import {
 import { OwlDateTimeModule, OwlNativeDateTimeModule,OWL_DATE_TIME_LOCALE,OWL_DATE_TIME_FORMATS } from 'ng-pick-datetime';
 
 import { FileUploadComponent } from '../forms/file-upload/file-upload.component';
-import { AlertsModule } from 'angular-alert-module';
+import { AlertsModule ,AlertsService} from 'angular-alert-module';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { QuillModule } from 'ngx-quill';
@@ -54,8 +54,13 @@ export const MY_NATIVE_FORMATS = {
   dateA11yLabel: {year: 'numeric', month: 'long', day: 'numeric'},
   monthYearA11yLabel: {year: 'numeric', month: 'long'},
 };
+import { AlertModule,AlertService } from 'ngx-alerts';
+import { ViewImpressionDocComponent } from './view-impression-doc/view-impression-doc.component';
+import { AngularAutoComponent } from './angular-auto/angular-auto.component';
+import {AutocompleteLibModule} from 'angular-ng-autocomplete';
+
 @NgModule({
-  declarations: [LabtechReportComponent,FileUploadComponent,AttendenceReportComponent,DataDialogOverviewComponent, CaseDocumentComponent],
+  declarations: [LabtechReportComponent,FileUploadComponent,AttendenceReportComponent, CaseDocumentComponent, ViewImpressionDocComponent, AngularAutoComponent],
   imports: [
     CommonModule,
     MatInputModule,
@@ -89,7 +94,8 @@ export const MY_NATIVE_FORMATS = {
     AgGridModule.withComponents([]),
     RouterModule.forChild(ReportsRouting),
     FileUploadModule,
-    AlertsModule.forRoot()
+    AlertModule.forRoot({maxMessages: 1, timeout: 3000, position: 'right'}),
+    AutocompleteLibModule
 
     ],
   providers: [
@@ -97,10 +103,12 @@ export const MY_NATIVE_FORMATS = {
     {provide: OWL_DATE_TIME_LOCALE, useValue: 'en-SG'},
     {provide: OWL_DATE_TIME_FORMATS, useValue: MY_NATIVE_FORMATS},
     DatePipe,
-    GetreportdataapiService
+    GetreportdataapiService,
+    AlertService
+    
   ],
-  entryComponents: [
+  /* entryComponents: [
     DataDialogOverviewComponent
-  ],
+  ], */
 })
 export class ReportsModule { }

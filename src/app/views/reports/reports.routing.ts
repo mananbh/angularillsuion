@@ -4,6 +4,9 @@ import{LabtechReportComponent} from './labtech-report/labtech-report.component';
 import{AttendenceReportComponent} from './attendence-report/attendence-report.component';
 import { FileUploadComponent } from '../forms/file-upload/file-upload.component';
 import { CaseDocumentComponent } from './case-document/case-document.component';
+import { ViewImpressionDocComponent } from './view-impression-doc/view-impression-doc.component';
+import { AngularAutoComponent } from './angular-auto/angular-auto.component';
+
 
 
 export const ReportsRouting: Routes = [
@@ -28,7 +31,7 @@ export const ReportsRouting: Routes = [
     children: [{
         path: 'rxupload',
         component: FileUploadComponent,
-        data: { title: 'Upload', breadcrumb: 'UPLOAD' }
+        data: { title: 'Upload', breadcrumb: 'UPLOAD RX' }
     }]
   },
   {
@@ -36,7 +39,23 @@ export const ReportsRouting: Routes = [
     children: [{
         path: 'casedoc',
         component: CaseDocumentComponent,
-        data: { title: 'Case', breadcrumb: 'Doc Upload' }
+        data: { title: 'Case', breadcrumb: 'UPLOAD IMPRESSION DOCUMENT' }
+    }]
+  },
+  {
+    path: '',
+    children: [{
+        path: 'viewimpdoc',
+        component: ViewImpressionDocComponent,
+        data: { title: 'View Impresionn Doc', breadcrumb: 'VIEW IMPRESSION DOCUMENT' }
+    }]
+  },
+  {
+    path: '',
+    children: [{
+        path: 'angularauto',
+        component: AngularAutoComponent,
+        data: { title: 'View Impresionn Doc', breadcrumb: 'VIEW IMPRESSION DOCUMENT' }
     }]
   }
 ];

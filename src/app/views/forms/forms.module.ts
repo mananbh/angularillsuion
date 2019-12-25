@@ -18,7 +18,7 @@ import {
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { QuillModule } from 'ngx-quill';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
-import { FileUploadModule } from 'ng2-file-upload';
+//import { FileUploadModule } from 'ng2-file-upload';
 
 import { BasicFormComponent } from './basic-form/basic-form.component';
 import { RichTextEditorComponent } from './rich-text-editor/rich-text-editor.component';
@@ -31,7 +31,6 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule ,OWL_DATE_TIME_LOCALE,OWL_DA
 import {GetcommdataService} from '../../shared/services/getcommdata.service'
 import { AgGridModule } from '@ag-grid-community/angular';
 import { MatDialogModule  } from '@angular/material';
-import { DataDialogOverviewComponent } from '../../../assets/examples/material/data-dialog/data-dialog-overview/data-dialog-overview.component'
 
 export const MY_NATIVE_FORMATS = {
   fullPickerInput: {year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric'},
@@ -61,7 +60,7 @@ export const MY_NATIVE_FORMATS = {
     FlexLayoutModule,
     QuillModule,
     NgxDatatableModule,
-    FileUploadModule,
+    //FileUploadModule,
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
     AgGridModule.withComponents([]),
@@ -69,7 +68,7 @@ export const MY_NATIVE_FORMATS = {
     MatDialogModule,
 
   ],
-  declarations: [BasicFormComponent, RichTextEditorComponent, FileUploadComponent, WizardComponent,DataDialogOverviewComponent],
+  declarations: [BasicFormComponent, RichTextEditorComponent /* FileUploadComponent */, WizardComponent],
   providers: [
     { provide: GetcommdataService, useClass: GetcommdataService },
     {provide: OWL_DATE_TIME_LOCALE, useValue: 'en-SG'},
@@ -77,9 +76,9 @@ export const MY_NATIVE_FORMATS = {
     DatePipe,
     
   ],
-  entryComponents: [
+  /* entryComponents: [
     DataDialogOverviewComponent
-  ],
+  ], */
 })
 
 export class AppFormsModule { }

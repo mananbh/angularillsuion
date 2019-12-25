@@ -6,7 +6,6 @@
   >
     <!-- headline -->
     <div class="form-headline text-center mb-32">
-      <h1 class="font-weight-light">Sign in to your account</h1>
     </div>
     <div class="mb-32" fxLayout="row wrap" fxLayoutAlign="center center">
       <img
@@ -17,40 +16,34 @@
     </div>
 
     <form [formGroup]="signupForm" class="signup3-form" (ngSubmit)="onSubmit()">
-      <div>
-        <mat-form-field class="full-width" appearance="outline">
-          <mat-label>Username</mat-label>
+      <div >
+        <mat-form-field class="full-width" appearance="outline" >
+          <mat-label   style="color: aliceblue;">Username</mat-label>
           <input
             matInput
             formControlName="username"
             type="text"
             name="username"
             placeholder="Username"
+            style="color: aliceblue;"
           />
         </mat-form-field>
 
         <mat-form-field class="full-width" appearance="outline">
-          <mat-label>Password</mat-label>
+          <mat-label   style="color: aliceblue;">Password</mat-label>
           <input
             matInput
             formControlName="password"
             type="password"
             name="password"
             placeholder="********"
+            style="color: aliceblue;"
           />
         </mat-form-field>
       </div>
       <div class="mb-24">
-        <button fxFill mat-raised-button color="primary">Sign In</button>
+        <button fxFill mat-raised-button style="background-color: maroon;color: aliceblue;"><b style="font-style: italic;font-weight: bolder;">SIGN IN</b></button>
       </div>
-      <p>
-        Don't have an account?
-        <a
-          class="mat-color-primary font-weight-bold mx-8"
-          routerLink="/sessions/signup3"
-          >Sign Up</a
-        >
-      </p>
     </form>
   </div>
 </div>

@@ -10,7 +10,8 @@ import { HttpClient, HttpParams,HttpHeaders } from '@angular/common/http';
 import {AllCommunityModules} from '@ag-grid-community/all-modules';
 import { DataDialogOverviewComponent } from '../../../../assets/examples/material/data-dialog/data-dialog-overview/data-dialog-overview.component'
 import { MatDialog } from '@angular/material';
-import { AlertsService } from 'angular-alert-module';
+import { AlertService } from 'ngx-alerts';
+import { environment } from '../../../../environments/environment';
 
 export interface DialogData {
   messages: string;
@@ -23,7 +24,9 @@ export interface DialogData {
 
 
 export class FileUploadComponent implements OnInit {
-    uaturl = 'http://104.211.240.240/labguru_mobile';
+  private API_URL= environment.apiURL;
+
+    uaturl = 'http://104.211.240.240/labguru_mobile/api';
     localurl = 'http://localhost:60531';
     liveurl = 'https://mobileapi.illusiondentallab.com/api';
 
@@ -31,7 +34,7 @@ export class FileUploadComponent implements OnInit {
     submitted = false;
     messeges :string
     response:string;
-    public uploader: FileUploader = new FileUploader({ url: this.liveurl+ '/PP/Upload_Rx?FolderID=8',
+    public uploader: FileUploader = new FileUploader({ url: this.API_URL+ '/PP/Upload_Rx?FolderID=8',
     formatDataFunction:async ,autoUpload : false,
   })
   ;
@@ -44,8 +47,7 @@ export class FileUploadComponent implements OnInit {
     getFileHash (file: File): string {
       return file.name;
      }
-    constructor(private loader: AppLoaderService,private changeDetector: ChangeDetectorRef,private getcommdata: GetcommdataService,private formbulider: FormBuilder,private datePipe: DatePipe,private http: HttpClient,public dialog: MatDialog,private alerts: AlertsService) {  
-      this.alerts.setDefaults("timeout",1);
+    constructor(private loader: AppLoaderService,private changeDetector: ChangeDetectorRef,private getcommdata: GetcommdataService,private formbulider: FormBuilder,private datePipe: DatePipe,private http: HttpClient,public dialog: MatDialog,private alerts: AlertService) {  
       
       this.uploader.clearQueue();
       this.uploader.response.subscribe( res => this.response = res );
@@ -119,7 +121,7 @@ export class FileUploadComponent implements OnInit {
     }
 
     this.uploader.onCompleteAll= () =>{
-      alert("All Image Uploading completed")
+      this.alerts.success("All Image Uploading completed");
     }
 
   }
@@ -155,7 +157,7 @@ export class FileUploadComponent implements OnInit {
 
       if(this.rximageupload.value.FromDate > this.rximageupload.value.ToDate){
         this.loader.close();
-        alert("From Date Cannot be more than to date")
+        this.alerts.info("From Date Cannot be more than to date")
         return;
       }
        
@@ -167,7 +169,7 @@ export class FileUploadComponent implements OnInit {
       this.rximageupload.value.ToDate = this.datePipe.transform(this.rximageupload.value.ToDate,"yyyy-MM-dd");
       this.dataSource2 =(await this.getcommdata.getimagenameapi(this.rximageupload.value).toPromise()).length;
       this.messeges =  this.dataSource2 + " Cases found.Kindly Browse Rx files and click upload all button";
-      this.alerts.setMessage(this.messeges,'success');
+      this.alerts.success(this.messeges);
 
       this.getiamgename();
     }
