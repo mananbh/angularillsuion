@@ -5,8 +5,8 @@ import{AttendenceReportComponent} from './attendence-report/attendence-report.co
 import { FileUploadComponent } from '../forms/file-upload/file-upload.component';
 import { CaseDocumentComponent } from './case-document/case-document.component';
 import { ViewImpressionDocComponent } from './view-impression-doc/view-impression-doc.component';
-import { AngularAutoComponent } from './angular-auto/angular-auto.component';
 
+import { PreRxFormComponent } from './pre-rx-form/pre-rx-form.component';
 
 
 export const ReportsRouting: Routes = [
@@ -53,9 +53,9 @@ export const ReportsRouting: Routes = [
   {
     path: '',
     children: [{
-        path: 'angularauto',
-        component: AngularAutoComponent,
-        data: { title: 'View Impresionn Doc', breadcrumb: 'VIEW IMPRESSION DOCUMENT' }
+        path: 'prerxform',
+        component: PreRxFormComponent,
+        data: { title: 'Pre Rx From', breadcrumb: 'PRE RX UPLOAD' }
     }]
   }
 ];

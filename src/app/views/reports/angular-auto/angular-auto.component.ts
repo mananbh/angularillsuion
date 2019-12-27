@@ -19,7 +19,7 @@ export class AngularAutoComponent implements OnInit {
        id: 2,
        name: 'England'
      }
-  ];
+  ]; 
   ngOnInit() {
     
   }
@@ -30,7 +30,7 @@ export class AngularAutoComponent implements OnInit {
   }
  
   onChangeSearch(val: string) {
-    this.getcommdata.getallpostdata().subscribe(data => {
+    this.getcommdata.getserachautocomplete(val).subscribe(data => {
       this.dataSource = data
     });
   }

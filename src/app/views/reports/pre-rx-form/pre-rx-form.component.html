@@ -1,0 +1,41 @@
+<mat-card class="p-0">
+    <div  class="row">
+        <div class="col-md-3"></div> 
+        <div class="col-md-6" style="font-size: 20px;text-align: center;">
+          <b>RX IMAGE UPLOAD</b>
+        </div>
+        <div class="col-md-3"></div>
+      </div>
+      <br>
+     <mat-card-title class="">
+        <div class="card-title-text" style="font-size: 20px;"> </div>
+        <mat-divider></mat-divider>
+      </mat-card-title>
+      <mat-card-content>
+          <div class="mb-1">
+            <label class="label"><b>Upload Image</b></label>
+            <div  class="custom-file-upload">
+            <input type="file" ng2FileSelect [uploader]="uploader" class="btn btn-primary" #myInput/>
+          </div>
+        
+        </div>
+        <button 
+        mat-raised-button
+        color="primary"
+        class="mx-4"
+        (click)="uploader.uploadAll()"
+        [disabled]="!uploader.getNotUploadedItems().length"  >Upload all</button>
+            
+        <button 
+        mat-raised-button
+        color="warn"
+        class="mx-4"
+        (click)="reset()"
+        [disabled]="!uploader.queue.length">Remove</button>
+      </mat-card-content>
+    </mat-card>
+    <ngx-alerts></ngx-alerts>
+    
+    
+    
+    

@@ -43,6 +43,7 @@ export class ViewImpressionDocComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.loader.open();
     this.viewimpression = this.formbulider.group({
       FromDate: ['', [Validators.required]],
       ToDate: ['', [Validators.required]],
@@ -57,10 +58,12 @@ export class ViewImpressionDocComponent implements OnInit {
     this.viewimpression.value.FromDate = this.datePipe.transform(todaydate,"yyyy-MM-dd");
     this.viewimpression.value.ToDate = this.datePipe.transform(todaydate,"yyyy-MM-dd");
     this.getcommdata.getviewimpresiondata(this.viewimpression.value).subscribe(data => {
+      this.loader.close();
       this.dataSource = data;
       this.changeDetector.detectChanges();
     },
     error  => {
+      this.loader.close();
       this.messeges =  "Something Went wrong check your internet or try again after sometime"; 
       this.alerts.danger(this.messeges);
       this.changeDetector.detectChanges();

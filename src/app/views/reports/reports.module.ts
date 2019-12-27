@@ -58,9 +58,10 @@ import { AlertModule,AlertService } from 'ngx-alerts';
 import { ViewImpressionDocComponent } from './view-impression-doc/view-impression-doc.component';
 import { AngularAutoComponent } from './angular-auto/angular-auto.component';
 import {AutocompleteLibModule} from 'angular-ng-autocomplete';
+import { PreRxFormComponent } from './pre-rx-form/pre-rx-form.component';
 
 @NgModule({
-  declarations: [LabtechReportComponent,FileUploadComponent,AttendenceReportComponent, CaseDocumentComponent, ViewImpressionDocComponent, AngularAutoComponent],
+  declarations: [LabtechReportComponent,FileUploadComponent,AttendenceReportComponent, CaseDocumentComponent, ViewImpressionDocComponent, AngularAutoComponent, PreRxFormComponent],
   imports: [
     CommonModule,
     MatInputModule,

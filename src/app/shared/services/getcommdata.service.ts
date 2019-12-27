@@ -108,4 +108,10 @@ export class GetcommdataService {
     return  this.http.post(this.API_URL+'/PP/View_ImpressionDoc',impressiondata,httpOptions);
   } 
 
+  getserachautocomplete(value){
+    let data = {CustomerOutput:value};
+    const httpOptions = {headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+    return  this.http.post(this.API_URL+'/PP/Auto_Cust',data,httpOptions);
+  } 
+
 }
