@@ -94,7 +94,7 @@ export class GetcommdataService {
 
   //for login
   doLogin(data){
-    return this.http.get(this.API_URL+'/PP/Login?usercode='+data.username+'&password='+data.password+'&IPAddress=12.27382.4666');
+    return this.http.get(this.API_URL+'/PP/Login?usercode='+data.username+'&password='+data.password+'&IPAddress='+data.ipaddress);
   }
 
   getimpresionno(ImpressionNo){

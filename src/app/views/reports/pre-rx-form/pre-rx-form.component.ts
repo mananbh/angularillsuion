@@ -29,6 +29,7 @@ myInputVariable: ElementRef;
     var userid = this.username.Data.LoginDetailsDTO_List[0].LoginUserID;
    
     this.uploader.onBeforeUploadItem = (item: FileItem) => {
+      this.loader.open();
       item.withCredentials = false;
       this.uploader.options.additionalParameter = {
        UserID: userid,
@@ -42,17 +43,26 @@ myInputVariable: ElementRef;
 
 
     this.uploader.onSuccessItem=(item: any, response: any, status: any, headers: any)=>{
-
+      this.loader.close();
       this.alerts.success(response.replace(/['"]+/g, ""));
       this.myInputVariable.nativeElement.value = "";
       this.changeDetector.detectChanges();
     }  
     
     this.uploader.onErrorItem = (item: any, response: any, status: any, headers: any)=> {
-      this.alerts.danger("Something wrong try again or check your internet connection");
+      this.loader.close();
+      this.alerts.danger(response.replace(/['"]+/g, ""));
       this.myInputVariable.nativeElement.value = "";
       this.changeDetector.detectChanges();
+      this.uploader.clearQueue();
+
     }
+
+    this.uploader.onCompleteAll=()=>{
+      this.loader.close();
+    }
+
+ 
   }
 
   reset(){

@@ -1,0 +1,15 @@
+.foo {
+    height: 0;
+    padding: 0; /* remove any pre-existing padding, just in case */
+    padding-bottom: 40%; /* for a 4:3 aspect ratio */
+    background: url('assets/images/backgrounds/lgo.png');
+    background-position: center center;
+    background-size: 30%;
+    background-repeat: no-repeat;
+    @media only screen and (max-width: 600px) {
+        padding-bottom: 120%; 
+        background-size: 100%;
+        
+      }
+}
+

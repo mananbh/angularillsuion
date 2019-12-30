@@ -39,7 +39,7 @@ export const ReportsRouting: Routes = [
     children: [{
         path: 'casedoc',
         component: CaseDocumentComponent,
-        data: { title: 'Case', breadcrumb: 'UPLOAD IMPRESSION DOCUMENT' }
+        data: { title: 'Case', breadcrumb: 'UPLOAD CASE DOCUMENT' }
     }]
   },
   {
@@ -47,7 +47,7 @@ export const ReportsRouting: Routes = [
     children: [{
         path: 'viewimpdoc',
         component: ViewImpressionDocComponent,
-        data: { title: 'View Impresionn Doc', breadcrumb: 'VIEW IMPRESSION DOCUMENT' }
+        data: { title: 'View  Documents', breadcrumb: 'VIEW  DOCUMENTS' }
     }]
   },
   {
@@ -55,7 +55,7 @@ export const ReportsRouting: Routes = [
     children: [{
         path: 'prerxform',
         component: PreRxFormComponent,
-        data: { title: 'Pre Rx From', breadcrumb: 'PRE RX UPLOAD' }
+        data: { title: 'UPLOAD PRE RX', breadcrumb: 'UPLOAD PRE RX' }
     }]
   }
 ];

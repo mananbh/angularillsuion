@@ -57,7 +57,8 @@ export class NavigationService {
       type: "separator",
       name: "Main Items"
     },
-    {
+    //dashboard comment
+  /*   {
       name: "DASHBOARD",
       type: "dropDown",
       tooltip: "Dashboard",
@@ -65,11 +66,11 @@ export class NavigationService {
       state: "dashboard",
       sub: [
         //{ name: "Default", state: "default" },
-        { name: "Analytics", state: "analytics" },
+        { name: "Main Page", state: "analytics" },
         //{ name: "Cryptocurrency", state: "crypto" },
        // { name: "Dark Cards", state: "dark" }
       ]
-    },
+    }, */
     {
     name: 'Production',
     type: 'dropDown',
@@ -789,7 +790,7 @@ export class NavigationService {
 
   // Icon menu TITLE at the very top of navigation.
   // This title will appear if any icon type item is present in menu.
-  iconTypeMenuTitle: string = "Frequently Accessed";
+ // iconTypeMenuTitle: string = "Frequently Accessed";
   // sets iconMenu as default;
   menuItems = new BehaviorSubject<IMenuItem[]>(this.iconMenu);
   // navigation component has subscribed to this Observable

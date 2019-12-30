@@ -32,14 +32,14 @@
                 [matMenuTriggerFor]="appUserMenu">
                     <mat-icon>settings</mat-icon>
                 </button>
-                <button 
+<!--                 <button 
                 class="text-muted"
                 mat-icon-button 
                 mat-xs-button
                 matTooltip="Inbox"
                 routerLink="/inbox">
                   <mat-icon>email</mat-icon>
-                </button>
+                </button> -->
                 <button 
                 class="text-muted"
                 mat-icon-button 
@@ -49,10 +49,10 @@
                     <mat-icon>exit_to_app</mat-icon>
                 </button>
                 <mat-menu #appUserMenu="matMenu">
-                    <button mat-menu-item routerLink="/profile/overview">
+<!--                     <button mat-menu-item routerLink="/profile/overview">
                         <mat-icon>account_box</mat-icon>
                         <span>Profile</span>
-                    </button>
+                    </button> -->
                     <button mat-menu-item routerLink="/profile/settings">
                         <mat-icon>settings</mat-icon>
                         <span>Account Settings</span>
@@ -69,7 +69,10 @@
                 </div>
             </div>
             <!-- Navigation -->
-            <app-sidenav [items]="menuItems" [hasIconMenu]="hasIconTypeMenuItem" [iconMenuTitle]="iconTypeMenuTitle"></app-sidenav>
+            <app-sidenav [items]="menuItems" [hasIconMenu]="hasIconTypeMenuItem" 
+        
+            ></app-sidenav>
         </div>
     </div>
 </div>
+<!-- //[iconMenuTitle]="iconTypeMenuTitle" -->

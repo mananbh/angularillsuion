@@ -6,12 +6,12 @@
       <span class="text-muted icon-menu-title">{{iconTypeMenuTitle}}</span>
     </div>
     <!-- Icon menu items -->
-    <div class="icon-menu-item" *ngFor="let item of menuItems">
+  <!--   <div class="icon-menu-item" *ngFor="let item of menuItems">
       <button *ngIf="!item.disabled && item.type === 'icon'" mat-raised-button [matTooltip]="item.tooltip" routerLink="/{{item.state}}"
         routerLinkActive="mat-bg-primary">
         <mat-icon>{{item.icon}}</mat-icon>
       </button>
-    </div>
+    </div> -->
   </div>
 
   <ul appDropdown class="sidenav">
