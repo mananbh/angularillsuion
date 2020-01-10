@@ -1,5 +1,5 @@
 <div class="sidenav-hold">
-  <div class="icon-menu mb-1" *ngIf="hasIconTypeMenuItem">
+  <div class="icon-menu mb-1" *ngIf="menuItems">
     <!-- Icon menu separator -->
     <div class="mb-1 nav-item-sep">
       <mat-divider [ngStyle]="{margin: '0 -24px'}"></mat-divider>
@@ -33,9 +33,15 @@
           <span fxFlex></span>
           <span class="menuitem-badge mat-bg-{{ badge.color }}" [ngStyle]="{background: badge.color}" *ngFor="let badge of item.badges">{{ badge.value }}</span>
         </a>
-
+     <!--    for single dropdown -->
+        <a *ngIf="item.type === 'singledropdown'"  routerLink="/{{item.state}}/{{item.sub}}"  appDropdownToggle matRipple>
+          <mat-icon>{{item.icon}}</mat-icon>
+          <span class="item-name lvl1">{{item.name | translate}}</span>
+          <span fxFlex></span>
+          <span class="menuitem-badge mat-bg-{{ badge.color }}" [ngStyle]="{background: badge.color}" *ngFor="let badge of item.badges">{{ badge.value }}</span>
+        </a>
         <!-- DropDown -->
-        <a *ngIf="item.type === 'dropDown'" appDropdownToggle matRipple>
+        <a *ngIf="item.type === 'dropDown'" appDropdownToggle matRipple >
           <mat-icon>{{item.icon}}</mat-icon>
           <span class="item-name lvl1">{{item.name | translate}}</span>
           <span fxFlex></span>
@@ -46,7 +52,7 @@
         <ul class="submenu lvl2" appDropdown *ngIf="item.type === 'dropDown'">
           <li *ngFor="let itemLvL2 of item.sub" appDropdownLink routerLinkActive="open">
 
-            <a routerLink="{{item.state ? '/'+item.state : ''}}/{{itemLvL2.state}}" appDropdownToggle *ngIf="itemLvL2.type !== 'dropDown'"
+            <a routerLink="{{item.state ? '/'+item.state : ''}}/{{itemLvL2.url}}" appDropdownToggle *ngIf="itemLvL2.type !== 'dropDown'"
               matRipple>
               <span class="item-name lvl2">{{itemLvL2.name | translate}}</span>
               <span fxFlex></span>

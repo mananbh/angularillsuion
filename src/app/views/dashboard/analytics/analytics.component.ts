@@ -29,10 +29,19 @@ export class AnalyticsComponent implements OnInit, AfterViewInit {
   trafficSourcesChart: any;
   countryTrafficStats: any[];
 
-  constructor() {}
+  constructor() {
+  }
 
   ngAfterViewInit() {}
   ngOnInit() {
+    console.log("called")
+    if (!localStorage.getItem('foo')) { 
+    localStorage.setItem('foo', 'no reload') 
+    location.reload() 
+  } else {
+    localStorage.removeItem('foo') 
+  }
+
     this.initTrafficVsSaleChart();
     this.initSessionsChart();
 

@@ -154,7 +154,7 @@ export const rootRouterConfig: Routes = [
   },
   { 
     path: '**', 
-    redirectTo: 'sessions/404'
+    redirectTo: 'sessions/signin3'
   }
 ];
 

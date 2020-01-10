@@ -46,6 +46,7 @@ import { DefaultDashboardComponent } from './default-dashboard/default-dashboard
     NgxDatatableModule,
     SharedPipesModule,
     RouterModule.forChild(DashboardRoutes)
+    
   ],
   declarations: [AnalyticsComponent, DashboardDarkComponent, CryptocurrencyComponent, DefaultDashboardComponent],
   exports: []

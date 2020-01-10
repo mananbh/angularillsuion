@@ -27,7 +27,7 @@ export class ViewImpressionDocComponent implements OnInit {
     {headerName: 'Impression No', field: 'ImpressionNo',filter: true, resizable: true,  
     minWidth:50,
   maxWidth:200},
-    {headerName: 'File name', field: 'FileName',filter: true,maxWidth:200, resizable: true},
+    {headerName: 'File name', field: 'FileName',maxWidth:200, resizable: true},
     {headerName: 'Download', field: 'Download',maxWidth:200, resizable: true,
     cellRenderer: function(params) {
       //return '<a href="'+params.value+'" target="_blank"><i class="glyphicon glyphicon-cloud"></i> </a>';

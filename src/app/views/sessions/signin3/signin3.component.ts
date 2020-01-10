@@ -47,9 +47,21 @@ export class Signin3Component implements OnInit {
       var usernamefromapi :string= this.dataSource.Data.LoginDetailsDTO_List[0].ValidationMsg;
       var usernamefromuser :string= this.signupForm.value.username;
       if (usernamefromapi=="") {
+       // this.dynamincnavfetch = this.dynamincnav["Data"]["MenuDetailDTO_List"];
+      var arraycount = countInObject(this.dataSource.Data.MenuDetailDTO_List)
           sessionStorage.setItem("Islogin",'true');
           sessionStorage.setItem('userData', JSON.stringify(this.dataSource));
+          //this.router.onSameUrlNavigation = 'reload';
           this.router.navigate(['/dashboard/analytics']);
+          if(arraycount==1){
+            console.log(this.dataSource.Data.MenuDetailDTO_List[0])
+            //this.router.navigate(['/reports/+?this.dataSource.Data.MenuDetailDTO_List[0].url']);
+            this.router.navigate(['/reports/'+this.dataSource.Data.MenuDetailDTO_List[0]["url"]]);
+
+          }else{
+            this.router.navigate(['/dashboard/analytics']);
+
+          }
         } else {
           this.loader.close();
           alert(usernamefromapi);
@@ -62,4 +74,12 @@ export class Signin3Component implements OnInit {
     // if (this.homePS) this.homePS.destroy();
     this.loader.close();
   }
+}
+
+//funtion to count multi dimensional array
+function countInObject(obj) {
+  var count = 0;
+  // iterate over properties, increment if a non-prototype property
+  for(var key in obj) if(obj.hasOwnProperty(key)) count++;
+  return count;
 }

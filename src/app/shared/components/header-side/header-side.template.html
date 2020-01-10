@@ -11,19 +11,16 @@
   </button>
   
   <!-- Search form -->
-  <!-- <div fxFlex fxHide.lt-sm="true" class="search-bar">
-    <form class="top-search-form">
-      <mat-icon role="img">search</mat-icon>
-      <input autofocus="true" placeholder="Search" type="text" />
-    </form>
-  </div> -->
+ <div fxFlex class="search-bar">
+   Welcome {{this.username}}
+  </div>
 
   <span fxFlex></span>
   <!-- Language Switcher -->
-  <button mat-button >
+<!--   <button mat-button >
     <span class="flag-icon {{currentLang.flag}} mr-05"></span>
     <span>{{currentLang.name}}</span>
-  </button>
+  </button> -->
 <!-- <mat-menu #menu="matMenu">
  --><!--   <button mat-menu-item *ngFor="let lang of availableLangs" (click)="setLang(lang)">
         <span class="flag-icon mr-05 {{lang.flag}}"></span>
@@ -53,7 +50,12 @@
     [matMenuTriggerFor]="accountMenu"
     class="topbar-button-right img-button"
   >
-    <img src="assets/images/face-7.jpg" alt="" />
+     <div *ngIf="this.dynamincnavfetch.length>0">
+        <img src="assets/images/faces/{{this.dynamincnavfetch}}" class="mat-elevation-z1" alt="">
+      </div>
+      <div *ngIf="this.dynamincnavfetch.length==0">
+        <img src="assets/images/faces/nouserimage.jpg" class="mat-elevation-z1" alt="">
+      </div>
   </button>
 
   <mat-menu #accountMenu="matMenu">
@@ -69,7 +71,7 @@
       <mat-icon>notifications_off</mat-icon>
       <span>Disable alerts</span>
     </button> -->
-    <button mat-menu-item [routerLink]="['/sessions/signin']">
+    <button mat-menu-item  routerLink="/session/signin3" (click)=signout()>
       <mat-icon>exit_to_app</mat-icon>
       <span>Sign out</span>
     </button>

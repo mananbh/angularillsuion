@@ -28,6 +28,10 @@
 }
 
 
+.ag-icon-menu{
+  color: aliceblue;
+}
+
 .ag-theme-dark .sick-days-breach {
     background-color:rgb(37, 141, 189) !important;
 }
@@ -55,6 +59,9 @@ input:-webkit-autofill:active {
 
 }
 }
+
+@import '~perfect-scrollbar/css/perfect-scrollbar.css';
+
 /* 
   Only Required if you want to use Angular Landing
   (https://themeforest.net/item/angular-landing-material-design-angular-app-landing-page/21198258)

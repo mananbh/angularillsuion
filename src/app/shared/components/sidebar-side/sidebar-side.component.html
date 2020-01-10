@@ -17,11 +17,17 @@
             <!-- Sidebar user -->
             <div class="app-user">
                 <div class="app-user-photo">
-                <img src="assets/images/face-7.jpg" class="mat-elevation-z1" alt="">
+                <div *ngIf="this.dynamincnavfetch.length>0">
+                    <img src="assets/images/faces/{{this.dynamincnavfetch}}" class="mat-elevation-z1" alt="">
+                 </div>
+                <div *ngIf="this.dynamincnavfetch.length==0">
+                <img src="assets/images/faces/nouserimage.jpg" class="mat-elevation-z1" alt="">
+                 </div>
+
                 </div>
+                <br>
                 <span class="app-user-name mb-05">
-                <mat-icon class="icon-xs text-muted">lock</mat-icon> 
-                Watson Joyce
+                {{this.username}}   
                 </span>
                 <!-- Small buttons -->
                 <div class="app-user-controls">
@@ -44,8 +50,9 @@
                 class="text-muted"
                 mat-icon-button 
                 mat-xs-button
+                routerLink="/session/signin3"
                 matTooltip="Sign Out"
-                routerLink="/sessions/signin">
+               (click)=signedout()>
                     <mat-icon>exit_to_app</mat-icon>
                 </button>
                 <mat-menu #appUserMenu="matMenu">
@@ -61,7 +68,7 @@
                         <mat-icon>date_range</mat-icon>
                         <span>Calendar</span>
                     </button>
-                    <button mat-menu-item routerLink="/sessions/signin3" (click)=signedout()>
+                    <button mat-menu-item  routerLink="/session/signin3"  (click)=signedout()>
                         <mat-icon>exit_to_app</mat-icon>
                         <span>Sign out</span>
                     </button>
