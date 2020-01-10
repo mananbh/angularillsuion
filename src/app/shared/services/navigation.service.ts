@@ -29,10 +29,12 @@ interface IBadge {
 export class NavigationService {
   dynamincnav:[]=JSON.parse(sessionStorage.getItem('userData'));
   dynamincnavfetch : [] =this.dynamincnav["Data"]["MenuDetailDTO_List"];
-
-  constructor() {}
+  constructor() {
+    console.log(this.dynamincnavfetch);
+    
+  }
   iconMenu: IMenuItem[] = [
-    {
+     /*{
       name: "HOME",
       type: "icon",
       tooltip: "Home",
@@ -58,7 +60,7 @@ export class NavigationService {
       name: "Main Items"
     },
     //dashboard comment
-  /*   {
+    {
       name: "DASHBOARD",
       type: "dropDown",
       tooltip: "Dashboard",
@@ -77,13 +79,14 @@ export class NavigationService {
     tooltip: 'Item',
     icon: 'accessibility',
     state: 'reports',
-    sub:[
+    sub:this.dynamincnavfetch
+ /*    sub:[
       {
         name: "Report",
         type: "dropDown",
         sub: this.dynamincnavfetch//data is fetching in the loop
       },
-    ]
+    ] */
     },
    /*  {
       name: "CRUD Table",

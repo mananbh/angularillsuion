@@ -68,7 +68,8 @@ const components = [
     SearchModule,
     SharedPipesModule,
     SharedDirectivesModule,
-    SharedMaterialModule
+    SharedMaterialModule,
+
   ],
   declarations: components,
   entryComponents: [AppComfirmComponent, AppLoaderComponent, BottomSheetShareComponent],

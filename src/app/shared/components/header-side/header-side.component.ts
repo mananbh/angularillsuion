@@ -19,7 +19,9 @@ export class HeaderSideComponent implements OnInit {
     flag: 'flag-icon-es'
   }]
   currentLang = this.availableLangs[0];
-
+  dynamincnav:[]=JSON.parse(sessionStorage.getItem('userData'));
+  dynamincnavfetch = [];
+  username:any;
   public egretThemes;
   public layoutConf:any;
   constructor(
@@ -29,6 +31,10 @@ export class HeaderSideComponent implements OnInit {
     private renderer: Renderer2
   ) {}
   ngOnInit() {
+    this.dynamincnavfetch = this.dynamincnav["Data"]["LoginDetailsDTO_List"][0]["Profile"];
+    this.username = this.dynamincnav["Data"]["LoginDetailsDTO_List"][0]["LoginUser"];
+
+    console.log(this.dynamincnavfetch.length);
     this.egretThemes = this.themeService.egretThemes;
     this.layoutConf = this.layout.layoutConf;
     this.translate.use(this.currentLang.code);
@@ -74,4 +80,9 @@ export class HeaderSideComponent implements OnInit {
   onSearch(e) {
     //   console.log(e)
   }
+
+  signout(){
+    sessionStorage.setItem('isLoggedIn','false');
+    sessionStorage.removeItem('userData');    
+   }
 }

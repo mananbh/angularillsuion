@@ -28,6 +28,7 @@ import { ProfileOverviewComponent } from './profile-overview/profile-overview.co
 import { ProfileSettingsComponent } from './profile-settings/profile-settings.component';
 import { ProfileBlankComponent } from './profile-blank/profile-blank.component';
 import { ProfileRoutes } from "./profile.routing";
+import { AlertModule,AlertService } from 'ngx-alerts';
 
 @NgModule({
   imports: [
@@ -51,7 +52,9 @@ import { ProfileRoutes } from "./profile.routing";
     ChartsModule,
     FileUploadModule,
     SharedPipesModule,
-    RouterModule.forChild(ProfileRoutes)
+    RouterModule.forChild(ProfileRoutes),
+    AlertModule.forRoot({maxMessages: 1, timeout: 3000, position: 'right'}),
+
   ],
   declarations: [ProfileComponent, ProfileOverviewComponent, ProfileSettingsComponent, ProfileBlankComponent]
 })

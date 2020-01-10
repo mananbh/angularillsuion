@@ -60,6 +60,7 @@ import { AngularAutoComponent } from './angular-auto/angular-auto.component';
 import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 import { PreRxFormComponent } from './pre-rx-form/pre-rx-form.component';
 
+
 @NgModule({
   declarations: [LabtechReportComponent,FileUploadComponent,AttendenceReportComponent, CaseDocumentComponent, ViewImpressionDocComponent, AngularAutoComponent, PreRxFormComponent],
   imports: [
@@ -96,7 +97,7 @@ import { PreRxFormComponent } from './pre-rx-form/pre-rx-form.component';
     RouterModule.forChild(ReportsRouting),
     FileUploadModule,
     AlertModule.forRoot({maxMessages: 1, timeout: 3000, position: 'right'}),
-    AutocompleteLibModule
+    AutocompleteLibModule,
 
     ],
   providers: [

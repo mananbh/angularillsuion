@@ -1,22 +1,28 @@
 <mat-card class="p-0">
     <div  class="row">
-        <div class="col-md-3"></div> 
-        <div class="col-md-6" style="font-size: 20px;text-align: center;">
-          <b>RX IMAGE UPLOAD</b>
+        <div class="col-md-3">
+        </div> 
+        <div class="col-md-6 foo" style="font-size: 20px; text-align: center;font-weight: bold;">
+          
         </div>
         <div class="col-md-3"></div>
       </div>
       <br>
-     <mat-card-title class="">
-        <div class="card-title-text" style="font-size: 20px;"> </div>
-        <mat-divider></mat-divider>
+     <mat-card-title>
+<!--         <div class="card-title-text" style="font-size: 20px; text-align: center;"  class="foo">
+         </div> -->
       </mat-card-title>
       <mat-card-content>
           <div class="mb-1">
-            <label class="label"><b>Upload Image</b></label>
-            <div  class="custom-file-upload">
-            <input type="file" ng2FileSelect [uploader]="uploader" class="btn btn-primary" #myInput/>
+            <label class="label"><b>Browse Image</b></label>
+            <div  class="custom-file-upload"><!-- 
+            <input type="file" ng2FileSelect [uploader]="uploader" class="btn btn-primary" #myInput multiple/> -->
+            
           </div>
+
+          <button (click)="fileInput.click()" class="btn btn-primary selectmultiple" >Browse Files</button>
+          
+             <input type="file" ng2FileSelect [uploader]="uploader" class="btn btn-primary" #fileInput multiple style="display: none;"/>
         
         </div>
         <button 
@@ -24,16 +30,85 @@
         color="primary"
         class="mx-4"
         (click)="uploader.uploadAll()"
-        [disabled]="!uploader.getNotUploadedItems().length"  >Upload all</button>
+        [disabled]="!uploader.getNotUploadedItems().length"  >Upload All</button>
             
         <button 
         mat-raised-button
         color="warn"
         class="mx-4"
         (click)="reset()"
-        [disabled]="!uploader.queue.length">Remove</button>
+        [disabled]="!uploader.queue.length">Remove All</button>
       </mat-card-content>
     </mat-card>
+    <p>Queue progress:</p>
+    <div class="progress mb-1" >
+        <mat-progress-bar
+          class=""
+          color="primary"
+          mode="determinate"
+          [value]="uploader.progress">
+        </mat-progress-bar>
+    </div>
+    <div class="table-responsive">
+
+    <table class="table table-bordered"  border="1">
+      <thead class="thead-dark">
+      <tr style="font-size: medium;font-weight: bold;" align="center">
+          <th>File Name</th>
+          <th  scope="col">File Size</th >
+          <th  scope="col">Status</th>
+         <th  scope="col">Actions</th>
+      </tr>
+      </thead>
+      <tbody *ngIf="uploader.queue.length; else tableNoData">
+      <tr *ngFor="let item of uploader.queue"  style="font-size: medium;font-weight: bold;" scope="row" align="center">
+          <td  style="max-width: 100px;">
+            {{ item?.file?.name }}
+          </td >
+          <td nowrap>{{ item?.file?.size/1024/1024 | number:'.2' }} MB</td>
+
+          <td class="">
+              <mat-icon *ngIf="item.isSuccess" color="primary">check</mat-icon>
+              <mat-icon *ngIf="item.isCancel" color="accent">cancel</mat-icon>
+              <mat-icon *ngIf="item.isError" color="warn">error</mat-icon>
+          </td>
+          <td nowrap>
+             <!--  <button 
+              mat-raised-button
+              color="primary"
+              class="mx-4"
+              (click)="item.upload()"
+              [disabled]="item.isReady  || item.isSuccess">Upload</button>
+         <button 
+              mat-raised-button
+              color="accent"
+              class="mx-4"
+              (click)="item.cancel()"
+              [disabled]="!item.isUploading">Cancel</button>
+ -->
+              <button 
+              mat-raised-button
+              color="warn"
+              class="mx-4"
+              (click)="item.remove()">Remove</button>
+          </td>
+      </tr>
+      </tbody>
+      <ng-template #tableNoData >
+        <tr>
+          <td>
+          </td>
+          <td align="center">
+           <b >Queue is empty</b> 
+          </td>
+          <td>
+          </td>
+          <td>
+          </td>
+        </tr>
+      </ng-template>
+  </table>
+  </div>
     <ngx-alerts></ngx-alerts>
     
     
