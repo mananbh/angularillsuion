@@ -165,5 +165,8 @@ export class AppCalendarComponent implements OnInit {
         this.events = this.initEvents(events);
         this.refresh.next();
       });
+
+    
   }
+ 
 }

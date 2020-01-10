@@ -6,7 +6,11 @@ import { AppComfirmComponent } from './app-confirm.component';
 
 interface confirmData {
   title?: string,
-  message?: string
+  message?: string,
+  firstname?: string,
+  username?: string,
+  email?: string,
+  website?: string
 }
 
 @Injectable()
@@ -21,8 +25,12 @@ export class AppConfirmService {
     dialogRef = this.dialog.open(AppComfirmComponent, {
       width: '380px',
       disableClose: true,
-      data: {title: data.title, message: data.message}
+      panelClass: 'my-class',
+      data: {title: data.title, message: data.message,firstname:data.firstname,
+      username:data.username,email:data.email,website:data.website}
     });
     return dialogRef.afterClosed();
   }
+
+  
 }

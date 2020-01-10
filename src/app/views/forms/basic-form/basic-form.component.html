@@ -1,9 +1,40 @@
+       <modal id="custom-modal-1">
+                <div class="modal">
+                    <div class="modal-body">
+                        <h1>A Custom Modal!</h1>
+                        <p>
+                            Home page text: <input type="text" [(ngModel)]="bodyText" />
+                        </p>
+                        <button (click)="closeModal('custom-modal-1');">Close</button>
+                    </div>
+                </div>
+                <div class="modal-background"></div>
+            </modal>
+            
+            <modal id="custom-modal-2" style="z-index: -1;">
+                <div class="modal">
+                    <div class="modal-body">
+                        <h1 style="height:1000px">A Tall Custom Modal!</h1>
+                        <button (click)="closeModal('custom-modal-2');">Close</button>
+                    </div>
+                </div>
+                <div class="modal-background"></div>
+            </modal>
+
+            <mat-card class="p-0">
+                <mat-card-content>
+                 <button mat-raised-button color="primary" (click)="generatePdf()" class="mb-1">Open PDF</button>
+               &nbsp; &nbsp; &nbsp; &nbsp;
+                  <button mat-raised-button color="primary" (click)="openDialog()" class="mb-1">Open Preview PDF</button>
+                </mat-card-content>
+              </mat-card>
 <mat-card class="p-0">
     <mat-card-title class="">
         <div class="card-title-text">Form validation</div>
         <mat-divider></mat-divider>
     </mat-card-title>
     <mat-card-content>
+       
         <form [formGroup]="basicForm">
             <div fxLayout="row wrap">
                 <div fxFlex="100" fxFlex.gt-xs="50" class="pr-1">
@@ -23,7 +54,8 @@
                         *ngIf="basicForm.controls['username'].hasError('maxlength') && basicForm.controls['username'].touched" 
                         class="form-error-msg"> Username can not contain more than {{basicForm.controls['username'].errors.maxlength.requiredLength}} characters </small>
                     </div>
-
+                    
+                  
                     <div class="pb-1">
                         <mat-form-field class="full-width">
                             <input
@@ -165,10 +197,12 @@
                     </div>
                 </div>
             </div>
+           
             <button 
             mat-raised-button 
             color="primary" 
             [disabled]="basicForm.invalid">Submit</button>
+           
         </form>
     </mat-card-content>
 </mat-card>

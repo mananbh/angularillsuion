@@ -68,6 +68,7 @@
     "ngx-quill": "4.8.0",
     "ngx-select-dropdown": "^1.2.1",
     "npm": "6.9.0",
+    "pdfmake": "^0.1.63",
     "perfect-scrollbar": "1.4.0",
     "quill": "1.3.6",
     "rxjs": "6.5.2",

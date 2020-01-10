@@ -9,6 +9,11 @@ import { AppConfirmService } from '../../../shared/services/app-confirm/app-conf
 export class ConfirmDialogComponent implements OnInit {
   title = 'Confirm dialog';
   text = 'Just click a button!';
+  firstname='';
+  username='';
+  email='';
+  website='';
+
   selectedOption;
   constructor(
     public confirmService: AppConfirmService,
@@ -18,7 +23,8 @@ export class ConfirmDialogComponent implements OnInit {
   ngOnInit() {
   }
   openDialog() {
-    this.confirmService.confirm({title: this.title, message: this.text})
+    this.confirmService.confirm({title: this.title, message: this.text,
+      firstname:this.firstname,username:this.username,email:this.email,website:this.website })
       .subscribe((result) => {
         this.selectedOption = result;
         

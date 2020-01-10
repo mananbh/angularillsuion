@@ -31,6 +31,9 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule ,OWL_DATE_TIME_LOCALE,OWL_DA
 import {GetcommdataService} from '../../shared/services/getcommdata.service'
 import { AgGridModule } from '@ag-grid-community/angular';
 import { MatDialogModule  } from '@angular/material';
+import { ModalComponent } from '../../modal/modal.component';
+import { ModalService } from '../../modal.service';
+
 
 export const MY_NATIVE_FORMATS = {
   fullPickerInput: {year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric'},
@@ -65,15 +68,17 @@ export const MY_NATIVE_FORMATS = {
     OwlNativeDateTimeModule,
     AgGridModule.withComponents([]),
     RouterModule.forChild(FormsRoutes),
-    MatDialogModule,
-
+    MatDialogModule
+    
   ],
-  declarations: [BasicFormComponent, RichTextEditorComponent /* FileUploadComponent */, WizardComponent],
+  declarations: [BasicFormComponent, RichTextEditorComponent /* FileUploadComponent */, WizardComponent,
+    ModalComponent],
   providers: [
     { provide: GetcommdataService, useClass: GetcommdataService },
     {provide: OWL_DATE_TIME_LOCALE, useValue: 'en-SG'},
     {provide: OWL_DATE_TIME_FORMATS, useValue: MY_NATIVE_FORMATS},
     DatePipe,
+    ModalService
     
   ],
   /* entryComponents: [

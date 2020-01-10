@@ -29,9 +29,11 @@
       </div>
 
       <!-- Date title -->
-      <div class="cal-top-col text-center">
+      <div class="cal-top-col text-center" >
         <h5 class="m-0" [style.lineHeight]="'40px'">{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h5>
       </div>
+
+      
 
       <!-- Month, day, week view toggle buttons -->
       <div class="cal-top-col text-center">
@@ -90,6 +92,9 @@
         (eventClicked)="handleEvent('edit', $event.event)"
         (eventTimesChanged)="eventTimesChanged($event)">
       </mwl-calendar-day-view>
+    </div>
+    <div>
+     
     </div>
   </mat-card-content>
 </mat-card>
