@@ -4,11 +4,20 @@ import { ThemeService } from "../../services/theme.service";
 import { Subscription } from "rxjs";
 import { ILayoutConf, LayoutService } from "app/shared/services/layout.service";
 import {  Router } from '@angular/router';
+import { HttpClient, HttpParams,HttpHeaders } from '@angular/common/http'; 
+import {GetcommdataService} from '../../../shared/services/getcommdata.service'
 
+export interface logindetails {
+  IPAddress: string; // Added
+  LoginUserID: number;
+  StatusID: boolean;
+}
 @Component({
   selector: "app-sidebar-side",
   templateUrl: "./sidebar-side.component.html"
 })
+
+
 export class SidebarSideComponent implements OnInit, OnDestroy, AfterViewInit {
   public menuItems: any[];
   public hasIconTypeMenuItem: boolean;
@@ -18,13 +27,19 @@ export class SidebarSideComponent implements OnInit, OnDestroy, AfterViewInit {
   dynamincnav:[]=JSON.parse(sessionStorage.getItem('userData'));
   dynamincnavfetch = [];
   dynamincnavfetchmenu = [];
-  username = [];
+  username : any;
+  loginuserid :any;
+  ipaddress:any;
+  Logindetails: logindetails;
   constructor(
     private navService: NavigationService,
     public themeService: ThemeService,
     private layout: LayoutService,
     private changeDetector: ChangeDetectorRef,
     private router: Router,
+    private getcommdata: GetcommdataService,
+    private http: HttpClient,
+
   ) {}
 
   ngOnInit() {
@@ -32,6 +47,8 @@ export class SidebarSideComponent implements OnInit, OnDestroy, AfterViewInit {
     this.dynamincnavfetch = this.dynamincnav["Data"]["LoginDetailsDTO_List"][0]["Profile"];
     //console.log(this.dynamincnavfetch.length);
     this.username = this.dynamincnav["Data"]["LoginDetailsDTO_List"][0]["LoginUser"];
+    this.loginuserid = this.dynamincnav["Data"]["LoginDetailsDTO_List"][0]["LoginUserID"];
+    this.ipaddress = sessionStorage.getItem("ipaddress");
     //console.log(this.dynamincnavfetch);
     //this.iconTypeMenuTitle = this.navService.iconTypeMenuTitle;
     this.menuItemsSub = this.navService.menuItems$.subscribe(menuItem => {
@@ -47,6 +64,14 @@ export class SidebarSideComponent implements OnInit, OnDestroy, AfterViewInit {
     });
     this.layoutConf = this.layout.layoutConf;
     this.changeDetector.detectChanges();
+    this.Logindetails = 
+      {
+        IPAddress: this.ipaddress,
+        LoginUserID: this.loginuserid,
+        StatusID:false
+      }
+  
+    
   }
   ngAfterViewInit() {}
   ngOnDestroy() {
@@ -70,9 +95,13 @@ export class SidebarSideComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   signedout(){
+    console.log(this.Logindetails);
+    this.getcommdata.getsignoutlogin(this.Logindetails).subscribe();
     sessionStorage.setItem('isLoggedIn','false');
     sessionStorage.removeItem('userData');    
   }
+
+   
 }
 
 function countInObject(obj) {

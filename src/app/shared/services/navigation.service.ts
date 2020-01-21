@@ -88,6 +88,21 @@ export class NavigationService {
       },
     ] */
     },
+    {
+      name: 'Report',
+      type: 'dropDown',
+      tooltip: 'Item',
+      icon: 'accessibility',
+      state: 'reports',
+      sub:[{name: "Labguru", state: "prrep"}]
+   /*    sub:[
+        {
+          name: "Report",
+          type: "dropDown",
+          sub: this.dynamincnavfetch//data is fetching in the loop
+        },
+      ] */
+      },
    /*  {
       name: "CRUD Table",
       type: "link",

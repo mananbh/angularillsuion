@@ -2,7 +2,14 @@ import { Component, OnInit, EventEmitter, Input, Output, Renderer2 } from '@angu
 import { ThemeService } from '../../services/theme.service';
 import { LayoutService } from '../../services/layout.service';
 import { TranslateService } from '@ngx-translate/core';
+import { HttpClient, HttpParams,HttpHeaders } from '@angular/common/http'; 
+import {GetcommdataService} from '../../../shared/services/getcommdata.service'
 
+export interface logindetails {
+  IPAddress: string; // Added
+  LoginUserID: number;
+  StatusID: boolean;
+}
 @Component({
   selector: 'app-header-side',
   templateUrl: './header-side.template.html'
@@ -22,22 +29,35 @@ export class HeaderSideComponent implements OnInit {
   dynamincnav:[]=JSON.parse(sessionStorage.getItem('userData'));
   dynamincnavfetch = [];
   username:any;
+  loginuserid :any;
+  ipaddress:any;
+  Logindetails: logindetails;
   public egretThemes;
   public layoutConf:any;
   constructor(
     private themeService: ThemeService,
     private layout: LayoutService,
     public translate: TranslateService,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private getcommdata: GetcommdataService,
+    private http: HttpClient,
+
   ) {}
   ngOnInit() {
     this.dynamincnavfetch = this.dynamincnav["Data"]["LoginDetailsDTO_List"][0]["Profile"];
     this.username = this.dynamincnav["Data"]["LoginDetailsDTO_List"][0]["LoginUser"];
-
+    this.loginuserid = this.dynamincnav["Data"]["LoginDetailsDTO_List"][0]["LoginUserID"];
+    this.ipaddress = sessionStorage.getItem("ipaddress");
     console.log(this.dynamincnavfetch.length);
     this.egretThemes = this.themeService.egretThemes;
     this.layoutConf = this.layout.layoutConf;
     this.translate.use(this.currentLang.code);
+    this.Logindetails = 
+    {
+      IPAddress: this.ipaddress,
+      LoginUserID: this.loginuserid,
+      StatusID:false
+    }
   }
   setLang(lng) {
     this.currentLang = lng;
@@ -82,6 +102,8 @@ export class HeaderSideComponent implements OnInit {
   }
 
   signout(){
+    console.log(this.Logindetails);
+    this.getcommdata.getsignoutlogin(this.Logindetails).subscribe();
     sessionStorage.setItem('isLoggedIn','false');
     sessionStorage.removeItem('userData');    
    }

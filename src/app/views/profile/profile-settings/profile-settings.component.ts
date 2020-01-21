@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ChangeDetectorRef } from '@angular/core';
 import { FileUploader,FileItem } from 'ng2-file-upload';
 import { environment } from '../../../../environments/environment';
 import { AlertService } from 'ngx-alerts';
@@ -14,7 +14,7 @@ export class ProfileSettingsComponent implements OnInit {
   username:any;
   public uploader: FileUploader = new FileUploader({  url: this.API_URL+ '/PP/Upload_Profile'});
   public hasBaseDropZoneOver: boolean = false;
-  constructor(private alerts: AlertService) { 
+  constructor(private alerts: AlertService,private changeDetector: ChangeDetectorRef) { 
    
   }
 
@@ -35,6 +35,8 @@ export class ProfileSettingsComponent implements OnInit {
    this.uploader.onSuccessItem=(item: any, response: any, status: any, headers: any)=>{
     this.alerts.success("Image Uploaded Success fully kindly Login Again for changes");
     this.uploader.clearQueue();
+   // window.location.reload();
+   this.changeDetector.detectChanges();
 
    }
 

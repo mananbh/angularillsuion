@@ -51,7 +51,7 @@
     class="topbar-button-right img-button"
   >
      <div *ngIf="this.dynamincnavfetch.length>0">
-        <img src="assets/images/faces/{{this.dynamincnavfetch}}" class="mat-elevation-z1" alt="">
+        <img src="assets/images/faces/{{this.dynamincnavfetch|uppercase}}" class="mat-elevation-z1" alt="">
       </div>
       <div *ngIf="this.dynamincnavfetch.length==0">
         <img src="assets/images/faces/nouserimage.jpg" class="mat-elevation-z1" alt="">

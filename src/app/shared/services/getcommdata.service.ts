@@ -48,33 +48,33 @@ export class GetcommdataService {
    getReportType(){
     let data = {SSCID: "3249",SituationID: "1",UserID:"1",RoleID:"1",Filter1:"16",Filter2:"0",Filter3:"0",Filter4:"0"};
     const httpOptions = {headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return  this.http.post(this.API_URL+'/GetCommonList',data,httpOptions);
+    return  this.http.post(this.API_URL+'/PP/GetCommonList',data,httpOptions);
   }  
 
   getLocation(){
     let data = {SSCID: "3249",SituationID: "2",UserID:"1",RoleID:"1",Filter1:"16",Filter2:"0",Filter3:"0",Filter4:"0"};
     const httpOptions = {headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return  this.http.post(this.API_URL+'/GetCommonList',data,httpOptions);
+    return  this.http.post(this.API_URL+'/PP/GetCommonList',data,httpOptions);
   }  
   getEmployee(){
     let data = {SSCID: "3249",SituationID: "3",UserID:"1",RoleID:"1",Filter1:"16",Filter2:"0",Filter3:"0",Filter4:"0"};
     const httpOptions = {headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return  this.http.post(this.API_URL+'/GetCommonList',data,httpOptions);
+    return  this.http.post(this.API_URL+'/PP/GetCommonList',data,httpOptions);
   }  
   getDepartment(){
     let data = {SSCID: "3249",SituationID: "4",UserID:"1",RoleID:"1",Filter1:"16",Filter2:"0",Filter3:"0",Filter4:"0"};
     const httpOptions = {headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return  this.http.post(this.API_URL+'/GetCommonList',data,httpOptions);
+    return  this.http.post(this.API_URL+'/PP/GetCommonList',data,httpOptions);
   }  
   getProcess(filter:string){
     let data = {SSCID: "3249",SituationID: "5",UserID:"1",RoleID:"1",Filter1:filter,Filter2:"0",Filter3:"0",Filter4:"0"};
     const httpOptions = {headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return  this.http.post(this.API_URL+'/GetCommonList',data,httpOptions);
+    return  this.http.post(this.API_URL+'/PP/GetCommonList',data,httpOptions);
   } 
 
   fetchlabgurureport(getlabgurudata) {
     const httpOptions = {headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return  this.http.post(this.API_URL+'/GetLabTechnicianPerformanceReport',getlabgurudata,httpOptions);
+    return  this.http.post(this.API_URL+'/PP/GetLabTechnicianPerformanceReport',getlabgurudata,httpOptions);
   } 
 
   getallpostdata() {
@@ -109,9 +109,16 @@ export class GetcommdataService {
   } 
 
   getserachautocomplete(value){
-    let data = {CustomerOutput:value};
+    let data = {CustomerInput:value};
     const httpOptions = {headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
     return  this.http.post(this.API_URL+'/PP/Auto_Cust',data,httpOptions);
-  } 
+  }
+  
+  //sign out
+  getsignoutlogin(value){
+    const httpOptions = {headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+    return  this.http.put(this.API_URL+'/PP/SignOut',value,httpOptions);
+  }
+
 
 }

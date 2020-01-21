@@ -24,6 +24,8 @@ export class Signin3Component implements OnInit {
     this.http.get<{ip:string}>('https://jsonip.com')
     .subscribe( data => {
       this.ipAddress = data.ip
+      sessionStorage.setItem("ipaddress",this.ipAddress);
+
     })
 
   }
@@ -52,7 +54,6 @@ export class Signin3Component implements OnInit {
           sessionStorage.setItem("Islogin",'true');
           sessionStorage.setItem('userData', JSON.stringify(this.dataSource));
           //this.router.onSameUrlNavigation = 'reload';
-          this.router.navigate(['/dashboard/analytics']);
           if(arraycount==1){
             console.log(this.dataSource.Data.MenuDetailDTO_List[0])
             //this.router.navigate(['/reports/+?this.dataSource.Data.MenuDetailDTO_List[0].url']);
