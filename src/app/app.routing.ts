@@ -149,7 +149,13 @@ export const rootRouterConfig: Routes = [
         path: 'reports', 
         loadChildren: () => import('./views/reports/reports.module').then(m => m.ReportsModule), 
         data: { title: 'Reports', breadcrumb: 'Report'}
+      },
+      {
+        path: 'auto', 
+        loadChildren: () => import('./views/reports/reports.module').then(m => m.ReportsModule), 
+        data: { title: 'Reports', breadcrumb: 'Report'}
       }
+      
     ]
   },
   { 

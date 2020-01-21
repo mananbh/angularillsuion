@@ -13,6 +13,8 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
     <div mat-dialog-content class="mb-1">Username  :{{ data.username }}</div>
     <div mat-dialog-content class="mb-1">Email  :{{ data.email }}</div>
     <div mat-dialog-content class="mb-1">Website :{{ data.website }}</div>
+    <div mat-dialog-content class="mb-1">Agree :{{ data.checkbox }}</div>
+    <div mat-dialog-content class="mb-1">Gender :{{ data.radiobutton }}</div>
     <div mat-dialog-actions>
     <button 
     type="button" 

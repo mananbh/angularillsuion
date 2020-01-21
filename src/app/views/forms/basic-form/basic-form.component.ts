@@ -6,7 +6,8 @@ import pdfFonts from 'pdfmake/build/vfs_fonts';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 import { ModalService } from '../../../../app/modal.service';
 import { AppConfirmService } from '../../../shared/services/app-confirm/app-confirm.service';
-
+import {GetcommdataService} from '../../../shared/services/getcommdata.service'
+import { DatePipe } from '@angular/common';
 
 
 @Component({
@@ -18,16 +19,38 @@ export class BasicFormComponent implements OnInit {
   formData = {}
   console = console;
   basicForm: FormGroup;
-  
+  dataSource :any;
+  department :any;
+
+  customer:[];
+  searchTerm : FormControl = new FormControl();
+  FromDate : FormControl = new FormControl();
+  ToDate : FormControl = new FormControl();
+
+  myCustomer = <any>[];
   constructor(private modalService: ModalService,
     public confirmService: AppConfirmService,
-    private cdr: ChangeDetectorRef) { 
+    private cdr: ChangeDetectorRef,
+    private getdata: GetcommdataService,
+    private datePipe: DatePipe) { 
 
     // this.basicForm = JSON.parse(sessionStorage.getItem('basicForm')) || new BasicFormComponent();
   }
   
   ngOnInit() {
     //this.bodyText = 'This text can be updated in modal 1';
+
+    
+    this.searchTerm.valueChanges.subscribe(
+      term => {
+        if (term != '') {
+          this.getdata.search(term).subscribe(
+            data => {
+              this.myCustomer = data as any[];
+              //console.log(data[0].BookName);
+          })
+        }
+    })
     let password = new FormControl('', Validators.required);
     let confirmPassword = new FormControl('', CustomValidators.equalTo(password));
 
@@ -60,8 +83,21 @@ export class BasicFormComponent implements OnInit {
           return { agreed: true }
         }
         return null;
-      })
+      }),
+      // FromDate: new FormControl['', [Validators.required]],
+      // ToDate: ['', [Validators.required]],
+      FromDate: new FormControl('', [
+        Validators.required
+      ]),
+      ToDate: new FormControl('', [
+        Validators.required
+      ]),
+      DepartmentID: new FormControl('', [
+        Validators.required
+      ]),
+      
     })
+    
   }
   openModal(id: string) {
     this.modalService.open(id);
@@ -70,10 +106,21 @@ export class BasicFormComponent implements OnInit {
 closeModal(id: string) {
     this.modalService.close(id);
 }
+
   generatePdf(){
     const documentDefinition = this.getDocumentDefinition();
     pdfMake.createPdf(documentDefinition).open();
    }
+
+   getemployeedata(){
+   
+    this.getdata.getserachautocomplete().subscribe((data:any) => {
+      this.dataSource = JSON.parse(data.objData); 
+       this.customer =   this.dataSource.Data;
+      
+       }
+    );
+  }
 
 
    openDialog() {
@@ -82,7 +129,9 @@ closeModal(id: string) {
       firstname: this.basicForm.value.firstname,
       username: this.basicForm.value.username,
       email: this.basicForm.value.email,
-      website: this.basicForm.value.website})
+      website: this.basicForm.value.website,
+      checkbox: this.basicForm.value.agreed,
+      radiobutton: this.basicForm.value.gender})
       .subscribe((result) => {
         // this.basicForm.value.website = result;
         
@@ -90,7 +139,7 @@ closeModal(id: string) {
       });
   }
 
-
+ 
 
    getDocumentDefinition() {
     sessionStorage.setItem('basicForm', JSON.stringify(this.formData));
@@ -120,6 +169,12 @@ closeModal(id: string) {
             {
               text: 'website : ' + this.basicForm.value.website,
             },
+            {
+              text: 'gender : ' + this.basicForm.value.gender,
+            },
+            {
+              text: 'agreed : ' + this.basicForm.value.agreed,
+            },
             ],
             [
               // Document definition for Profile pic
@@ -134,6 +189,16 @@ closeModal(id: string) {
         }
     };
   }
-  
 
+
+  getdepartmentdata(){
+       this.department  =[
+        { Description: 'Acrylic' },  { ID: 'AU' },
+        { Description: 'Captek' }, { ID: 'BM' },
+        { Description: 'Ceramic'}, { ID: 'CA'} ,
+        {Description: 'Composite'}, { ID: 'CM'} ,
+        {Description: 'Correction'}, { ID: 'DK' },
+        {Description: 'Managment'},  { ID:'FR'} 
+    ];
+  }
 }

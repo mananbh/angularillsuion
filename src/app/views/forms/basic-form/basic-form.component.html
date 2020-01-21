@@ -185,7 +185,7 @@
                         </mat-radio-group>
                     </div>
                     
-                    <div class="pb-1 pt-05">
+                    <div class="pb-1">
                         <mat-checkbox
                         name="agreed"
                         formControlName="agreed" 
@@ -195,8 +195,61 @@
                             *ngIf="basicForm.controls['agreed'].hasError('agreed') && basicForm.controls['agreed'].touched" 
                             class="form-error-msg"> You must agree to the terms and conditions </small>
                     </div>
+                    
+                    </div>
+                  
+   
+               
                 </div>
-            </div>
+                <div class="col-md-12">
+                        <div class="col-md-6">
+                            <label class="label">From Date</label>
+                            <input [owlDateTime]="fromdate"  [owlDateTimeTrigger]="fromdate"  class="form-control" formControlName="FromDate" 
+                          >
+                            <owl-date-time #fromdate></owl-date-time>
+                      </div>
+                      <div class="col-md-6">
+                          <label class="label">To Date</label>
+                          <input [owlDateTime]="todate" [owlDateTimeTrigger]="todate"  class="form-control"
+                          formControlName="ToDate" > 
+                          <owl-date-time #todate ></owl-date-time>
+                      </div>
+                    </div>
+                <div class="col-md-12">
+                        <div class="col-md-6">
+                                <label class="label">Department</label>
+                                <ng-select class="custom" [items]="department"
+                                bindLabel="Description"
+                                bindValue="ID"
+                                formControlName="DepartmentID"
+                                [(ngModel)]="selected"
+                                (ngModelChange)="getdepartmentdata()"
+                                [selectOnTab]="true"
+                                ></ng-select>
+                                
+                               </div>
+                <div class="col-md-6">
+                        <mat-form-field class="container">
+
+                                <!-- ADD AN INPUT BOX OF TYPE TEXT AND LINK IT TO THE AUTO COMPLETE PANEL. -->
+                                <input type="text" placeholder="Search Customer ..."
+                                    matInput 
+                                    [formControl]="searchTerm" 
+                                    [matAutocomplete]="auto">  
+                      
+                                <!-- CREATE AUTO COMPLETE PANEL WITH OPTIONS. -->
+                                <mat-autocomplete #auto="matAutocomplete">
+                                  <mat-option *ngFor="let Customer of myCustomer" [value]="Customer.Description">
+                                    {{ Customer.Description }}
+                                  </mat-option>
+                                </mat-autocomplete>
+                      
+                            </mat-form-field>
+                </div>
+               
+        
+    </div>
+           
            
             <button 
             mat-raised-button 
@@ -205,5 +258,5 @@
            
         </form>
     </mat-card-content>
+    
 </mat-card>
-

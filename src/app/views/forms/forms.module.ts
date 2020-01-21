@@ -15,6 +15,8 @@ import {
   MatIconModule,
   MatStepperModule
 } from '@angular/material';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { QuillModule } from 'ngx-quill';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
@@ -33,7 +35,10 @@ import { AgGridModule } from '@ag-grid-community/angular';
 import { MatDialogModule  } from '@angular/material';
 import { ModalComponent } from '../../modal/modal.component';
 import { ModalService } from '../../modal.service';
+// import { DropDownListModule } from '@syncfusion/ej2-angular-dropdowns';
+// import { ButtonModule } from '@syncfusion/ej2-angular-buttons';
 
+import { NgSelectModule } from '@ng-select/ng-select';
 
 export const MY_NATIVE_FORMATS = {
   fullPickerInput: {year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric'},
@@ -68,7 +73,10 @@ export const MY_NATIVE_FORMATS = {
     OwlNativeDateTimeModule,
     AgGridModule.withComponents([]),
     RouterModule.forChild(FormsRoutes),
-    MatDialogModule
+    MatDialogModule,
+    MatAutocompleteModule,
+    NgSelectModule
+
     
   ],
   declarations: [BasicFormComponent, RichTextEditorComponent /* FileUploadComponent */, WizardComponent,

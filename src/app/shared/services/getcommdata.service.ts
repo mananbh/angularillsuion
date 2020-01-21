@@ -4,6 +4,7 @@ import { HttpClient, HttpParams,HttpHeaders } from '@angular/common/http';
 import {LabGuruReportcolnames} from '../../shared/classes/reportcolnames';
 import {} from '../CommonModal/commonmodal'
 import { environment } from '../../../environments/environment';
+import { debounceTime, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +31,10 @@ export class rxfileupload{
 export class ImpressionNo{
   
   ImpressionNo  : string;
+}
+export class Customer{
+  
+  CustomerName  : string;
 }
 export class GetcommdataService {
   private API_URL= environment.apiURL;
@@ -108,10 +113,26 @@ export class GetcommdataService {
     return  this.http.post(this.API_URL+'/PP/View_ImpressionDoc',impressiondata,httpOptions);
   } 
 
-  getserachautocomplete(value){
-    let data = {CustomerOutput:value};
-    const httpOptions = {headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return  this.http.post(this.API_URL+'/PP/Auto_Cust',data,httpOptions);
-  } 
 
-}
+
+  getserachautocomplete(){
+    let data = {CustomerName:'san'};
+    const httpOptions = {headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+    return  this.http.post(this.API_URL+'/PP/GetCustomerAutoComplete',data,httpOptions);
+  }  
+  search(term) {
+    var listOfBooks = this.http.get('http://localhost:60531/api/PP/Auto_Customer?custname=' + term)
+    .pipe(
+        debounceTime(500),  // WAIT FOR 500 MILISECONDS ATER EACH KEY STROKE.
+        map(
+            (data: any) => {
+                return (
+                    data.length != 0 ? data as any[] : [{"CustomerName": "No Record Found"} as any]
+                );
+            }
+    ));
+
+    return listOfBooks;  
+}  
+}  
+

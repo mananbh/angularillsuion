@@ -9,6 +9,7 @@ import { ViewImpressionDocComponent } from './view-impression-doc/view-impressio
 import { PreRxFormComponent } from './pre-rx-form/pre-rx-form.component';
 
 
+
 export const ReportsRouting: Routes = [
   {
     path: '',
@@ -58,4 +59,5 @@ export const ReportsRouting: Routes = [
         data: { title: 'UPLOAD PRE RX', breadcrumb: 'UPLOAD PRE RX' }
     }]
   }
+
 ];

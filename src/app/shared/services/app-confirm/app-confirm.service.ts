@@ -11,6 +11,8 @@ interface confirmData {
   username?: string,
   email?: string,
   website?: string
+  checkbox?: string
+  radiobutton?: string
 }
 
 @Injectable()
@@ -27,7 +29,8 @@ export class AppConfirmService {
       disableClose: true,
       panelClass: 'my-class',
       data: {title: data.title, message: data.message,firstname:data.firstname,
-      username:data.username,email:data.email,website:data.website}
+      username:data.username,email:data.email,website:data.website,
+      checkbox:data.checkbox,radiobutton:data.checkbox}
     });
     return dialogRef.afterClosed();
   }

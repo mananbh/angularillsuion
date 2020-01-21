@@ -56,13 +56,13 @@ export const MY_NATIVE_FORMATS = {
 };
 import { AlertModule,AlertService } from 'ngx-alerts';
 import { ViewImpressionDocComponent } from './view-impression-doc/view-impression-doc.component';
-import { AngularAutoComponent } from './angular-auto/angular-auto.component';
+
 import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 import { PreRxFormComponent } from './pre-rx-form/pre-rx-form.component';
 
 
 @NgModule({
-  declarations: [LabtechReportComponent,FileUploadComponent,AttendenceReportComponent, CaseDocumentComponent, ViewImpressionDocComponent, AngularAutoComponent, PreRxFormComponent],
+  declarations: [LabtechReportComponent,FileUploadComponent,AttendenceReportComponent, CaseDocumentComponent, ViewImpressionDocComponent, PreRxFormComponent],
   imports: [
     CommonModule,
     MatInputModule,
@@ -97,7 +97,8 @@ import { PreRxFormComponent } from './pre-rx-form/pre-rx-form.component';
     RouterModule.forChild(ReportsRouting),
     FileUploadModule,
     AlertModule.forRoot({maxMessages: 1, timeout: 3000, position: 'right'}),
-    AutocompleteLibModule,
+    AutocompleteLibModule
+    
 
     ],
   providers: [
