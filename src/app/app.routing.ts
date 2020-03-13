@@ -35,22 +35,22 @@ export const rootRouterConfig: Routes = [
         loadChildren: () => import('./views/dashboard/dashboard.module').then(m => m.DashboardModule), 
         data: { title: 'Dashboard', breadcrumb: 'DASHBOARD'}
       },
-      {
+     /*  {
         path: 'material', 
         loadChildren: () => import('./views/material-example-view/material-example-view.module').then(m => m.MaterialExampleViewModule), 
         data: { title: 'Material', breadcrumb: 'MATERIAL'}
-      },
+      }, 
       {
         path: 'dialogs', 
         loadChildren: () => import('./views/app-dialogs/app-dialogs.module').then(m => m.AppDialogsModule), 
         data: { title: 'Dialogs', breadcrumb: 'DIALOGS'}
-      },
+      },*/
       {
         path: 'profile', 
         loadChildren: () => import('./views/profile/profile.module').then(m => m.ProfileModule), 
         data: { title: 'Profile', breadcrumb: 'PROFILE'}
       },
-      {
+     /*  {
         path: 'others', 
         loadChildren: () => import('./views/others/others.module').then(m => m.OthersModule), 
         data: { title: 'Others', breadcrumb: 'OTHERS'}
@@ -144,7 +144,7 @@ export const rootRouterConfig: Routes = [
         path: 'icons', 
         loadChildren: () => import('./views/mat-icons/mat-icons.module').then(m => m.MatIconsModule), 
         data: { title: 'Icons', breadcrumb: 'MATICONS'}
-      },
+      }, */
       {
         path: 'reports', 
         loadChildren: () => import('./views/reports/reports.module').then(m => m.ReportsModule), 

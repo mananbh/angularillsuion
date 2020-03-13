@@ -7,7 +7,7 @@ import { CaseDocumentComponent } from './case-document/case-document.component';
 import { ViewImpressionDocComponent } from './view-impression-doc/view-impression-doc.component';
 
 import { PreRxFormComponent } from './pre-rx-form/pre-rx-form.component';
-
+import { DocumntcollectionComponent } from './documntcollection/documntcollection.component';
 
 export const ReportsRouting: Routes = [
   {
@@ -56,6 +56,14 @@ export const ReportsRouting: Routes = [
         path: 'prerxform',
         component: PreRxFormComponent,
         data: { title: 'UPLOAD PRE RX', breadcrumb: 'UPLOAD PRE RX' }
+    }]
+  },
+  {
+    path: '',
+    children: [{
+        path: 'documentcollection',
+        component: DocumntcollectionComponent,
+        data: { title: 'Document Upload', breadcrumb: 'Document Upload' }
     }]
   }
 ];

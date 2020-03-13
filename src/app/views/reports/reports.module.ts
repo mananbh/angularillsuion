@@ -59,10 +59,11 @@ import { ViewImpressionDocComponent } from './view-impression-doc/view-impressio
 import { AngularAutoComponent } from './angular-auto/angular-auto.component';
 import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 import { PreRxFormComponent } from './pre-rx-form/pre-rx-form.component';
+import { DocumntcollectionComponent } from './documntcollection/documntcollection.component';
 
 
 @NgModule({
-  declarations: [LabtechReportComponent,FileUploadComponent,AttendenceReportComponent, CaseDocumentComponent, ViewImpressionDocComponent, AngularAutoComponent, PreRxFormComponent],
+  declarations: [LabtechReportComponent,FileUploadComponent,AttendenceReportComponent, CaseDocumentComponent, ViewImpressionDocComponent, AngularAutoComponent, PreRxFormComponent, DocumntcollectionComponent],
   imports: [
     CommonModule,
     MatInputModule,

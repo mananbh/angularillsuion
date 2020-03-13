@@ -119,6 +119,12 @@ export class GetcommdataService {
     const httpOptions = {headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
     return  this.http.put(this.API_URL+'/PP/SignOut',value,httpOptions);
   }
+//document upload type api
+  getReportTypeforDoc(): Observable<any>{
+    let data = {SituationID: "1"};
+    const httpOptions = {headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+    return  this.http.post<any>(this.API_URL+'/PP/IncentiveTypeList',data,httpOptions);
+  }  
 
 
 }
