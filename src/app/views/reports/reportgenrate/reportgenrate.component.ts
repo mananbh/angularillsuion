@@ -39,7 +39,7 @@ export class ReportgenrateComponent implements OnInit {
   SupplierDescription:any;
   EmployeeDescription:any;
   OUDescription:any;
-
+  AllReportsData:any;
   ngOnInit() {
     this.registerreport = this.formbulider.group({
       CustomerTD: ['', [Validators.required]],
@@ -164,7 +164,12 @@ export class ReportgenrateComponent implements OnInit {
       
     this.registerreport.addControl('ReportGroupID ', new FormControl());
     this.registerreport.controls["ReportGroupID "].setValue(this.reportlist[0].GroupCode);
-    console.log(this.registerreport.value);
+
+    this.getcommdata.getAllReportsInGrid(this.registerreport.value).subscribe((data:any) => {
+         this.AllReportsData =   data;
+         }
+      );
+
   }
 
   
