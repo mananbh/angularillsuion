@@ -29,6 +29,7 @@ interface IBadge {
 export class NavigationService {
   dynamincnav:[]=JSON.parse(sessionStorage.getItem('userData'));
   dynamincnavfetch : [] =this.dynamincnav["Data"]["MenuDetailDTO_List"];
+  ReportNormal : [] =this.dynamincnav["Data"]["MenuDetailDTO_List1"];
   constructor() {
     console.log(this.dynamincnavfetch);
     
@@ -89,12 +90,12 @@ export class NavigationService {
     ] */
     },
     {
-      name: 'Report',
+      name: 'Financial Report',
       type: 'dropDown',
       tooltip: 'Item',
       icon: 'accessibility',
       state: 'reports',
-      sub:[{name: "Labguru", state: "prrep"}]
+      sub:this.ReportNormal
    /*    sub:[
         {
           name: "Report",

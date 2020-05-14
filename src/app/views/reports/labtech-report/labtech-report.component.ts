@@ -184,6 +184,8 @@ onGridReady(params) {
   this.getcommdata.fetchlabgurureport(this.labgururepform.value);
   params.api.resetRowHeights();
 }
+
+
    
   
 

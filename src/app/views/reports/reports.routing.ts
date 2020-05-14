@@ -8,6 +8,7 @@ import { ViewImpressionDocComponent } from './view-impression-doc/view-impressio
 
 import { PreRxFormComponent } from './pre-rx-form/pre-rx-form.component';
 import { DocumntcollectionComponent } from './documntcollection/documntcollection.component';
+import { ReportgenrateComponent } from './reportgenrate/reportgenrate.component';
 
 export const ReportsRouting: Routes = [
   {
@@ -64,6 +65,14 @@ export const ReportsRouting: Routes = [
         path: 'documentcollection',
         component: DocumntcollectionComponent,
         data: { title: 'Document Upload', breadcrumb: 'Document Upload' }
+    }]
+  },
+  {
+    path: '',
+    children: [{
+        path: 'reportnormal',
+        component: ReportgenrateComponent,
+        data: { title: 'Finacial Report', breadcrumb: 'Report Genrate' }
     }]
   }
 ];

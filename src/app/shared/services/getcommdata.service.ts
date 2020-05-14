@@ -126,5 +126,29 @@ export class GetcommdataService {
     return  this.http.post<any>(this.API_URL+'/PP/IncentiveTypeList',data,httpOptions);
   }  
 
+  //view pre rx details
+  GetTotalPreRXUploaded(prexrxdetails): Observable<any>{
+    const httpOptions = {headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+    return  this.http.post<any>(this.API_URL+'/PP/GetTotalPreRXUploaded',prexrxdetails,httpOptions);
+  }  
+
+  //report genrateapi call
+  getReportGenateData(SituationID){
+    let data = {SituationID: SituationID};
+    const httpOptions = {headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+    return  this.http.post(this.API_URL+'/PP/Get_Emp_Cust_Supp_Details',data,httpOptions);
+  }  
+
+  getalldatafilterreport(){
+    const httpOptions = {headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+    return  this.http.get(this.API_URL+'/PP/Get_Filter_Detail',httpOptions);
+  }  
+
+  getallreportinlist(SoftwareSubComponentID){
+    let data = {SoftwareSubComponentID: SoftwareSubComponentID};
+    const httpOptions = {headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+    return  this.http.post(this.API_URL+'/PP/GetChkReportsDetail?SoftwareSubComponentID='+SoftwareSubComponentID+'',data,httpOptions);
+  }  
+
 
 }

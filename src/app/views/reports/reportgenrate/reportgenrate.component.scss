@@ -1,0 +1,47 @@
+body {
+    padding: 10% 20%;
+    font-family: 'Open Sans', sans-serif;
+    background: #111;
+    color: #fff;
+  }
+  
+  tr {
+    padding: 4px 6px;
+    line-height: 190%;
+    outline-style: none;
+    transition: all .6s;
+  }
+  
+  .hiddenCB tr {
+    display: inline;
+    margin:8px;
+    padding: 0;
+    list-style: none;
+  }
+  
+ 
+  .hiddenCB t {
+    
+    cursor: pointer;
+  }
+  
+  .hiddenCB input[type="checkbox"]+label:hover{
+    background-color: navajowhite;
+
+  }
+  
+  .hiddenCB input[type="checkbox"]:checked+label {
+    background-color: navajowhite;
+
+  }
+  
+  .hiddenCB input[type="checkbox"]:checked+label:hover{
+    background-color: navajowhite;
+  }
+
+  .columns-container {
+    display: table-cell;
+    height: 100%;
+    width:600px;
+    text-align: center;
+}

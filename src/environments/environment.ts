@@ -6,6 +6,6 @@
 export const environment = {
   production: false,
  //apiURL: 'http://10.10.0.149/API/api'
- apiURL: 'http://localhost:60531/api'
+ apiURL: 'http://104.211.156.102/Labguru_Mobile/api'
 
 };

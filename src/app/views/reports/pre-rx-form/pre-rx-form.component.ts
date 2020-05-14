@@ -10,6 +10,10 @@ import { isThisISOWeek } from 'date-fns';
 import { environment } from '../../../../environments/environment';
 import { Directive, AfterViewInit, ElementRef,Input } from '@angular/core';
 import { timeout } from 'rxjs/operators';
+import { DomSanitizer} from '@angular/platform-browser';
+import { DatePipe } from '@angular/common';
+import {AllCommunityModules} from '@ag-grid-community/all-modules';
+
 @Component({
   selector: 'app-pre-rx-form',
   templateUrl: './pre-rx-form.component.html',
@@ -20,7 +24,10 @@ export class PreRxFormComponent implements OnInit {
 /*   @ViewChild('myInput',{static: false})
 myInputVariable: ElementRef; */
   private API_URL= environment.apiURL;
-  i = 0
+  i = 0;
+  j = 0;
+  submitted : any;
+
   public uploader: FileUploader = new FileUploader({ url: this.API_URL+ '/PP/UploadPerRx',
   formatDataFunction:async ,parametersBeforeFiles  : true,
   allowedMimeType: ['image/jpg', 'image/jpeg','image/png','image/bnp'],
@@ -28,7 +35,11 @@ myInputVariable: ElementRef; */
   response:any;
   username :any;
   resetdata:any;
-  constructor(private loader: AppLoaderService,private changeDetector: ChangeDetectorRef,private getcommdata: GetcommdataService,private formbulider: FormBuilder,private http: HttpClient,private alerts: AlertService,private el: ElementRef) { 
+  localImageUrl:any=[];
+  prerxform: FormGroup;
+  dataSource:any;
+  messeges:any;
+  constructor(private loader: AppLoaderService,private changeDetector: ChangeDetectorRef,private getcommdata: GetcommdataService,private formbulider: FormBuilder,private http: HttpClient,private alerts: AlertService,private el: ElementRef,private sanitizer: DomSanitizer,private datePipe: DatePipe) { 
     this.uploader.onProgressItem = (progress: any) => this.changeDetector.detectChanges();
 
     this.username  = JSON.parse(sessionStorage.getItem('userData'));
@@ -41,8 +52,6 @@ myInputVariable: ElementRef; */
        UserID: userid,
        type: item.file.type,
       };
-
-     
     };
 
     this.uploader.onWhenAddingFileFailed= (item: any, filter: any, options: any) => {
@@ -55,39 +64,50 @@ myInputVariable: ElementRef; */
     this.uploader.onAfterAddingFile = (file) => {
       this.i++
       file.withCredentials = false;
-     if(file.file.type!="image/jpg" && file.file.type!="image/jpeg"  && file.file.type!="image/png" && file.file.type!="image/bnp" ){
-        this.alerts.danger("Only Image File can be accepted");
-     //   this.myInputVariable.nativeElement.value = "";
+      console.log(file);
+      if(file.file.type!="image/jpg" && file.file.type!="image/jpeg"  && file.file.type!="image/png" && file.file.type!="image/bnp" ){
+          this.alerts.danger("Only Image File can be accepted");
+      //   this.myInputVariable.nativeElement.value = "";
       }
       file.file.name = "PreRx" + this.i;
       console.log(file);
+      let url =  this.sanitizer.bypassSecurityTrustUrl((window.URL) ? window.URL.createObjectURL(file._file) : (window as any).webkitURL.createObjectURL(file._file));
+      this.localImageUrl[this.j] = url;
+      console.log(this.localImageUrl);
+      this.changeDetector.detectChanges();
+      this.j++;
     }; 
 
 
     this.uploader.onSuccessItem=(item: any, response: any, status: any, headers: any)=>{
       this.loader.close();
       this.alerts.success(response.replace(/['"]+/g, ""));
-    //  this.myInputVariable.nativeElement.value = "";
-     this.uploader.removeFromQueue(item)
+      this.uploader.removeFromQueue(item)
+      console.log(item);
       this.changeDetector.detectChanges();
-
+     /*  this.localImageUrl = [];
+      this.j--; */
     }  
     
     this.uploader.onErrorItem = (item: any, response: any, status: any, headers: any)=> {
       this.loader.close();
       this.alerts.danger(response.replace(/['"]+/g, ""));
-    //  this.myInputVariable.nativeElement.value = "";
-      this.changeDetector.detectChanges();
-
+      this.changeDetector.detectChanges();     
     }
-
 
     this.uploader.onCompleteAll=()=>{
       this.loader.close();
+      this.getviewprexrxdetails();
+      this.localImageUrl = [];
+      this.j = 0;
     }
+  }
 
-   
-
+  removeFile(item,k) {
+    this.j--;
+    this.localImageUrl.splice(k,1);
+   console.log(this.localImageUrl);
+    this.uploader.removeFromQueue(item);
   }
 
 
@@ -96,6 +116,55 @@ myInputVariable: ElementRef; */
   }
   
   ngOnInit() {
+    this.prerxform = this.formbulider.group({
+      FromDate: ['', [Validators.required]],
+    });
+    let dynamincnav:[]=JSON.parse(sessionStorage.getItem('userData'));
+    let dynamincnavfetch : [] =dynamincnav["Data"]["LoginDetailsDTO_List"][0].LoginUserID;
+
+    var todaydate = new Date();
+    this.prerxform.controls["FromDate"].setValue(todaydate);
+    this.prerxform.value.FromDate = this.datePipe.transform(todaydate,"yyyy-MM-dd");
+
+    this.prerxform.addControl('UserID', new FormControl());
+    this.prerxform.controls["UserID"].setValue(dynamincnavfetch);
+    this.getviewprexrxdetails();
   }
+
+  modules = AllCommunityModules;
+  tablecolumn = [
+    {headerName: 'Pre RX No', field: 'TransactionNumber',filter: true, resizable: true,  width: 300,},
+    {headerName: 'Status', field: 'Status',maxWidth:100, resizable: true},
+    {headerName: 'Path', field: 'Path',maxWidth:100, resizable: true,
+    cellRenderer: function(params) {
+      //return '<a href="'+params.value+'" target="_blank"><i class="glyphicon glyphicon-cloud"></i> </a>';
+      return '<a href="'+params.value+'" target="_blank"><mat-icon class="mat-icon material-icons mat-icon-no-color" role="img" aria-hidden="true">cloud_download</mat-icon><i class="glyphicon glyphicon-cloud"></a>';    
+      }  
+    },
+  ];
+
+  getviewprexrxdetails(){
+  
+
+    this.prerxform.value.FromDate = this.datePipe.transform(this.prerxform.value.FromDate,"yyyy-MM-dd");
+     this.getcommdata.GetTotalPreRXUploaded(this.prerxform.value).subscribe(data => {
+      this.loader.close();
+      this.dataSource = data;
+      this.changeDetector.detectChanges();
+    },
+    error  => {
+      this.messeges =  "Something Went wrong check your internet or try again after sometime"; 
+      this.loader.close();
+      this.dataSource = []
+      this.alerts.danger(this.messeges);
+      this.changeDetector.detectChanges();
+    },);
+  }
+
+ 
+  onFirstDataRendered(params) {
+    params.api.sizeColumnsToFit();
+  }
+
 
 }
