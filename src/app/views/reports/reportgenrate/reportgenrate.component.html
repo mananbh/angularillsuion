@@ -37,7 +37,6 @@
             bindLabel="Description"
             bindValue="ID"
             formControlName="EmployeeID"
-            [loading]="EmployeeLoading"
             [selectOnTab]="true"
             (change)="GetEmployeeDesc($event.Description)"
            ></ng-select>
@@ -69,7 +68,6 @@
               bindLabel="Description"
               bindValue="ID"
               formControlName="FromYear"
-              [loading]="EmployeeLoading"
               [selectOnTab]="true"
              ></ng-select>
             </div>
@@ -79,7 +77,6 @@
               bindLabel="Description"
               bindValue="ID"
               formControlName="ToYear"
-              [loading]="EmployeeLoading"
               [selectOnTab]="true"
              ></ng-select>
             </div>
@@ -91,7 +88,6 @@
                 bindLabel="Description"
                 bindValue="ID"
                 formControlName="OU"
-                [loading]="EmployeeLoading"
                 (change)="GetOUDesc($event.Description)"
                 [selectOnTab]="true">
                 </ng-select>
@@ -102,7 +98,6 @@
                 bindLabel="Description"
                 bindValue="ID"
                 formControlName="ExportTo"
-                [loading]="EmployeeLoading"
                 [selectOnTab]="true">
                 </ng-select>
             </div>
@@ -142,7 +137,7 @@
   </div>
 
  
-    <div *ngIf="getlabdataSource">
+    <!-- div *ngIf="getlabdataSource">
       <ag-grid-angular 
     style="width: auto; height: 450px;"
     class="ag-theme-dark"
@@ -153,9 +148,9 @@
         [pagination]="true"
         [floatingFilter]="true"
     
-        >
+        > 
     </ag-grid-angular>
-    </div>
+    </div>-->
 
     </form>
     

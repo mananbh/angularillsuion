@@ -61,10 +61,11 @@ import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 import { PreRxFormComponent } from './pre-rx-form/pre-rx-form.component';
 import { DocumntcollectionComponent } from './documntcollection/documntcollection.component';
 import { ReportgenrateComponent } from './reportgenrate/reportgenrate.component';
+import { DownloadreportComponent } from './downloadreport/downloadreport.component';
 
 
 @NgModule({
-  declarations: [LabtechReportComponent,FileUploadComponent,AttendenceReportComponent, CaseDocumentComponent, ViewImpressionDocComponent, AngularAutoComponent, PreRxFormComponent, DocumntcollectionComponent, ReportgenrateComponent],
+  declarations: [LabtechReportComponent,FileUploadComponent,AttendenceReportComponent, CaseDocumentComponent, ViewImpressionDocComponent, AngularAutoComponent, PreRxFormComponent, DocumntcollectionComponent, ReportgenrateComponent, DownloadreportComponent],
   imports: [
     CommonModule,
     MatInputModule,

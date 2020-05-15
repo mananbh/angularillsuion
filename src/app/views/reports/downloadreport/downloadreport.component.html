@@ -1,0 +1,108 @@
+<form [formGroup]="downloadreports">
+    <div  class="row">
+      <div class="col-md-3"></div> 
+      <div class="col-md-6" style="font-size: 20px;text-align: center;">
+        <b>Filter</b>
+      </div>
+      <div class="col-md-3"></div>
+    </div>
+    <br>
+    
+<div class="card" >
+    <div class="card-body">
+        <div class="form-group row">
+            <div class="col-md-3">
+              <label class="label">Report Group(DDL)</label>
+              <ng-select class="custom" [items]="reportlist"
+              bindLabel="GroupName"
+              bindValue="GroupCode"
+              formControlName="ReportGroupID"
+              [selectOnTab]="true"
+            ></ng-select>
+            </div>
+              <div class="col-md-3">
+              <label class="label">Report</label>
+              <ng-select class="custom" class="custom" [items]="reportlist"
+              bindLabel="ReportName"
+              bindValue="ReportCode"
+              formControlName="ReportID"
+              [selectOnTab]="true"
+              ></ng-select>
+            </div>
+            <div class="col-md-3">
+                <label class="label">Status</label>
+               <input type="text" class="form-control" formControlName="StatusID">
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-3">
+                <label class="label">From Date</label>
+                <input [owlDateTime]="fromdate" [owlDateTimeTrigger]="fromdate"  class="form-control" formControlName="FromDate" 
+              >
+                <owl-date-time #fromdate></owl-date-time>
+              </div>
+              <div class="col-md-3">
+                  <label class="label">To Date</label>
+                  <input [owlDateTime]="todate" [owlDateTimeTrigger]="todate"  class="form-control"
+                  formControlName="ToDate" > 
+                  <owl-date-time #todate ></owl-date-time>
+              </div>
+              <div class="col-md-3">
+                  <label class="label">Request No</label>
+                  <input class="form-control" formControlName="RequestNo" > 
+              </div>
+          </div>
+        <div class="form-group row">
+            <div class="col-md-3">
+              <label class="label">Customer</label>
+              <ng-select class="custom" [items]="customerreport"
+              bindLabel="Description"
+              bindValue="ID"
+              formControlName="CustomerTD"
+              [selectOnTab]="true"
+            ></ng-select>
+            </div>
+              <div class="col-md-3">
+              <label class="label">Supplier</label>
+              <ng-select class="custom" class="custom" [items]="supplierreport"
+              bindLabel="Description"
+              bindValue="ID"
+              formControlName="SupplierID"
+              [selectOnTab]="true"
+              ></ng-select>
+            </div>
+            <div class="col-md-3">
+                <label class="label">Employee</label>
+                <ng-select class="custom" [items]="employeereport"
+                bindLabel="Description"
+                bindValue="ID"
+                formControlName="EmployeeID"
+                [selectOnTab]="true"
+               ></ng-select>
+            </div>
+        </div>
+      </div>
+    <div class="form-group row">
+      <div class="col-md-3" style="padding-top: 25px;">
+          <button (click)="getdownloadreport()" class="btn btn-success">Get data</button>         
+      </div>
+   </div>
+</div>
+
+ 
+  <div *ngIf="DownloadReports">
+      <ag-grid-angular 
+    style="width: auto; height: 450px;"
+    class="ag-theme-dark"
+    [rowData]="DownloadReports "
+        [columnDefs]="tablecolumn"
+        [modules]="modules"
+        [pagination]="true"
+        [floatingFilter]="true"
+    
+        > 
+    </ag-grid-angular>
+    </div>
+
+    </form>
+    

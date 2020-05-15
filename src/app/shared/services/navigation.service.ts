@@ -31,7 +31,7 @@ export class NavigationService {
   dynamincnavfetch : [] =this.dynamincnav["Data"]["MenuDetailDTO_List"];
   ReportNormal : [] =this.dynamincnav["Data"]["MenuDetailDTO_List1"];
   constructor() {
-    console.log(this.dynamincnavfetch);
+    console.log(this.ReportNormal);
     
   }
   iconMenu: IMenuItem[] = [

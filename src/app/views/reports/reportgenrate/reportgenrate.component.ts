@@ -56,7 +56,7 @@ export class ReportgenrateComponent implements OnInit {
 
     let userdetails:[]=JSON.parse(sessionStorage.getItem('userData'));
     this.UserID  =userdetails["Data"]["LoginDetailsDTO_List"][0].LoginUserID;
-    this.UserName   =userdetails["Data"]["LoginDetailsDTO_List"][0].LoginUserID;
+    this.UserName   =userdetails["Data"]["LoginDetailsDTO_List"][0].LoginUser;
 
     console.log(userdetails["Data"]["LoginDetailsDTO_List"][0]);
 
@@ -143,13 +143,13 @@ export class ReportgenrateComponent implements OnInit {
     this.getfromdate = "Name='From Date' Code='mFromDate' Value='"+this.registerreport.value.FromDate+"' Caption='"+this.registerreport.value.FromDate+"'$#$"
     this.gettodate = "Name='Till Date' Code='mToDate' Value='"+this.registerreport.value.ToDate+"' Caption='"+this.registerreport.value.ToDate+"'$#$"
     this.getcustomer ="Name='Customer' Code= 'mCustomer' Value='"+this.registerreport.value.CustomerTD+"' Caption='"+this.CustomerDescription+"'$#$"
-    this.getuser =" Name'User Name' Code='mUserName' Value='"+this.UserID+"' Caption='"+this.UserName+"'"
-    this.getfromyear =" Name'From Year' Code='mFromYear' Value='"+this.registerreport.value.FromYear+"' Caption='"+this.registerreport.value.FromYear+"'"
-    this.gettoyear =" Name'To Year' Code='mToYear' Value='"+this.registerreport.value.ToYear+"' Caption='"+this.registerreport.value.ToYear+"'"
-    this.getsupplier =" Name'Supplier' Code='mSupplier' Value='"+this.registerreport.value.SupplierID+"' Caption='"+this.SupplierDescription+"'"
-    this.getemployee =" Name'Employee' Code='mEmployee' Value='"+this.registerreport.value.EmployeeID+"' Caption='"+this.EmployeeDescription+"'"
-    this.getOU =" Name'Employee' Code='OU' Value='"+this.registerreport.value.OU+"' Caption='"+this.registerreport.value.OU+"'"
-    this.filterallparam = this.getfromdate +this.gettodate+this.getcustomer+this.getuser+this.getfromyear+this.gettoyear+this.getsupplier+this.getemployee;
+    this.getuser =" Name='User Name' Code='mUserName' Value='"+this.UserID+"' Caption='"+this.UserName+"'$#$"
+    this.getfromyear =" Name='From Year' Code='mFromYear' Value='"+this.registerreport.value.FromYear+"' Caption='"+this.registerreport.value.FromYear+"'$#$"
+    this.gettoyear =" Name='To Year' Code='mToYear' Value='"+this.registerreport.value.ToYear+"' Caption='"+this.registerreport.value.ToYear+"'$#$"
+    this.getsupplier =" Name='Supplier' Code='mSupplier' Value='"+this.registerreport.value.SupplierID+"' Caption='"+this.SupplierDescription+"'$#$"
+    this.getemployee =" Name='Employee' Code='mEmployee' Value='"+this.registerreport.value.EmployeeID+"' Caption='"+this.EmployeeDescription+"'$#$"
+    this.getOU =" Name='OU' Code='OU' Value='"+this.registerreport.value.OU+"' Caption='"+this.registerreport.value.OU+"'"
+    this.filterallparam = this.getfromdate +this.gettodate+this.getcustomer+this.getuser+this.getfromyear+this.gettoyear+this.getsupplier+this.getemployee + this.getOU;
     console.log( this.filterallparam);
 
     this.registerreport.addControl('Parameters', new FormControl());
@@ -158,17 +158,18 @@ export class ReportgenrateComponent implements OnInit {
     this.registerreport.addControl('ReportList', new FormControl());
     this.registerreport.controls["ReportList"].setValue(reportchangedformat);
 
-    this.registerreport.addControl('ReportUserID ', new FormControl());
-    this.registerreport.controls["ReportUserID "].setValue(this.UserName);
+    this.registerreport.addControl('ReportUserID', new FormControl());
+    this.registerreport.controls["ReportUserID"].setValue(this.UserName);
 
       
-    this.registerreport.addControl('ReportGroupID ', new FormControl());
-    this.registerreport.controls["ReportGroupID "].setValue(this.reportlist[0].GroupCode);
+    this.registerreport.addControl('ReportGroupID', new FormControl());
+    this.registerreport.controls["ReportGroupID"].setValue(this.reportlist[0].GroupCode);
 
     this.getcommdata.getAllReportsInGrid(this.registerreport.value).subscribe((data:any) => {
          this.AllReportsData =   data;
          }
       );
+
 
   }
 

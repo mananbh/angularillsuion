@@ -151,9 +151,15 @@ export class GetcommdataService {
   }  
 
   getAllReportsInGrid(reportsfilter){
+    console.log(reportsfilter);
     let data = {ReportUserID: reportsfilter.ReportUserID,ReportMode: "Manual",ReportGroupID: reportsfilter.ReportGroupID,ReportList:reportsfilter.ReportList,Parameters:reportsfilter.Parameters,ExportTo:"E",MergeLevel:"0",Password:"",mrIdentifier:"",mrRequestStatus:"0",mtyIsSelectRequired:"1",SituationID:"0"};
     const httpOptions = {headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
     return  this.http.post(this.API_URL+'/PP/GetGenerateReportingRequest',data,httpOptions);
+  }  
+//download reports
+  getDownloadReports(DownloadReport){
+    const httpOptions = {headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+    return  this.http.post(this.API_URL+'/PP/GetMISDownloadData',DownloadReport,httpOptions);
   }  
 
 
