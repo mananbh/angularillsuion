@@ -5,6 +5,8 @@ import { AppLoaderService } from '../../../shared/services/app-loader/app-loader
 import { DatePipe } from '@angular/common';
 import {AllCommunityModules} from '@ag-grid-community/all-modules';
 import { HttpClient, HttpParams,HttpHeaders } from '@angular/common/http'; 
+import { AlertService } from 'ngx-alerts';
+
 @Component({
   selector: 'app-reportgenrate',
   templateUrl: './reportgenrate.component.html',
@@ -12,7 +14,7 @@ import { HttpClient, HttpParams,HttpHeaders } from '@angular/common/http';
 })
 export class ReportgenrateComponent implements OnInit {
   dataSource :any;
-  constructor(private getcommdata:GetcommdataService,private formbulider: FormBuilder,private loader: AppLoaderService,private datePipe: DatePipe,private http: HttpClient,private changeDetector: ChangeDetectorRef) { }
+  constructor(private getcommdata:GetcommdataService,private formbulider: FormBuilder,private loader: AppLoaderService,private datePipe: DatePipe,private http: HttpClient,private changeDetector: ChangeDetectorRef,private alertreq: AlertService) { }
   registerreport: FormGroup;
   customerreport :any;
   supplierreport :any;
@@ -35,21 +37,21 @@ export class ReportgenrateComponent implements OnInit {
   getemployee:any;
   getOU:any;
   GetReportList :any =[];
-  CustomerDescription:any;
-  SupplierDescription:any;
-  EmployeeDescription:any;
+  CustomerDescription:any="";
+  SupplierDescription:any="";
+  EmployeeDescription:any="";
   OUDescription:any;
   AllReportsData:any;
   ngOnInit() {
     this.registerreport = this.formbulider.group({
-      CustomerTD: ['', [Validators.required]],
-      SupplierID: ['', [Validators.required]],
-      EmployeeID: ['', [Validators.required]],
+      CustomerTD: ['0', [Validators.required]],
+      SupplierID: ['0', [Validators.required]],
+      EmployeeID: ['0', [Validators.required]],
       FinaYear: ['', [Validators.required]],
       FromYear: ['', [Validators.required]],
       ToYear: ['', [Validators.required]],
-      FromDate: ['', [Validators.required]],
-      ToDate: ['', [Validators.required]],
+      FromDate: ['0', [Validators.required]],
+      ToDate: ['0', [Validators.required]],
       OU: ['', [Validators.required]],
       ExportTo: ['', [Validators.required]],
     });
@@ -89,7 +91,7 @@ export class ReportgenrateComponent implements OnInit {
     );
   }
   getallotherfilterdata(){
-    this.getcommdata.getalldatafilterreport().subscribe((data:any) => {
+    this.getcommdata.getalldatafilterreport(0).subscribe((data:any) => {
       this.dataSource = JSON.parse(data.objData); 
        this.fromyear =   this.dataSource.Data.FromYear;
        this.toyear =   this.dataSource.Data.ToYear;
@@ -166,7 +168,12 @@ export class ReportgenrateComponent implements OnInit {
     this.registerreport.controls["ReportGroupID"].setValue(this.reportlist[0].GroupCode);
 
     this.getcommdata.getAllReportsInGrid(this.registerreport.value).subscribe((data:any) => {
+        this.loader.open();
          this.AllReportsData =   data;
+          this.alertreq.info("Report Genrated Successfully report no is  " + data[0]["MISRequestNo"])
+          this.changeDetector.detectChanges();
+          this.loader.close();
+
          }
       );
 

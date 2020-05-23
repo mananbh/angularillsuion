@@ -11,82 +11,88 @@
 <div class="card" >
     <div class="card-body">
         <div class="form-group row">
-            <div class="col-md-3">
+            <div class="col-md-2">
               <label class="label">Report Group(DDL)</label>
-              <ng-select class="custom" [items]="reportlist"
-              bindLabel="GroupName"
-              bindValue="GroupCode"
+              <ng-select class="custom" [items]="MisGroupReport"
+              bindLabel="Description"
+              bindValue="ID"
               formControlName="ReportGroupID"
               [selectOnTab]="true"
+              (change)="getReportsData($event)"
             ></ng-select>
             </div>
               <div class="col-md-3">
               <label class="label">Report</label>
-              <ng-select class="custom" class="custom" [items]="reportlist"
-              bindLabel="ReportName"
-              bindValue="ReportCode"
+              <ng-select class="custom" class="custom" [items]="Misreport"
+              bindLabel="Description"
+              bindValue="ID"
               formControlName="ReportID"
               [selectOnTab]="true"
               ></ng-select>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <label class="label">Status</label>
-               <input type="text" class="form-control" formControlName="StatusID">
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-md-3">
-                <label class="label">From Date</label>
-                <input [owlDateTime]="fromdate" [owlDateTimeTrigger]="fromdate"  class="form-control" formControlName="FromDate" 
-              >
-                <owl-date-time #fromdate></owl-date-time>
-              </div>
-              <div class="col-md-3">
-                  <label class="label">To Date</label>
-                  <input [owlDateTime]="todate" [owlDateTimeTrigger]="todate"  class="form-control"
-                  formControlName="ToDate" > 
-                  <owl-date-time #todate ></owl-date-time>
-              </div>
-              <div class="col-md-3">
-                  <label class="label">Request No</label>
-                  <input class="form-control" formControlName="RequestNo" > 
-              </div>
-          </div>
-        <div class="form-group row">
-            <div class="col-md-3">
-              <label class="label">Customer</label>
-              <ng-select class="custom" [items]="customerreport"
-              bindLabel="Description"
-              bindValue="ID"
-              formControlName="CustomerTD"
-              [selectOnTab]="true"
-            ></ng-select>
-            </div>
-              <div class="col-md-3">
-              <label class="label">Supplier</label>
-              <ng-select class="custom" class="custom" [items]="supplierreport"
-              bindLabel="Description"
-              bindValue="ID"
-              formControlName="SupplierID"
-              [selectOnTab]="true"
+               <ng-select class="custom" [items]="Status"
+               bindLabel="Description"
+               bindValue="ID"
+               formControlName="StatusID"
+               [selectOnTab]="true"
               ></ng-select>
             </div>
             <div class="col-md-3">
+              <label class="label">From Date</label>
+              <input [owlDateTime]="fromdate" [owlDateTimeTrigger]="fromdate"  class="form-control" formControlName="FromDate" 
+            >
+              <owl-date-time #fromdate  [pickerType]="'calendar'"></owl-date-time>
+            </div>
+            <div class="col-md-2">
+              <label class="label">To Date</label>
+              <input [owlDateTime]="todate" [owlDateTimeTrigger]="todate"  class="form-control"
+              formControlName="ToDate" > 
+              <owl-date-time #todate  [pickerType]="'calendar'"></owl-date-time>
+          </div>
+        </div>
+        <div class="form-group row">
+          
+           
+              <div class="col-md-2">
+                  <label class="label">Request No</label>
+                  <input class="form-control" formControlName="RequestNo" > 
+              </div>
+              <div class="col-md-3">
+                <label class="label">Customer</label>
+                <ng-select class="custom" [items]="customerreport"
+                bindLabel="Description"
+                bindValue="ID"
+                formControlName="CustomerTD"
+                [selectOnTab]="true"
+              ></ng-select>
+              </div>
+              <div class="col-md-3">
+                <label class="label">Supplier</label>
+                <ng-select class="custom" class="custom" [items]="supplierreport"
+                bindLabel="Description"
+                bindValue="ID"
+                formControlName="SupplierID"
+                [selectOnTab]="true"
+                ></ng-select>
+              </div>
+               
+            
+              <div class="col-md-3">
                 <label class="label">Employee</label>
                 <ng-select class="custom" [items]="employeereport"
                 bindLabel="Description"
                 bindValue="ID"
                 formControlName="EmployeeID"
                 [selectOnTab]="true"
-               ></ng-select>
-            </div>
-        </div>
+              ></ng-select>
+             </div>
+             <div class="col-md-1" style="padding-top: 25px;">
+              <button (click)="getdownloadreport()" class="btn btn-success">Get data</button>         
+          </div>
+          </div>
       </div>
-    <div class="form-group row">
-      <div class="col-md-3" style="padding-top: 25px;">
-          <button (click)="getdownloadreport()" class="btn btn-success">Get data</button>         
-      </div>
-   </div>
 </div>
 
  
@@ -97,7 +103,7 @@
     [rowData]="DownloadReports "
         [columnDefs]="tablecolumn"
         [modules]="modules"
-        [pagination]="true"
+          [pagination]="true"
         [floatingFilter]="true"
     
         > 

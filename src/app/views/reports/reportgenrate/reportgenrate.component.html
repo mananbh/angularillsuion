@@ -41,28 +41,28 @@
             (change)="GetEmployeeDesc($event.Description)"
            ></ng-select>
         </div>
+
+        <div class="col-md-3">
+          <label class="label">From Date</label>
+          <input [owlDateTime]="fromdate" [owlDateTimeTrigger]="fromdate"  class="form-control" formControlName="FromDate" 
+        >
+          <owl-date-time #fromdate [pickerType]="'calendar'"></owl-date-time>
+        </div>
        
       </div>
       <div class="form-group row">
-          <div class="col-md-3">
-              <label class="label">From Date</label>
-              <input [owlDateTime]="fromdate" [owlDateTimeTrigger]="fromdate"  class="form-control" formControlName="FromDate" 
-            >
-              <owl-date-time #fromdate></owl-date-time>
-            </div>
+         
             <div class="col-md-3">
                 <label class="label">To Date</label>
                 <input [owlDateTime]="todate" [owlDateTimeTrigger]="todate"  class="form-control"
                 formControlName="ToDate" > 
-                <owl-date-time #todate ></owl-date-time>
+                <owl-date-time #todate [pickerType]="'calendar'" ></owl-date-time>
             </div>
             <div class="col-md-3">
                 <label class="label">Financial Year</label>
                 <input class="form-control" formControlName="FinaYear" > 
             </div>
-        </div>
-      <div class="form-group row">
-          <div class="col-md-3">
+            <div class="col-md-3">
               <label class="label">From Year</label>
               <ng-select class="custom" [items]="fromyear"
               bindLabel="Description"
@@ -71,15 +71,16 @@
               [selectOnTab]="true"
              ></ng-select>
             </div>
+            
             <div class="col-md-3">
-                <label class="label">To Year</label>
-                <ng-select class="custom" [items]="toyear"
-              bindLabel="Description"
-              bindValue="ID"
-              formControlName="ToYear"
-              [selectOnTab]="true"
-             ></ng-select>
-            </div>
+              <label class="label">To Year</label>
+              <ng-select class="custom" [items]="toyear"
+            bindLabel="Description"
+            bindValue="ID"
+            formControlName="ToYear"
+            [selectOnTab]="true"
+           ></ng-select>
+          </div>
         </div>
       <div class="form-group row">
           <div class="col-md-3">
@@ -101,39 +102,36 @@
                 [selectOnTab]="true">
                 </ng-select>
             </div>
+            <div class="form-group row">
+              <div class="col-md-3" style="padding-top: 25px;">
+                  <button (click)="getreport()" class="btn btn-success">Genrate</button>         
+              </div>
+           </div>
         </div>
-     
+        
       </div>
       <div  class="row">
-        
-        <div class="col-md-12">
         <div class="col-md-12">
           <h3 style="text-align: center;"><b>List of Report</b></h3>
 
           <div *ngIf="reportlist">
-            <table class="hiddenCB table"  >
+            <table class="hiddenCB table"  align="left" border="1">
               <!-- <tr> <span class="input-group-addon"><td>
                 <i class="fi flaticon-plus"></i>
                  <b style="font-size: medium;">&nbsp;{{page.pageName}}</b></td></span>
                 </tr> -->
-            <tr *ngFor="let page of reportlist;let i=index">
-                <td class="columns-container"  style="width: 259px; vertical-align:middle;border: none;">
+            <tr *ngFor="let page of reportlist;let i=index" >
+                <td class="columns-container"  style="width: 150px; vertical-align:left;">
                     <input class="form-check-input" type="checkbox" id="{{page.ReportCode}}"  name="reportlistdata" value="{{page.ReportCode}}"/>
                     <label class="form-check-label" for="{{page.ReportCode}}" >{{page.ReportName}}</label>
                 </td>
               </tr>
-              <br>
             </table>
         </div>
       </div>
-      </div>
 
     </div>
-    <div class="form-group row">
-      <div class="col-md-3" style="padding-top: 25px;">
-          <button (click)="getreport()" class="btn btn-success">Get data</button>         
-      </div>
-   </div>
+ 
   </div>
 
  
@@ -153,4 +151,4 @@
     </div>-->
 
     </form>
-    
+    <ngx-alerts></ngx-alerts>

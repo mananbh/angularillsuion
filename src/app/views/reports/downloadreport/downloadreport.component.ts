@@ -21,7 +21,9 @@ export class DownloadreportComponent implements OnInit {
   fromyear:any;
   toyear:any;
   DownloadReports:any;
-  reportlist:any;
+  Misreport:any;
+  Status:any;
+  MisGroupReport:any;
   constructor(private getcommdata:GetcommdataService,private formbulider: FormBuilder,private loader: AppLoaderService,private datePipe: DatePipe,private http: HttpClient,private changeDetector: ChangeDetectorRef) { }
 
   ngOnInit() {
@@ -45,7 +47,7 @@ export class DownloadreportComponent implements OnInit {
     this.getcustomerreport(62);
     this.getsupplierreport(61);
     this.getemployeereport(63);
-    this.getallreportinlist(24009)
+    this.getallotherfilterdata(0);
   }
 
   getcustomerreport(SituationID){
@@ -68,44 +70,69 @@ export class DownloadreportComponent implements OnInit {
     );
   }
 
-  getallreportinlist(SoftwareSubComponentID){
-    this.getcommdata.getallreportinlist(SoftwareSubComponentID).subscribe((data:any) => {
-       this.reportlist =   data;
-       this.changeDetector.detectChanges();
-       console.log( this.reportlist);
-
-       }
-    );
-  }
 
   getdownloadreport(){
+    this.loader.open();
     this.downloadreports.value.FromDate = this.datePipe.transform(this.downloadreports.value.FromDate,"yyyy-MM-dd");
     this.downloadreports.value.ToDate = this.datePipe.transform(this.downloadreports.value.ToDate,"yyyy-MM-dd");
     this.getcommdata.getDownloadReports(this.downloadreports.value).subscribe((data:any) => {
          this.DownloadReports =   data;
+         this.changeDetector.detectChanges();
+         this.loader.close();
+
          }
       );
+  }
+
+  getallotherfilterdata(GroupComponentID){
+    this.getcommdata.getalldatafilterreport(GroupComponentID).subscribe((data:any) => {
+      this.dataSource = JSON.parse(data.objData); 
+       this.Status =   this.dataSource.Data.Status;
+       this.MisGroupReport =   this.dataSource.Data.Misreportgroup;
+       }
+    );
+  }
+
+  getMisReportByGroupID(GroupComponentID){
+    this.getcommdata.getalldatafilterreport(GroupComponentID).subscribe((data:any) => {
+       this.Misreport =   this.dataSource.Data.Misreport;
+       console.log(this.Misreport);
+
+       }
+    );
   }
   
   modules = AllCommunityModules;
   tablecolumn = [
+    
     {headerName: 'RowNo', field: 'RowNo',filter: true, resizable: true,  width: 300,},
     {headerName: 'RequestNo', field: 'RequestNo',maxWidth:100, resizable: true},
-    {headerName: 'ReportName', field: 'ReportName',maxWidth:100, resizable: true},
-    {headerName: 'ParamName', field: 'ParamName',maxWidth:100, resizable: true},
-    {headerName: 'ParamValue', field: 'RequestNo',maxWidth:100, resizable: true},
     {headerName: 'ReportStatus', field: 'mrStatus',maxWidth:100, resizable: true},
-    {headerName: 'RequestDateTime', field: 'RequestDateTime',maxWidth:100, resizable: true},
-    {headerName: 'RequestPickTime', field: 'RequestPickTime',maxWidth:100, resizable: true},
-    {headerName: 'RequestCompletiontime', field: 'RequestCompletiontime',maxWidth:100, resizable: true},
-    {headerName: 'RequestedBy', field: 'RequestedBy',maxWidth:100, resizable: true},
     {headerName: 'Path', field: 'mrdFileLocation',maxWidth:100, resizable: true,
     cellRenderer: function(params) {
       //return '<a href="'+params.value+'" target="_blank"><i class="glyphicon glyphicon-cloud"></i> </a>';
       return '<a href="'+params.value+'" target="_blank"><mat-icon class="mat-icon material-icons mat-icon-no-color" role="img" aria-hidden="true">cloud_download</mat-icon><i class="glyphicon glyphicon-cloud"></a>';    
-      }  
+      }
     },
+    {headerName: 'ReportName', field: 'ReportName',maxWidth:100, resizable: true},
+    {headerName: 'ParamName', field: 'ParamName',maxWidth:100, resizable: true},
+    {headerName: 'ParamValue', field: 'RequestNo',maxWidth:100, resizable: true},
+    {headerName: 'RequestDateTime', field: 'RequestDateTime',maxWidth:100, resizable: true},
+    {headerName: 'RequestPickTime', field: 'RequestPickTime',maxWidth:100, resizable: true},
+    {headerName: 'RequestCompletiontime', field: 'RequestCompletiontime',maxWidth:100, resizable: true},
+    {headerName: 'RequestedBy', field: 'RequestedBy',maxWidth:100, resizable: true},
+  
+    
   ];
 
+  getReportsData(value:any){
+    if(value){
+    this.getMisReportByGroupID(value.ID);
+    }else{
+      this.downloadreports.controls["ReportID"].setValue('');
+
+      this.Misreport = [];
+    }
+  }
 
 }

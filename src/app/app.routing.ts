@@ -149,6 +149,10 @@ export const rootRouterConfig: Routes = [
         path: 'reports', 
         loadChildren: () => import('./views/reports/reports.module').then(m => m.ReportsModule), 
         data: { title: 'Reports', breadcrumb: 'Report'}
+      },{
+        path: 'chat', 
+        loadChildren: () => import('./views/app-chats/app-chats.module').then(m => m.AppChatsModule), 
+        data: { title: 'Chat', breadcrumb: 'CHAT'}
       }
     ]
   },

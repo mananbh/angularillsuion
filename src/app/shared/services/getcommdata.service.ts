@@ -139,9 +139,9 @@ export class GetcommdataService {
     return  this.http.post(this.API_URL+'/PP/Get_Emp_Cust_Supp_Details',data,httpOptions);
   }  
 
-  getalldatafilterreport(){
+  getalldatafilterreport(GroupReportID){
     const httpOptions = {headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return  this.http.get(this.API_URL+'/PP/Get_Filter_Detail',httpOptions);
+    return  this.http.get(this.API_URL+'/PP/Get_Filter_Detail?GroupReportID='+GroupReportID+'',httpOptions);
   }  
 
   getallreportinlist(SoftwareSubComponentID){

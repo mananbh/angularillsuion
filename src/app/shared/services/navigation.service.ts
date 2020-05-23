@@ -145,7 +145,7 @@ export class NavigationService {
       icon: "chat",
       state: "chat",
       badges: [{ color: "warn", value: "1" }]
-    }, */
+    },
 /*     {
       name: "CALENDAR",
       type: "link",
