@@ -40,6 +40,7 @@
               bindValue="ID"
               formControlName="ReportID"
               [selectOnTab]="true"
+              [virtualScroll]="true"
               ></ng-select>
             </div>
             <div class="col-md-2">
@@ -49,7 +50,6 @@
                bindValue="ID"
                formControlName="StatusID"
                [selectOnTab]="true"
-               
               ></ng-select>
             </div>
            
@@ -59,7 +59,7 @@
            
               <div class="col-md-2">
                   <label class="label">Request No</label>
-                  <input class="form-control" formControlName="RequestNo" > 
+                  <input class="form-control" formControlName="RequestNo" (keypress)="omit_special_char($event)"> 
               </div>
               <div class="col-md-3">
                 <label class="label">Customer</label>
@@ -68,6 +68,9 @@
                 bindValue="ID"
                 formControlName="CustomerTD"
                 [selectOnTab]="true"
+                [virtualScroll]="true"
+                [loading]="CustomerLoading"
+
               ></ng-select>
               </div>
               <div class="col-md-3">
@@ -77,6 +80,7 @@
                 bindValue="ID"
                 formControlName="SupplierID"
                 [selectOnTab]="true"
+                [virtualScroll]="true"
                 ></ng-select>
               </div>
                
@@ -88,6 +92,7 @@
                 bindValue="ID"
                 formControlName="EmployeeID"
                 [selectOnTab]="true"
+                [virtualScroll]="true"
               ></ng-select>
              </div>
              <div class="col-md-1" style="padding-top: 25px;">

@@ -24,9 +24,13 @@ export class DownloadreportComponent implements OnInit {
   Misreport:any;
   Status:any;
   MisGroupReport:any;
+  CustomerLoading:any= true;
+
   constructor(private getcommdata:GetcommdataService,private formbulider: FormBuilder,private loader: AppLoaderService,private datePipe: DatePipe,private http: HttpClient,private changeDetector: ChangeDetectorRef) { }
 
   ngOnInit() {
+    var todaydate = new Date();
+    var onemonthbefordate =   new Date();
     this.downloadreports = this.formbulider.group({
       ReportGroupID: ['', [Validators.required]],
       ReportID: ['0'],
@@ -42,7 +46,8 @@ export class DownloadreportComponent implements OnInit {
     let userdetails:[]=JSON.parse(sessionStorage.getItem('userData'));
     this.UserID  =userdetails["Data"]["LoginDetailsDTO_List"][0].LoginUserID;
     this.UserName   =userdetails["Data"]["LoginDetailsDTO_List"][0].LoginUser;
-
+    this.downloadreports.controls["FromDate"].setValue(onemonthbefordate);
+    this.downloadreports.controls["ToDate"].setValue(todaydate);
     this.downloadreports.addControl('LoginUserID', new FormControl());
     this.downloadreports.controls["LoginUserID"].setValue(this.UserID);
 
@@ -55,6 +60,9 @@ export class DownloadreportComponent implements OnInit {
   getcustomerreport(SituationID){
     this.getcommdata.getReportGenateData(SituationID).subscribe((data:any) => {
        this.customerreport =   data;
+       this.CustomerLoading =  false
+       this.changeDetector.detectChanges();
+
        }
     );
   }
@@ -138,5 +146,13 @@ export class DownloadreportComponent implements OnInit {
       this.Misreport = [];
     }
   }
+  omit_special_char(event)
+{   
+  const charCode = (event.which) ? event.which : event.keyCode;
+  if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+    return false;
+  }
+  return true;
+}
 
 }

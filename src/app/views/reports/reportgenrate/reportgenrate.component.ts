@@ -56,7 +56,22 @@ export class ReportgenrateComponent implements OnInit,OnDestroy{
   getRoletypeid:any;
   getRefid:any;
   getLanguageID:any;
+  CustomerLoading:any= true;
+  accessfromdate:any;
+  accesstodate:any;
+  accesscustomer:any;
+  accesssupplier:any;
+  accessemployee:any;
+  accessoou:any;
+  accessfinanyear:any;
+  accessToyear:any;
+  accessfromyear:any;
+  accessstatus:any;
+  accessallreports:any;
+
   ngOnInit() {
+    var todaydate = new Date();
+    var onemonthbefordate =   new Date(new Date().setDate(todaydate.getDate()-30));
     this.registerreport = this.formbulider.group({
       CustomerTD: ['0'],
       SupplierID: ['0'],
@@ -69,6 +84,8 @@ export class ReportgenrateComponent implements OnInit,OnDestroy{
       OU: [''],
       ExportTo: [''],
     });
+    this.registerreport.controls["FromDate"].setValue(onemonthbefordate);
+    this.registerreport.controls["ToDate"].setValue(todaydate);
     let userdetails:[]=JSON.parse(sessionStorage.getItem('userData'));
     this.UserID  =userdetails["Data"]["LoginDetailsDTO_List"][0].LoginUserID;
     this.UserName   =userdetails["Data"]["LoginDetailsDTO_List"][0].LoginUser;
@@ -85,24 +102,32 @@ export class ReportgenrateComponent implements OnInit,OnDestroy{
    (this.getemployeereport(63));
     (this.getallotherfilterdata());
    (this.getallreportinlist(24009));
+   
   }
 
   getcustomerreport(SituationID){
     this.customersubscribe= this.getcommdata.getReportGenateData(SituationID).subscribe((data:any) => {
        this.customerreport =   data;
+       this.CustomerLoading = false;
+      this.changeDetector.detectChanges();
        }
     );
   }
 
   getsupplierreport(SituationID){
+    let SupplierLoading = true;
+
     this.suppliersubscribe=  this.getcommdata.getReportGenateData(SituationID).subscribe((data:any) => {
-       this.supplierreport =   data;
+       this.supplierreport =   data; 
+       SupplierLoading = false;
        }
     );
   }
   getemployeereport(SituationID){
+    let EmployeeLoading =  true;
      this.employeesubscribe =  this.getcommdata.getReportGenateData(SituationID).subscribe((data:any) => {
        this.employeereport =   data;
+       EmployeeLoading =  false
        }
     );
   }
@@ -118,26 +143,49 @@ export class ReportgenrateComponent implements OnInit,OnDestroy{
   }
 
   getallreportinlist(SoftwareSubComponentID){
+    let fieldlist
    this.reportsubscribe =  this.getcommdata.getallreportinlist(SoftwareSubComponentID).subscribe((data:any) => {
-       this.reportlist =   data;
+   
+       this.reportlist =   data.GetChkReportsDetail;
+       fieldlist =   data.GetChkReportsDetail1;
+       this.accesscustomer =   fieldlist[0].IsRequire;
+       this.accessfromdate =   fieldlist[1].IsRequire;
+       this.accesstodate =   fieldlist[2].IsRequire;
+       this.accessallreports =   fieldlist[3].IsRequire;
+       this.accessstatus =   fieldlist[4].IsRequire;
+       this.accesssupplier =   fieldlist[5].IsRequire;
+       this.accessemployee =   fieldlist[6].IsRequire;
+       this.accessoou =   fieldlist[7].IsRequire;
+       this.accessfinanyear =   fieldlist[8].IsRequire;
+       this.accessToyear =   fieldlist[10].IsRequire;
+       this.accessfromyear =   fieldlist[9].IsRequire;
        this.changeDetector.detectChanges();
-       console.log( this.reportlist);
+       console.log(this.accessfromdate);
+       console.log(fieldlist);
 
        }
     );
   }
 
-  GetCustomerDesc(name){
-    this.CustomerDescription = name;
+  GetCustomerDesc(val){
+    if(val){
+      this.CustomerDescription = val.Description;
+    }
   }
-  GetEmployeeDesc(name){
-    this.EmployeeDescription = name;
+  GetEmployeeDesc(val){
+    if(val){
+    this.EmployeeDescription = val.Description;
+    }
   }
-  GetSupplierDesc(name){
-    this.SupplierDescription = name;
+  GetSupplierDesc(val){
+    if(val){
+    this.SupplierDescription = val.Description;
+    }
   }
-  GetOUDesc(name){
-    this.OUDescription = name;
+  GetOUDesc(val){
+    if(val){
+    this.OUDescription =  val.Description;
+    }
   }
 
   getreport(){
@@ -151,17 +199,28 @@ export class ReportgenrateComponent implements OnInit,OnDestroy{
           }
         }
       }
+      if(this.registerreport.value.FromDate > this.registerreport.value.ToDate){
+        this.loader.close();
+        this.alertreq.info("From Date should not be less than to date")
+        return;
+      }
+
+       if(this.GetReportList.length == 0){
+        this.alertreq.warning("Kindly select atleast one report")
+        return;
+       }
      var reportlisttostring = this.GetReportList.toString();
     var newchar = '$#$'
     var reportchangedformat = reportlisttostring.split(',').join(newchar);
 
     this.registerreport.value.FromDate = this.datePipe.transform(this.registerreport.value.FromDate,"yyyy-MM-dd");
     this.registerreport.value.ToDate = this.datePipe.transform(this.registerreport.value.ToDate,"yyyy-MM-dd");
-
+  
+     
     this.getfromdate = "Name='From Date' Code='mFromDate' Value='"+this.registerreport.value.FromDate+"' Caption='"+this.registerreport.value.FromDate+"'$#$"
     this.gettodate = "Name='Till Date' Code='mToDate' Value='"+this.registerreport.value.ToDate+"' Caption='"+this.registerreport.value.ToDate+"'$#$"
     this.getcustomer ="Name='Customer' Code= 'mCustomer' Value='"+this.registerreport.value.CustomerTD+"' Caption='"+this.CustomerDescription+"'$#$"
-    this.getuser =" Name='User Name' Code='mUserName' Value='"+this.UserID+"' Caption='"+this.UserName+"'$#$"
+    this.getuser =" Name='User Name' Code='mUserName' Value='"+this.UserName+"' Caption='"+this.UserName+"'$#$"
     this.getfromyear =" Name='From Year' Code='mFromYear' Value='"+this.registerreport.value.FromYear+"' Caption='"+this.registerreport.value.FromYear+"'$#$"
     this.gettoyear =" Name='To Year' Code='mToYear' Value='"+this.registerreport.value.ToYear+"' Caption='"+this.registerreport.value.ToYear+"'$#$"
     this.getsupplier =" Name='Supplier' Code='mSupplier' Value='"+this.registerreport.value.SupplierID+"' Caption='"+this.SupplierDescription+"'$#$"
