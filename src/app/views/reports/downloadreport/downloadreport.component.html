@@ -11,8 +11,20 @@
 <div class="card" >
     <div class="card-body">
         <div class="form-group row">
+          <div class="col-md-3">
+            <label class="label">From Date*</label>
+            <input [owlDateTime]="fromdate" [owlDateTimeTrigger]="fromdate"  class="form-control" formControlName="FromDate" 
+         required >
+            <owl-date-time #fromdate  [pickerType]="'calendar'"></owl-date-time>
+          </div>
+          <div class="col-md-2">
+            <label class="label">To Date*</label>
+            <input [owlDateTime]="todate" [owlDateTimeTrigger]="todate"  class="form-control"
+            formControlName="ToDate" required> 
+            <owl-date-time #todate  [pickerType]="'calendar'"></owl-date-time>
+        </div>
             <div class="col-md-2">
-              <label class="label">Report Group(DDL)</label>
+              <label class="label">Report Group(DDL)*</label>
               <ng-select class="custom" [items]="MisGroupReport"
               bindLabel="Description"
               bindValue="ID"
@@ -28,6 +40,7 @@
               bindValue="ID"
               formControlName="ReportID"
               [selectOnTab]="true"
+              [virtualScroll]="true"
               ></ng-select>
             </div>
             <div class="col-md-2">
@@ -39,25 +52,14 @@
                [selectOnTab]="true"
               ></ng-select>
             </div>
-            <div class="col-md-3">
-              <label class="label">From Date</label>
-              <input [owlDateTime]="fromdate" [owlDateTimeTrigger]="fromdate"  class="form-control" formControlName="FromDate" 
-            >
-              <owl-date-time #fromdate  [pickerType]="'calendar'"></owl-date-time>
-            </div>
-            <div class="col-md-2">
-              <label class="label">To Date</label>
-              <input [owlDateTime]="todate" [owlDateTimeTrigger]="todate"  class="form-control"
-              formControlName="ToDate" > 
-              <owl-date-time #todate  [pickerType]="'calendar'"></owl-date-time>
-          </div>
+           
         </div>
         <div class="form-group row">
           
            
               <div class="col-md-2">
                   <label class="label">Request No</label>
-                  <input class="form-control" formControlName="RequestNo" > 
+                  <input class="form-control" formControlName="RequestNo" (keypress)="omit_special_char($event)"> 
               </div>
               <div class="col-md-3">
                 <label class="label">Customer</label>
@@ -66,6 +68,9 @@
                 bindValue="ID"
                 formControlName="CustomerTD"
                 [selectOnTab]="true"
+                [virtualScroll]="true"
+                [loading]="CustomerLoading"
+
               ></ng-select>
               </div>
               <div class="col-md-3">
@@ -75,6 +80,7 @@
                 bindValue="ID"
                 formControlName="SupplierID"
                 [selectOnTab]="true"
+                [virtualScroll]="true"
                 ></ng-select>
               </div>
                
@@ -86,10 +92,11 @@
                 bindValue="ID"
                 formControlName="EmployeeID"
                 [selectOnTab]="true"
+                [virtualScroll]="true"
               ></ng-select>
              </div>
              <div class="col-md-1" style="padding-top: 25px;">
-              <button (click)="getdownloadreport()" class="btn btn-success">Get data</button>         
+              <button (click)="getdownloadreport()" class="btn btn-success" [disabled]="!downloadreports.valid">Get</button>         
           </div>
           </div>
       </div>
