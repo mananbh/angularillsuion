@@ -32,7 +32,8 @@ import {
   MatSidenavModule,
   MatToolbarModule,
   MatGridListModule,
- MatTableModule 
+ MatTableModule,
+ MatTabsModule
 
   
 } from '@angular/material';
@@ -101,7 +102,7 @@ import { DownloadreportComponent } from './downloadreport/downloadreport.compone
     FileUploadModule,
     AlertModule.forRoot({maxMessages: 1, timeout: 3000, position: 'right'}),
     AutocompleteLibModule,
-
+    MatTabsModule
     ],
   providers: [
     { provide: GetcommdataService, useClass: GetcommdataService },

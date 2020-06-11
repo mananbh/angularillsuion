@@ -1,3 +1,5 @@
+<mat-tab-group mat-align-tabs="start">
+  <mat-tab label="Upload Image">
 <mat-card class="p-0">
 <!--     <div  class="row">
         <div class="col-md-3">
@@ -12,28 +14,25 @@
 <!--         <div class="card-title-text" style="font-size: 20px; text-align: center;"  class="foo">
          </div> -->
 
-            <div class="col-md-7">
-              <label class="label"><b>Browse Image</b></label>
-              <div  class="custom-file-upload"><!-- 
+              <div  class="btn-group" role="group" aria-label="Basic example"><!-- 
               <input type="file" ng2FileSelect [uploader]="uploader" class="btn btn-primary" #myInput multiple/> -->  
-                <button (click)="fileInput.click()" class="btn btn-primary selectmultiple" >Browse Files</button>
+                <button (click)="fileInput.click()" class="btn btn-primary selectmultiple" >Browse File</button>
                 <input type="file" ng2FileSelect [uploader]="uploader" class="btn btn-primary" #fileInput multiple style="display: none;"/>
-             
+                <button 
+                mat-raised-button
+                color="primary"
+                class="mx-2"
+                (click)="uploader.uploadAll()"
+                [disabled]="!uploader.getNotUploadedItems().length"  >Upload</button>
+                    
+                <button 
+                mat-raised-button
+                color="warn"
+                class="mx-2"
+                (click)="reset()"
+                [disabled]="!uploader.queue.length">Remove</button>
             </div>
-            <button 
-            mat-raised-button
-            color="primary"
-            class="mx-2"
-            (click)="uploader.uploadAll()"
-            [disabled]="!uploader.getNotUploadedItems().length"  >Upload All</button>
-                
-            <button 
-            mat-raised-button
-            color="warn"
-            class="mx-2"
-            (click)="reset()"
-            [disabled]="!uploader.queue.length">Remove All</button>
-            </div>
+   
             
          
       </mat-card-title>
@@ -76,7 +75,7 @@
           [value]="uploader.progress">
         </mat-progress-bar>
     </div>
-    <div class="table-responsive">
+    <div class="table-responsive" >
 
     <table class="table table-bordered"  border="1">
       <thead class="thead-dark">
@@ -84,7 +83,7 @@
           <th>File Name</th>
           <th  scope="col">File Size</th >
           <th  scope="col">Status</th>
-          <th  scope="col">................Preview...................</th>
+          <th  scope="col" style="min-width: 200px;">Preview</th>
          <th  scope="col">Actions</th>
       </tr>
       </thead>
@@ -101,7 +100,7 @@
               <mat-icon *ngIf="item.isError" color="warn">error</mat-icon>
           </td>
           <td  >
-            <img [src]="localImageUrl[i]" style="width:400px;height:300px;" alt="Pre Rx Image">
+            <img [src]="localImageUrl[i]"  sizes="(min-width: 400px) 80vw, 100vw" alt="Pre Rx Image">
 
           </td>
           <td nowrap>
@@ -141,7 +140,11 @@
         </tr>
       </ng-template>
   </table>
-  
+</div>
+
+</mat-tab>
+<mat-tab label="View Data">
+
   <form  [formGroup]="prerxform">
     <div class="form-row align-items-center">
   <div class="col-auto">
@@ -156,26 +159,25 @@
     <div class="col-auto">
         <button type="button" class="btn btn-primary mb-2" (click)="getviewprexrxdetails()">Get Data</button>
     </div>
-    <div class="col-auto">
-
-    <ag-grid-angular 
-    style="height: 300px;"
-     class="ag-theme-dark"
-     [rowData]="dataSource"
-     [columnDefs]="tablecolumn"
-     [modules]="modules"
-     [pagination]="true"
-     [floatingFilter]="true"
-     (firstDataRendered)="onFirstDataRendered($event)"
-
-    >
-   </ag-grid-angular>
-   </div>
 </div>
+<div class="col-md-3"  class="table table-bordered">
+  <ag-grid-angular 
+   class="ag-theme-dark"
+   [rowData]="dataSource"
+   [columnDefs]="tablecolumn"
+   [modules]="modules"
+   [pagination]="true"
+   [floatingFilter]="true"
+   style="width: auto; height: 450px;"
+
+  >
+ </ag-grid-angular>
+ </div>
   </form>
-  </div>
-    <ngx-alerts></ngx-alerts>
-    
-    
+</mat-tab>  
+  </mat-tab-group>
+  <ngx-alerts></ngx-alerts>
+
+
     
     

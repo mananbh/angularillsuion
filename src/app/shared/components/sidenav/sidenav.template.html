@@ -52,7 +52,7 @@
         <ul class="submenu lvl2" appDropdown *ngIf="item.type === 'dropDown'">
           <li *ngFor="let itemLvL2 of item.sub" appDropdownLink routerLinkActive="open">
 
-            <a routerLink="{{item.state ? '/'+item.state : ''}}/{{itemLvL2.url}}" appDropdownToggle *ngIf="itemLvL2.type !== 'dropDown'"
+            <a routerLink="{{item.state ? '/'+item.state : ''}}/{{itemLvL2.url}}/{{itemLvL2.sscid}}" appDropdownToggle *ngIf="itemLvL2.type !== 'dropDown'"
               matRipple>
               <span class="item-name lvl2">{{itemLvL2.name | translate}}</span>
               <span fxFlex></span>

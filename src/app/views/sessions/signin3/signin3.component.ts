@@ -67,7 +67,11 @@ export class Signin3Component implements OnInit {
           this.loader.close();
           alert(usernamefromapi);
        }
-     });
+     },
+     (err) => {alert("Something wrong kindly check internet connection or try again later")
+     this.loader.close();
+      }
+     );
     }
   }
 

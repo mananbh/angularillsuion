@@ -15,7 +15,7 @@ export const ReportsRouting: Routes = [
   {
     path: '',
     children: [{
-      path: 'prrep',
+      path: 'prrep/:SoftwareSubcomponentID',
       component: LabtechReportComponent,
       data: { title: 'Report', breadcrumb: 'Lab Tech report' }
     }]
@@ -23,7 +23,7 @@ export const ReportsRouting: Routes = [
   {
     path: '',
     children: [{
-      path: 'attenrep',
+      path: 'attenrep/:SoftwareSubcomponentID',
       component: AttendenceReportComponent,
       data: { title: 'Report', breadcrumb: 'Attendence report Log' }
     }]
@@ -31,7 +31,7 @@ export const ReportsRouting: Routes = [
   {
     path: '',
     children: [{
-        path: 'rxupload',
+        path: 'rxupload/:SoftwareSubcomponentID',
         component: FileUploadComponent,
         data: { title: 'Upload', breadcrumb: 'UPLOAD RX' }
     }]
@@ -39,7 +39,7 @@ export const ReportsRouting: Routes = [
   {
     path: '',
     children: [{
-        path: 'casedoc',
+        path: 'casedoc/:SoftwareSubcomponentID',
         component: CaseDocumentComponent,
         data: { title: 'Case', breadcrumb: 'UPLOAD CASE DOCUMENT' }
     }]
@@ -47,7 +47,7 @@ export const ReportsRouting: Routes = [
   {
     path: '',
     children: [{
-        path: 'viewimpdoc',
+        path: 'viewimpdoc/:SoftwareSubcomponentID',
         component: ViewImpressionDocComponent,
         data: { title: 'View  Documents', breadcrumb: 'VIEW  DOCUMENTS' }
     }]
@@ -55,7 +55,7 @@ export const ReportsRouting: Routes = [
   {
     path: '',
     children: [{
-        path: 'prerxform',
+        path: 'prerxform/:SoftwareSubcomponentID',
         component: PreRxFormComponent,
         data: { title: 'UPLOAD PRE RX', breadcrumb: 'UPLOAD PRE RX' }
     }]
@@ -63,7 +63,7 @@ export const ReportsRouting: Routes = [
   {
     path: '',
     children: [{
-        path: 'documentcollection',
+        path: 'documentcollection/:SoftwareSubcomponentID',
         component: DocumntcollectionComponent,
         data: { title: 'Document Upload', breadcrumb: 'Document Upload' }
     }]
@@ -71,7 +71,7 @@ export const ReportsRouting: Routes = [
   {
     path: '',
     children: [{
-        path: 'reportnormal',
+        path: 'reportnormal/:SoftwareSubcomponentID',
         component: ReportgenrateComponent,
         data: { title: 'Finacial Report', breadcrumb: 'Report Genrate' }
     }]
@@ -79,7 +79,7 @@ export const ReportsRouting: Routes = [
   {
     path: '',
     children: [{
-        path: 'downloadreports',
+        path: 'downloadreports/:SoftwareSubcomponentID',
         component: DownloadreportComponent,
         data: { title: 'Download Report', breadcrumb: 'Download' }
     }]

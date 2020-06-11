@@ -39,6 +39,11 @@ myInputVariable: ElementRef; */
   prerxform: FormGroup;
   dataSource:any;
   messeges:any;
+  style = {
+    width: '100%',
+    height: '100%',
+    flex: '1 1 auto'
+};
   constructor(private loader: AppLoaderService,private changeDetector: ChangeDetectorRef,private getcommdata: GetcommdataService,private formbulider: FormBuilder,private http: HttpClient,private alerts: AlertService,private el: ElementRef,private sanitizer: DomSanitizer,private datePipe: DatePipe) { 
     this.uploader.onProgressItem = (progress: any) => this.changeDetector.detectChanges();
 
@@ -129,13 +134,14 @@ myInputVariable: ElementRef; */
     this.prerxform.addControl('UserID', new FormControl());
     this.prerxform.controls["UserID"].setValue(dynamincnavfetch);
     this.getviewprexrxdetails();
+    
   }
 
   modules = AllCommunityModules;
   tablecolumn = [
-    {headerName: 'Pre RX No', field: 'TransactionNumber',filter: true, resizable: true,  width: 300,},
-    {headerName: 'Status', field: 'Status',maxWidth:100, resizable: true},
-    {headerName: 'Path', field: 'Path',maxWidth:100, resizable: true,
+    {headerName: 'Pre RX No', field: 'TransactionNumber',filter: true, resizable: true,  width: 150},
+    {headerName: 'Status', field: 'Status', width: 120, resizable: true},
+    {headerName: 'Path', field: 'Path',maxWidth:10, resizable: true,
     cellRenderer: function(params) {
       //return '<a href="'+params.value+'" target="_blank"><i class="glyphicon glyphicon-cloud"></i> </a>';
       return '<a href="'+params.value+'" target="_blank"><mat-icon class="mat-icon material-icons mat-icon-no-color" role="img" aria-hidden="true">cloud_download</mat-icon><i class="glyphicon glyphicon-cloud"></a>';    
@@ -161,10 +167,10 @@ myInputVariable: ElementRef; */
     },);
   }
 
- 
+/*  
   onFirstDataRendered(params) {
     params.api.sizeColumnsToFit();
   }
-
+ */
 
 }
