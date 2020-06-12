@@ -57,7 +57,7 @@ export class Signin3Component implements OnInit {
           if(arraycount==1){
             console.log(this.dataSource.Data.MenuDetailDTO_List[0])
             //this.router.navigate(['/reports/+?this.dataSource.Data.MenuDetailDTO_List[0].url']);
-            this.router.navigate(['/reports/'+this.dataSource.Data.MenuDetailDTO_List[0]["url"]]);
+            this.router.navigate(['/reports/'+this.dataSource.Data.MenuDetailDTO_List[0]["url"]+'/:SoftwareSubcomponentID']);
 
           }else{
             this.router.navigate(['/dashboard/analytics']);

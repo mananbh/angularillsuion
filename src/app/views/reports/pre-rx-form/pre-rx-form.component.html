@@ -1,5 +1,5 @@
 <mat-tab-group mat-align-tabs="start">
-  <mat-tab label="Upload Image">
+  <mat-tab label="Upload Pre RX">
 <mat-card class="p-0">
 <!--     <div  class="row">
         <div class="col-md-3">
@@ -21,7 +21,7 @@
                 <button 
                 mat-raised-button
                 color="primary"
-                class="mx-2"
+                class="mx-2 btn-secondary"
                 (click)="uploader.uploadAll()"
                 [disabled]="!uploader.getNotUploadedItems().length"  >Upload</button>
                     
@@ -75,23 +75,23 @@
           [value]="uploader.progress">
         </mat-progress-bar>
     </div>
-    <div class="table-responsive" >
 
-    <table class="table table-bordered"  border="1">
+    <table class="table-responsive"  border="1"  
+   >
       <thead class="thead-dark">
       <tr style="font-size: medium;font-weight: bold;" align="center">
           <th>File Name</th>
-          <th  scope="col">File Size</th >
-          <th  scope="col">Status</th>
+<!--           <th  scope="col">File Size</th >
+ -->          <th  scope="col">Status</th>
           <th  scope="col" style="min-width: 200px;">Preview</th>
          <th  scope="col">Actions</th>
       </tr>
       </thead>
       <tbody *ngIf="uploader.queue.length; else tableNoData">
       <tr *ngFor="let item of uploader.queue;let i = index"  style="font-size: medium;font-weight: bold;" scope="row" align="center">
-          <td  >
+        <!--   <td  >
             {{ item?.file?.name }}
-          </td >
+          </td > -->
           <td nowrap>{{ item?.file?.size/1024/1024 | number:'.2' }} MB</td>
 
           <td class="">
@@ -127,23 +127,13 @@
       </tr>
       </tbody>
       <ng-template #tableNoData >
-        <tr>
-          <td>
-          </td>
-          <td align="center">
+        <tr >
            <b >Queue is empty</b> 
-          </td>
-          <td>
-          </td>
-          <td>
-          </td>
         </tr>
       </ng-template>
   </table>
-</div>
-
 </mat-tab>
-<mat-tab label="View Data">
+<mat-tab label="View Pre RX">
 
   <form  [formGroup]="prerxform">
     <div class="form-row align-items-center">

@@ -18,10 +18,10 @@
   }
 }
 
-
 ::-webkit-scrollbar {
   -webkit-appearance: none;
   width: 7px;
+  height:  7px;
 }
 ::-webkit-scrollbar-thumb {
   border-radius: 4px;
@@ -33,9 +33,17 @@
 html {
   scroll-behavior: smooth;
 }
-
 .img-custom{
   @media only screen and (max-width: 600px) {
     width: 200px;border: aliceblue;height: 150px;
   }
+}
+.table-responsive {
+  width: 100%;
+  margin-bottom: 15px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  border: 1px solid #DDD;
 }

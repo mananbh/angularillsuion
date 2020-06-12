@@ -2,7 +2,7 @@
       <div  class="row">
         <div class="col-md-3"></div> 
         <div class="col-md-6" style="font-size: 20px;text-align: center;">
-          <b>Report Genrate	</b>
+          <b>Report Generate	</b>
         </div>
         <div class="col-md-3"></div>
       </div>
@@ -34,6 +34,7 @@
                 bindValue="ID"
                 formControlName="OU"
                 (change)="GetOUDesc($event)"
+                (clear)="ClearOU()"
                 [selectOnTab]="true">
                 </ng-select>
             </div>
@@ -68,6 +69,7 @@
           (change)="GetCustomerDesc($event)"
           [virtualScroll]="true"
           [loading]="CustomerLoading"
+          (clear)="ClearCustomer()"
 
         ></ng-select>
         </div>
@@ -81,6 +83,7 @@
           (change)="GetSupplierDesc($event)"
           [virtualScroll]="true"
           [loading]="SupplierLoading"
+          (clear)="ClearSupplier()"
 
           ></ng-select>
         </div>
@@ -96,6 +99,7 @@
                 (change)="GetEmployeeDesc($event)"
                 [virtualScroll]="true"
                 [loading]="EmployeeLoading"
+                (clear)="ClearEmployee()"
 
               ></ng-select>
             </div>
@@ -113,7 +117,7 @@
           </div>
           <div class="form-group row">
             <div class="col-md-3" style="padding-top: 25px;">
-                <button (click)="getreport()" class="btn btn-success" [disabled]="!registerreport.valid">Genrate</button>         
+                <button (click)="getreport()" class="btn btn-success" [disabled]="!registerreport.valid">Generate</button>         
             </div>
         </div>
   </div>

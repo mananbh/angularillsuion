@@ -7,6 +7,7 @@ import {AllCommunityModules} from '@ag-grid-community/all-modules';
 import { HttpClient, HttpParams,HttpHeaders } from '@angular/common/http'; 
 import { AlertService } from 'ngx-alerts';
 import { Subscription } from 'rxjs';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'app-reportgenrate',
@@ -15,7 +16,7 @@ import { Subscription } from 'rxjs';
 })
 export class ReportgenrateComponent implements OnInit,OnDestroy{
   dataSource :any;
-  constructor(private getcommdata:GetcommdataService,private formbulider: FormBuilder,private loader: AppLoaderService,private datePipe: DatePipe,private http: HttpClient,private changeDetector: ChangeDetectorRef,private alertreq: AlertService) { }
+  constructor(private getcommdata:GetcommdataService,private formbulider: FormBuilder,private loader: AppLoaderService,private datePipe: DatePipe,private http: HttpClient,private changeDetector: ChangeDetectorRef,private alertreq: AlertService,private route: ActivatedRoute) { }
   registerreport: FormGroup;
   customerreport :any;
   supplierreport :any;
@@ -41,7 +42,7 @@ export class ReportgenrateComponent implements OnInit,OnDestroy{
   CustomerDescription:any="";
   SupplierDescription:any="";
   EmployeeDescription:any="";
-  OUDescription:any;
+  OUDescription:any="";
   AllReportsData:any;
   messeges:any;
   customersubscribe : Subscription
@@ -68,7 +69,7 @@ export class ReportgenrateComponent implements OnInit,OnDestroy{
   accessfromyear:any;
   accessstatus:any;
   accessallreports:any;
-
+  SoftwareSubcomponentID:any;
   ngOnInit() {
     var todaydate = new Date();
     var onemonthbefordate =   new Date(new Date().setDate(todaydate.getDate()-30));
@@ -97,11 +98,16 @@ export class ReportgenrateComponent implements OnInit,OnDestroy{
 
     this.registerreport.addControl('UserID', new FormControl());
     this.registerreport.controls["UserID"].setValue(this.UserID);
+
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      let id = parseInt(params.get('SoftwareSubcomponentID'));
+      this.SoftwareSubcomponentID = id;
+      this.getallreportinlist(this.SoftwareSubcomponentID);
+    });
    this.getcustomerreport(62);
    (this.getsupplierreport(61));
    (this.getemployeereport(63));
     (this.getallotherfilterdata());
-   (this.getallreportinlist(24009));
    
   }
 
@@ -220,12 +226,12 @@ export class ReportgenrateComponent implements OnInit,OnDestroy{
     this.getfromdate = "Name='From Date' Code='mFromDate' Value='"+this.registerreport.value.FromDate+"' Caption='"+this.registerreport.value.FromDate+"'$#$"
     this.gettodate = "Name='Till Date' Code='mToDate' Value='"+this.registerreport.value.ToDate+"' Caption='"+this.registerreport.value.ToDate+"'$#$"
     this.getcustomer ="Name='Customer' Code= 'mCustomer' Value='"+this.registerreport.value.CustomerTD+"' Caption='"+this.CustomerDescription+"'$#$"
-    this.getuser =" Name='User Name' Code='mUserName' Value='"+this.UserName+"' Caption='"+this.UserName+"'$#$"
+    this.getuser =" Name='User Name' Code='mUserName' Value='"+this.UserID+"' Caption='"+this.UserID+"'$#$"
     this.getfromyear =" Name='From Year' Code='mFromYear' Value='"+this.registerreport.value.FromYear+"' Caption='"+this.registerreport.value.FromYear+"'$#$"
     this.gettoyear =" Name='To Year' Code='mToYear' Value='"+this.registerreport.value.ToYear+"' Caption='"+this.registerreport.value.ToYear+"'$#$"
     this.getsupplier =" Name='Supplier' Code='mSupplier' Value='"+this.registerreport.value.SupplierID+"' Caption='"+this.SupplierDescription+"'$#$"
     this.getemployee =" Name='Employee' Code='mEmployee' Value='"+this.registerreport.value.EmployeeID+"' Caption='"+this.EmployeeDescription+"'$#$"
-    this.getOU =" Name='OU' Code='OU' Value='"+this.registerreport.value.OU+"' Caption='"+this.registerreport.value.OU+"'$#$"
+    this.getOU =" Name='OU' Code='mOU' Value='"+this.registerreport.value.OU+"' Caption='"+this.registerreport.value.OU+"'$#$"
     this.getCompanyid =" Name='LoginCompanyID' Code='mLoginCompanyID' Value='"+this.LoginCompanyID+"' Caption='"+this.LoginCompanyID+"'$#$"
     this.getRoletypeid =" Name='LoginRoleTypeID' Code='mLoginRoleTypeID' Value='"+this.LoginRoleTypeID+"' Caption='"+this.LoginRoleTypeID+"'$#$"
     this.getRefid =" Name='LoginReferenceID' Code='mLoginReferenceID' Value='"+this.LoginReferenceID+"' Caption='"+this.LoginReferenceID+"'$#$"
@@ -270,6 +276,25 @@ export class ReportgenrateComponent implements OnInit,OnDestroy{
     if( this.reportsubscribe ) this.reportsubscribe.unsubscribe();
     if( this.filtersubscribe ) this.filtersubscribe.unsubscribe();
     if( this.suppliersubscribe ) this.suppliersubscribe.unsubscribe();
+  }
+
+  ClearOU(){
+    this.registerreport.value.OU = "";
+  }
+
+  
+  ClearCustomer(){
+    this.registerreport.value.CustomerTD = "";
+  }
+
+  
+  ClearSupplier(){
+    this.registerreport.value.SupplierID = "";
+  }
+
+  
+  ClearEmployee(){
+    this.registerreport.value.EmployeeID = "";
   }
 
   
